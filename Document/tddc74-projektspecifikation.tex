@@ -300,7 +300,7 @@ Datatypen \textbf{player} kommer att vara en klass som beskriver spelarobjekt, o
 \end{tabular}
 
 \subsubsubsection{Buff}
-Datatypen \textbf{buff} kommer att beskriva bonusobjekt, och kommer utöver de allmänna variablerna för flygande objekt även beskriva vilken typ av bonus det är. \\
+Datatypen \textbf{buff} kommer att ara en klass som beskriver bonusobjekt, och kommer utöver de allmänna variablerna för flygande objekt även beskriva vilken typ av bonus det är. \\
 
 \begin{tabular}{| c | c | p{8.2cm} |}
 	\hline
@@ -313,7 +313,7 @@ Datatypen \textbf{buff} kommer att beskriva bonusobjekt, och kommer utöver de a
 \end{tabular}
 
 \subsubsubsection{Entities}
-datatypen \textbf{entities} kommer att beskriva flygande objekt som inte styrs av spelaren(exempelvis fåglar), och kommer förutom de allmäna egenskaperna för flygande objekt att beskriva de unika egenskaperna för dessa objekt. \\
+datatypen \textbf{entities} kommer att varea en klass som beskriver flygande objekt som inte styrs av spelaren(exempelvis fåglar), och kommer förutom de allmäna egenskaperna för flygande objekt att beskriva de unika egenskaperna för dessa objekt. \\
 
 \begin{tabular}{| c | c | p{9.5cm} |}
 	\hline
@@ -342,13 +342,20 @@ Datatypen \textbf{world} kommer att vara en klass som beskriver alla icke-rörli
 \end{tabular}
 
 \subsubsection{HUD}
-Datatypen \textbf{HUD} kommer att beskriva de objekt som ger information till spelaren, det vill säga hastighetsmätare, buffräknare, flaggor och hastighetsbuffindikator. Denna klass kommer dock att designas vid ett senare tillfälle, då vi har mer kunskap om hur grafik representeras.
+Datatypen \textbf{HUD} kommer att beskriva de objekt som ger information till spelaren, det vill säga hastighetsmätare, buffräknare, flaggor och hastighetsbuffindikator. Dessa skall kunna uppdateras i realtid, och beroende på vad som händer så skall bilderna både kunna förflyttas(visaren på hastighetsmätaren) eller ändras helt(antalet bonusar),
 
 \subsubsection{Background}
-Datatypen \textbf{background} kommer att beskriva den bakgrund vilket spelet spelas över, och även bakgrunden i menyerna. Denna klass kommer dock att designas vid ett senare tillfälle, då vi har mer kunskap om hur grafik representeras.
+Datatypen \textbf{background} kommer att beskriva den bakgrund vilket spelet spelas över, och även bakgrunden i menyerna. Denna kommer att vara statisk under spelets gång, och kommer därför bara att behöva uppdateras vid uppstart och när man går till menyn.
 
 \subsubsection{Button}
-Datatypen \textbf{button} kommer att representera alla tryckbara knappar i menyerna och eventuellt i huvudspelet. Det kommer att beslutas senare hur dessa ska representeras, men ett möjligt alternativ är att de placeras i ett rutnät över skärmen som bara interageras med av musen. \\
+Datatypen \textbf{button} kommer att representera alla tryckbara knappar i menyerna och eventuellt i huvudspelet. Dessa ska utföra kommandon om spelaren trycker på detta område av skärmen med musen.
+
+\subsubsection{Vector}
+Datatypen \textbf{vector} kommer att beskriva vektorer och punkter i koordinatsystemet, om kommer bestå av ett par där car-delen är x-värdet och cdr-delen y-värdet.
+
+\subsubsection{Matrix}
+Datatypen \textbf{matrix} kommer att beskriva matriser som används för beräkningar, och kommer att bestå av en lista, där första elementet är en lista av första raden i matrisen, andra elementet är en lista av andra raden, etcetera.
+
 
 \subsection{Testning}
 När det gäller tester så är det främst viktigt att rörelserna i koordinatsystemet och kollisiondetekteringen fungerar på rätt sätt. Vi kommer därför att behöva testfunktioner som avläser och skriver ut de variabler som framkommer vid ett programvarv, för att se att saker får rätt position, att kollision detekteras korrekt samt att händelser kontrolleras och utförs korrekt. Lämpligt här är att skapa en testfunktion där programmet kan uppdateras med hjälp av ett knapptryck eller kommando istället för en klocka, för att på så sätt kunna analysera varje uppdatering på detaljnivå. Man bör även i kunna sätta alla variabler manuellt i testfunktionen, för att kunna testa specifika fall enklare. \\
@@ -371,8 +378,8 @@ Tot: & Summerad tid & 4 \\ \hline
 \begin{tabular}{|c|c|c|}
 \hline
 Vecka & \textbf{Arbetsuppgift} & \textbf{Tid(h)} \\ \hline
-14 & Skrivit kravspec & 7,5 \\ \hline
-Tot: & Summerad tid & 7,5 \\ \hline
+14 & Skrivit kravspec & 8 \\ \hline
+Tot: & Summerad tid & 8 \\ \hline
 \end{tabular}
 
 
