@@ -42,9 +42,9 @@
 (define £c7_tl (cons 5 6))
 (define £c7_tr (cons 6 6))
 
-(define £c8_bl (cons 9 7))
+(define £c8_bl (cons 7 7))
 (define £c8_br (cons 12 7))
-(define £c8_tl (cons 9 9))
+(define £c8_tl (cons 7 9))
 (define £c8_tr (cons 12 9))
 ;_________________________________________________
 ;_________________________________________________
@@ -229,8 +229,24 @@
 
 
 
-;Prints the list of collisions on the x-axis in a readable format.
-(define ($Print_X_Collisions collisions)
+
+
+;Takes the result of ($Find_X_Collision) as an argument and returns a list
+;with all full collisions(x and y-axis, so identified as a true collision).
+(define ($Find_Full_Collision x_collisions)
+  (filter (lambda (element)
+            (let ([ymin_obj1 (cdr (send (car element) $Get_Bl_Corner))]
+                  [ymax_obj1 (cdr (send (car element) $Get_Tl_Corner))]
+                  [ymin_obj2 (cdr (send (cdr element) $Get_Bl_Corner))]
+                  [ymax_obj2 (cdr (send (cdr element) $Get_Tl_Corner))])
+              (not (or (>= ymin_obj2 ymax_obj1) (<= ymax_obj2 ymin_obj1)))))
+          x_collisions))
+
+
+
+;Prints the list of collisions in a readable format, works for both
+;full collisions and only on the x-axis.
+(define ($Print_Collisions collisions)
   (let ([counter 1])
     (printf "Collision #   obj1    obj2~%~%")
     (map (lambda (element)
@@ -244,3 +260,107 @@
            (set! counter (+ counter 1)))
          collisions))
   (void))
+#|
+(define ($Find_Plane_Square_Collision plane list_of_squares)
+  (let ([list_of_plane_corners (list (send plane $Get_Bl_Corner)
+                                  (send plane $Get_Br_Corner)
+                                  (send plane $Get_Tl_Corner)
+                                  (send plane $Get_Tr_Corner))]
+        ;[bl_corner_plane (send plane $Get_Bl_Corner)]
+        ;[br_corner_plane (send plane $Get_Br_Corner)]
+        ;[tl_corner_plane (send plane $Get_Tl_Corner)]
+        ;[tr_corner_plane (send plane $Get_Tr_Corner)]
+        )
+    (filter (lambda (square) (let ([x_min_square (car (send square $Get_Br_Corner))]
+                                   [x_max_square (car (send square $Get_Bl_Corner))]
+                                   [y_min_square (cdr (send square $Get_Br_Corner))]
+                                   [y_max_square (cdr (send square $Get_Tr_Corner))])
+                               (filter (lambda (plane_corner) (let ([plane_corner_x (car plane_corner)]
+                                                            [plane_corner_y (cdr plane_corner)])
+                                                        (and (> plane_corner_x x_min_square)
+                                                             (< plane_conrer_x x_max_square)
+                                                             (> plane_corner_y y_min_square)
+                                                             (< plane_conrer_y y_max_square))))
+                                       list_of_plane_corners)
+
+                                                              (< (car plane_corner)|#
+
+
+(define ($Find_Perpendicular_Axes rectangle_object)
+  (let ([tr_corner_x (car (send rectangle_object $Get_Tr_Corner))]
+        [tr_corner_y (cdr (send rectangle_object $Get_Tr_Corner))]
+        [tl_corner_x (car (send rectangle_object $Get_Tl_Corner))]
+        [tl_corner_y (cdr (send rectangle_object $Get_Tl_Corner))]
+        [br_corner_x (car (send rectangle_object $Get_Br_Corner))]
+        [br_corner_y (cdr (send rectangle_object $Get_Br_Corner))])
+    
+    (let (
+          ;goes from the left side to the right,(parallel to the top and bottom side)
+          [axis_lr (cons (- tr_corner_x tl_corner_x)
+                         (- tr_corner_y tl_corner_y))]
+          ;goes from the bottom to the top,(parallel to the left and right side) 
+          [axis_bt (cons (- tr_corner_x br_corner_x)
+                         (- tr_corner_y br_corner_y))])
+      
+      (cons  axis_lr  axis_bt))))
+
+(define ($Find_Collision rectangle_a rectangle_b)
+  (let ([perpendicular_axes_obj_a ($Find_Perpendicular_Axes rectangle_a)])
+    (and ($Projection_Overlap?
+          (car perpendicular_axes_obj_a) rectangle_a rectangle_b)
+         ($Projection_Overlap?
+          (cdr perpendicular_axes_obj_a) rectangle_a rectangle_b))))
+
+
+
+
+       
+
+
+(define ($Find_Max_Min_Projection_Scalar axis . projections)
+  (let ([list_of_scalars
+         (sort (map (lambda (vector) ($Dot_Product axis vector)) projections)
+               <)])
+    (let ([min_scalar (car list_of_scalars)]
+          [max_scalar ($Last_Element_List list_of_scalars)])
+      (cons min_scalar max_scalar))))
+
+(define ($Projection_Overlap? axis main_rectangle second_rectangle)
+  (let ([proj_main_1 ($project
+                      (send main_rectangle $Get_Tr_Corner)
+                      axis)]
+        [proj_main_2 ($project
+                      (send main_rectangle $Get_Br_Corner)
+                      axis)]
+        [proj_second_1 ($project
+                        (send second_rectangle $Get_Tr_Corner)
+                        axis)]
+        [proj_second_2 ($project
+                        (send second_rectangle $Get_Tl_Corner)
+                        axis)]
+        [proj_second_3 ($project
+                        (send second_rectangle $Get_Br_Corner)
+                        axis)]
+        [proj_second_4 ($project
+                        (send second_rectangle $Get_Bl_Corner)
+                        axis)])
+    
+    (let ([min_max_scalar_a ($Find_Max_Min_Projection_Scalar
+                             axis
+                             proj_main_1
+                             proj_main_2)]
+          
+          [min_max_scalar_b ($Find_Max_Min_Projection_Scalar
+                             axis
+                             proj_second_1
+                             proj_second_2
+                             proj_second_3
+                             proj_second_4)])
+
+      (let ([min_scalar_a (car min_max_scalar_a)]
+            [max_scalar_a (cdr min_max_scalar_a)]
+            [min_scalar_b (car min_max_scalar_b)]
+            [max_scalar_b (cdr min_max_scalar_b)])
+
+        (and (< min_scalar_b max_scalar_a)
+             (< min_scalar_a max_scalar_b))))))
