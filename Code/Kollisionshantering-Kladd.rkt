@@ -1,6 +1,6 @@
 #lang racket
+(require "Basic-vector-functions.rkt")
 (require racket/trace)
-
 ;_________________________________________________
 ;Corners for testing collision
 ;c1_bl = corner 1, bottom left
@@ -34,8 +34,8 @@
 
 (define £c6_bl (cons 6 2))
 (define £c6_br (cons 12 2))
-(define £c6_tl (cons 4 6))
-(define £c6_tr (cons 4 12))
+(define £c6_tl (cons 6 4))
+(define £c6_tr (cons 12 4))
 
 (define £c7_bl (cons 5 5))
 (define £c7_br (cons 6 5))
@@ -46,18 +46,34 @@
 (define £c8_br (cons 12 7))
 (define £c8_tl (cons 7 9))
 (define £c8_tr (cons 12 9))
+
+(define £c9_bl (cons 3 5))
+(define £c9_br (cons 7 7))
+(define £c9_tl (cons 2 7))
+(define £c9_tr (cons 6 9))
+
+(define £c10_bl (cons 7 7))
+(define £c10_br (cons 10 8.5))
+(define £c10_tl (cons 6 9))
+(define £c10_tr (cons 9 10.5))
+
+(define £c11_bl (cons 5 1))
+(define £c11_br (cons 6 2))
+(define £c11_tl (cons 4 2))
+(define £c11_tr (cons 5 3))
 ;_________________________________________________
 ;_________________________________________________
-;A class for defining a rectangle box
+;A class for defining a rectangle object
 (define rectangle-object%
   (class object%
     (init-field
      name       ;name tag for the rectangle 
-     bl_corner  ;bottom-left coordinates
-     br_corner  ;bottom-right coordinates
-     tl_corner  ;top-left coordinates
-     tr_corner) ;top-right coordinates
-    
+     bl_corner  ;bottom-left coordinate
+     br_corner  ;bottom-right coordinate
+     tl_corner  ;top-left coordinate
+     tr_corner) ;top-right coordinate
+
+    ;Retreiveing the variables for hte object
     (define/public ($Get_Bl_Corner) bl_corner)
     (define/public ($Get_Br_Corner) br_corner)
     (define/public ($Get_Tl_Corner) tl_corner)
@@ -68,62 +84,82 @@
 ;_________________________________________________
 ;Defining rectangle-objects for testing
 
-(define *sq1* (new rectangle-object%
-                   [name 'sq1]
+(define *re1* (new rectangle-object%
+                   [name 're1]
                    [bl_corner £c1_bl]
                    [br_corner £c1_br]
                    [tl_corner £c1_tl]
                    [tr_corner £c1_tr]))
 
-(define *sq2* (new rectangle-object%
-                   [name 'sq2]
+(define *re2* (new rectangle-object%
+                   [name 're2]
                    [bl_corner £c2_bl]
                    [br_corner £c2_br]
                    [tl_corner £c2_tl]
                    [tr_corner £c2_tr]))
 
-(define *sq3* (new rectangle-object%
-                   [name 'sq3]
+(define *re3* (new rectangle-object%
+                   [name 're3]
                    [bl_corner £c3_bl]
                    [br_corner £c3_br]
                    [tl_corner £c3_tl]
                    [tr_corner £c3_tr]))
 
-(define *sq4* (new rectangle-object%
-                   [name 'sq4]
+(define *re4* (new rectangle-object%
+                   [name 're4]
                    [bl_corner £c4_bl]
                    [br_corner £c4_br]
                    [tl_corner £c4_tl]
                    [tr_corner £c4_tr]))
 
-(define *sq5* (new rectangle-object%
-                   [name 'sq5]
+(define *re5* (new rectangle-object%
+                   [name 're5]
                    [bl_corner £c5_bl]
                    [br_corner £c5_br]
                    [tl_corner £c5_tl]
                    [tr_corner £c5_tr]))
 
-(define *sq6* (new rectangle-object%
-                   [name 'sq6]
+(define *re6* (new rectangle-object%
+                   [name 're6]
                    [bl_corner £c6_bl]
                    [br_corner £c6_br]
                    [tl_corner £c6_tl]
                    [tr_corner £c6_tr]))
 
-(define *sq7* (new rectangle-object%
-                   [name 'sq7]
+(define *re7* (new rectangle-object%
+                   [name 're7]
                    [bl_corner £c7_bl]
                    [br_corner £c7_br]
                    [tl_corner £c7_tl]
                    [tr_corner £c7_tr]))
 
-(define *sq8* (new rectangle-object%
-                   [name 'sq8]
+(define *re8* (new rectangle-object%
+                   [name 're8]
                    [bl_corner £c8_bl]
                    [br_corner £c8_br]
                    [tl_corner £c8_tl]
                    [tr_corner £c8_tr]))
 
+(define *re9* (new rectangle-object%
+                   [name 're9]
+                   [bl_corner £c9_bl]
+                   [br_corner £c9_br]
+                   [tl_corner £c9_tl]
+                   [tr_corner £c9_tr]))
+
+(define *re10* (new rectangle-object%
+                   [name 're10]
+                   [bl_corner £c10_bl]
+                   [br_corner £c10_br]
+                   [tl_corner £c10_tl]
+                   [tr_corner £c10_tr]))
+
+(define *re11* (new rectangle-object%
+                   [name 're11]
+                   [bl_corner £c11_bl]
+                   [br_corner £c11_br]
+                   [tl_corner £c11_tl]
+                   [tr_corner £c11_tr]))
 ;_________________________________________________
 ;_________________________________________________
 ;A procedure that finds if the given rectangle objects collide when projected on
@@ -224,7 +260,7 @@
 
 ;_____________________________________________________________________________________
 ;Used for testing, will be removed later!
-(define ans ($Find_X_Collision *sq1* *sq2* *sq3* *sq4* *sq5* *sq6* *sq7* *sq8*))
+(define ans ($Find_X_Collision *re1* *re2* *re3* *re4* *re5* *re6* *re7* *re8*))
 ;____________________________________________________________________________________
 
 
@@ -260,33 +296,29 @@
            (set! counter (+ counter 1)))
          collisions))
   (void))
-#|
-(define ($Find_Plane_Square_Collision plane list_of_squares)
-  (let ([list_of_plane_corners (list (send plane $Get_Bl_Corner)
-                                  (send plane $Get_Br_Corner)
-                                  (send plane $Get_Tl_Corner)
-                                  (send plane $Get_Tr_Corner))]
-        ;[bl_corner_plane (send plane $Get_Bl_Corner)]
-        ;[br_corner_plane (send plane $Get_Br_Corner)]
-        ;[tl_corner_plane (send plane $Get_Tl_Corner)]
-        ;[tr_corner_plane (send plane $Get_Tr_Corner)]
-        )
-    (filter (lambda (square) (let ([x_min_square (car (send square $Get_Br_Corner))]
-                                   [x_max_square (car (send square $Get_Bl_Corner))]
-                                   [y_min_square (cdr (send square $Get_Br_Corner))]
-                                   [y_max_square (cdr (send square $Get_Tr_Corner))])
-                               (filter (lambda (plane_corner) (let ([plane_corner_x (car plane_corner)]
-                                                            [plane_corner_y (cdr plane_corner)])
-                                                        (and (> plane_corner_x x_min_square)
-                                                             (< plane_conrer_x x_max_square)
-                                                             (> plane_corner_y y_min_square)
-                                                             (< plane_conrer_y y_max_square))))
-                                       list_of_plane_corners)
-
-                                                              (< (car plane_corner)|#
 
 
+;Returns the last element of a list
+(define ($Last_Element_List arg_list)
+  (let ([rest_of_list arg_list]
+        [list_length (length arg_list)])
+    (cond [(null? list_length)
+           (raise-arguments-error 'last-element
+                                  "You cant enter a list with no elements!")]
+          [else (define (loop)
+                  (if (= list_length 1)
+                      (car rest_of_list)
+                      (begin (set! rest_of_list (cdr rest_of_list))
+                             (set! list_length (- list_length 1))
+                             (loop))))
+                (loop)])))
+
+
+
+;Takes a rectangle object and returns 2 axes perpendicular to its sides. 
 (define ($Find_Perpendicular_Axes rectangle_object)
+  
+        ;retrieving the necessary corners to make the axes.
   (let ([tr_corner_x (car (send rectangle_object $Get_Tr_Corner))]
         [tr_corner_y (cdr (send rectangle_object $Get_Tr_Corner))]
         [tl_corner_x (car (send rectangle_object $Get_Tl_Corner))]
@@ -301,10 +333,37 @@
           ;goes from the bottom to the top,(parallel to the left and right side) 
           [axis_bt (cons (- tr_corner_x br_corner_x)
                          (- tr_corner_y br_corner_y))])
-      
+
+      ;returned as a pair
       (cons  axis_lr  axis_bt))))
 
-(define ($Find_Collision rectangle_a rectangle_b)
+
+
+
+
+#|
+Takes 2 rectangle objects and returns #t if they have collided,
+else #f.
+
+//It uses SAT(separating axes theorem) to find if a collision har occured:
+
+1. Find the perpendicular axes to 1 of the rectangles.
+
+2. Project all corners from both rectangles on the axes, one at a time.
+
+3. Take the dot product between the projections and the projection axis to
+   find which projection goes furthest and shortest. for both rectangles.
+
+4. Compare these values, collision has occured if:
+   min(rectangle b) < max(rectangle a)
+   min(rectangle a) < max(rectangle b)
+
+5. Repeat for the second axis. Collision has occured if both axis returns true.
+
+NOTE: If one axis shows no collision, that is enough to fully decide that no
+   collision has occured, and the procedure won't check the next one.//
+|#
+(define ($Rectangle_Collision? rectangle_a rectangle_b)
   (let ([perpendicular_axes_obj_a ($Find_Perpendicular_Axes rectangle_a)])
     (and ($Projection_Overlap?
           (car perpendicular_axes_obj_a) rectangle_a rectangle_b)
@@ -313,35 +372,43 @@
 
 
 
-
-       
-
-
+;Takes an axis, some projections on that axis, then takes the dot product between
+;the projections and the axis. The max and min of these values are then returned as
+;a pair.
 (define ($Find_Max_Min_Projection_Scalar axis . projections)
   (let ([list_of_scalars
-         (sort (map (lambda (vector) ($Dot_Product axis vector)) projections)
+         (sort (map (lambda (vector) ($Vector_Dot_Product axis vector)) projections)
                <)])
     (let ([min_scalar (car list_of_scalars)]
           [max_scalar ($Last_Element_List list_of_scalars)])
       (cons min_scalar max_scalar))))
 
+
+
+;Takes an axis and two rectangles and returns #t if their projections
+;overlap on that axis, else #f.
 (define ($Projection_Overlap? axis main_rectangle second_rectangle)
-  (let ([proj_main_1 ($project
+
+       ;Projections on the given axis.
+  (let (
+        ;Since the axis is perpendicular to the first(main) rectangle,
+        ;only 2 projections are needed since they 
+        [proj_main_1 ($Vector_Projection
                       (send main_rectangle $Get_Tr_Corner)
                       axis)]
-        [proj_main_2 ($project
-                      (send main_rectangle $Get_Br_Corner)
+        [proj_main_2 ($Vector_Projection
+                      (send main_rectangle $Get_Bl_Corner)
                       axis)]
-        [proj_second_1 ($project
+        [proj_second_1 ($Vector_Projection
                         (send second_rectangle $Get_Tr_Corner)
                         axis)]
-        [proj_second_2 ($project
+        [proj_second_2 ($Vector_Projection
                         (send second_rectangle $Get_Tl_Corner)
                         axis)]
-        [proj_second_3 ($project
+        [proj_second_3 ($Vector_Projection
                         (send second_rectangle $Get_Br_Corner)
                         axis)]
-        [proj_second_4 ($project
+        [proj_second_4 ($Vector_Projection
                         (send second_rectangle $Get_Bl_Corner)
                         axis)])
     
@@ -356,11 +423,17 @@
                              proj_second_2
                              proj_second_3
                              proj_second_4)])
-
+      
       (let ([min_scalar_a (car min_max_scalar_a)]
             [max_scalar_a (cdr min_max_scalar_a)]
             [min_scalar_b (car min_max_scalar_b)]
             [max_scalar_b (cdr min_max_scalar_b)])
-
+        
         (and (< min_scalar_b max_scalar_a)
              (< min_scalar_a max_scalar_b))))))
+
+
+(trace $Find_Perpendicular_Axes)
+(trace $Rectangle_Collision?)
+(trace $Find_Max_Min_Projection_Scalar)
+(trace $Projection_Overlap?)
