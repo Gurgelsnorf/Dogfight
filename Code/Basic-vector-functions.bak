@@ -1,5 +1,5 @@
 #lang racket
-(provide (all-defined-out))
+(provide all-defined-out)
 
 ;Vector multiplication with a real number and returns the new vector
 (define ($Vector_Multiplication real_numb vector)
