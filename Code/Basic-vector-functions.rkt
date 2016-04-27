@@ -1,6 +1,9 @@
 #lang racket
 (provide (all-defined-out))
 
+(define ($Vector_Create start_point end_point)
+  ($Vector_Addition end_point ($Vector_Multiplication -1 start_point)))
+
 ;Vector multiplication with a real number and returns the new vector
 (define ($Vector_Multiplication real_numb vector)
   (cons (* (car vector) real_numb) (* (cdr vector) real_numb)))

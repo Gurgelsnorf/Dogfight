@@ -72,7 +72,7 @@
      br_corner  ;bottom-right coordinate
      tl_corner  ;top-left coordinate
      tr_corner) ;top-right coordinate
-
+    
     ;Retreiveing the variables for hte object
     (define/public ($Get_Bl_Corner) bl_corner)
     (define/public ($Get_Br_Corner) br_corner)
@@ -148,18 +148,18 @@
                    [tr_corner £c9_tr]))
 
 (define *re10* (new rectangle-object%
-                   [name 're10]
-                   [bl_corner £c10_bl]
-                   [br_corner £c10_br]
-                   [tl_corner £c10_tl]
-                   [tr_corner £c10_tr]))
+                    [name 're10]
+                    [bl_corner £c10_bl]
+                    [br_corner £c10_br]
+                    [tl_corner £c10_tl]
+                    [tr_corner £c10_tr]))
 
 (define *re11* (new rectangle-object%
-                   [name 're11]
-                   [bl_corner £c11_bl]
-                   [br_corner £c11_br]
-                   [tl_corner £c11_tl]
-                   [tr_corner £c11_tr]))
+                    [name 're11]
+                    [bl_corner £c11_bl]
+                    [br_corner £c11_br]
+                    [tl_corner £c11_tl]
+                    [tr_corner £c11_tr]))
 ;_________________________________________________
 ;_________________________________________________
 ;A procedure that finds if the given rectangle objects collide when projected on
@@ -318,7 +318,7 @@
 ;Takes a rectangle object and returns 2 axes perpendicular to its sides. 
 (define ($Find_Perpendicular_Axes rectangle_object)
   
-        ;retrieving the necessary corners to make the axes.
+  ;retrieving the necessary corners to make the axes.
   (let ([tr_corner_x (car (send rectangle_object $Get_Tr_Corner))]
         [tr_corner_y (cdr (send rectangle_object $Get_Tr_Corner))]
         [tl_corner_x (car (send rectangle_object $Get_Tl_Corner))]
@@ -333,7 +333,7 @@
           ;goes from the bottom to the top,(parallel to the left and right side) 
           [axis_bt (cons (- tr_corner_x br_corner_x)
                          (- tr_corner_y br_corner_y))])
-
+      
       ;returned as a pair
       (cons  axis_lr  axis_bt))))
 
@@ -388,8 +388,8 @@ NOTE: If one axis shows no collision, that is enough to fully decide that no
 ;Takes an axis and two rectangles and returns #t if their projections
 ;overlap on that axis, else #f.
 (define ($Projection_Overlap? axis main_rectangle second_rectangle)
-
-       ;Projections on the given axis.
+  
+  ;Projections on the given axis.
   (let (
         ;Since the axis is perpendicular to the first(main) rectangle,
         ;only 2 projections are needed since they 
@@ -433,7 +433,129 @@ NOTE: If one axis shows no collision, that is enough to fully decide that no
              (< min_scalar_a max_scalar_b))))))
 
 
-(trace $Find_Perpendicular_Axes)
-(trace $Rectangle_Collision?)
-(trace $Find_Max_Min_Projection_Scalar)
-(trace $Projection_Overlap?)
+(define ($Point_In_Rectangle? point br_corner bl_corner tr_corner)
+  (let* ([vector_br_p ($Vector_Create br_corner point)]
+         [vector_br_bl ($Vector_Create br_corner bl_corner)]
+         [vector_br_tr ($Vector_Create br_corner tr_corner)]
+         
+         [comparison_value_1 ($Vector_Dot_Product vector_br_p vector_br_bl)]
+         [comparison_value_2 ($Vector_Dot_Product vector_br_p vector_br_tr)])
+    
+    (and (< 0 comparison_value_1)
+         (< comparison_value_1 ($Vector_Dot_Product vector_br_bl vector_br_bl))
+         (< 0 comparison_value_2)
+         (< comparison_value_2 ($Vector_Dot_Product vector_br_tr vector_br_tr)))))
+
+(define ($Circle_Collision? circle_1 circle_2)
+  (let ([distance ($Vector_Length ($Vector_Create
+                                   (send circle_1 $Get_Center)
+                                   (send circle_2 $Get_Center)))])
+    (< distance (+ (send circle_1 $Get_Radius)
+                   (send circle_2 $Get_Radius)))))
+
+(define circle%
+  (class object%
+    (init-field
+     [radius 1]
+     [center (cons 0 0)])
+    
+    (define/public ($Get_Center)
+      center)
+    (define/public ($Get_Radius)
+      radius)
+    
+    (super-new)))
+
+(define *ci1*
+  (new circle%))
+
+(define *ci2*
+  (new circle%
+       [radius 2]
+       [center (cons 2 3)]))
+
+(define *ci3*
+  (new circle%
+       [radius 1]
+       [center (cons 1 1)]))
+
+(define *ci4*
+  (new circle%
+       [radius 3]
+       [center (cons 0 -4)]))
+
+(define *ci5*
+  (new circle%
+       [radius 2]
+       [center (cons -5 -4)]))
+
+(define *ci6*
+  (new circle%
+       [radius 1]
+       [center (cons -5 -4)]))
+
+(define ($Rectangle_Circle_Collision? rectangle circle)
+  (let* ([circle_center (send circle $Get_Center)]
+         [circle_radius (send circle $Get_Radius)]
+         [rec_br_corner (send rectangle $Get_Br_Corner)]
+         [rec_bl_corner (send rectangle $Get_Bl_Corner)]
+         [rec_tr_corner (send rectangle $Get_Tr_Corner)]
+         [rec_tl_corner (send rectangle $Get_Tl_Corner)])
+    
+    (or ($Point_In_Rectangle? circle_center
+                              rec_br_corner
+                              rec_bl_corner
+                              rec_tr_corner)
+        (let ([ x (filter
+                   (lambda (corner) (< ($Vector_Length
+                                        ($Vector_Create corner circle_center))
+                                       circle_radius))
+                   (list rec_br_corner
+                         rec_bl_corner
+                         rec_tr_corner
+                         rec_tl_corner))])
+          (display x)
+          (not (null? x)))
+        
+        
+        (let ([y (filter
+                  (lambda (line_center_distance)
+                    (> circle_radius line_center_distance))
+                  
+                  (map
+                   (lambda (corner_pair)
+                     ($Distance_Line_Point
+                      (car corner_pair)
+                      (cdr corner_pair)
+                      circle_center))
+                   (list (cons rec_br_corner rec_bl_corner)
+                         (cons rec_br_corner rec_tr_corner)
+                         (cons rec_tr_corner rec_tl_corner)
+                         (cons rec_bl_corner rec_tl_corner))))])
+          (display y)
+          (not (null? y))))))
+
+
+
+(define  ($Distance_Line_Point line_point_1 line_point_2 main_point)
+  (let* ([x_1 (car line_point_1)]
+         [y_1 (cdr line_point_1)]
+         [x_2 (car line_point_2)]
+         [y_2 (cdr line_point_2)]
+         [x_main (car main_point)]
+         [y_main (cdr main_point)]
+         [delta_x (- x_2 x_1)]
+         [delta_y (- y_2 y_1)])
+    
+    (/ (abs (+
+             (* delta_y x_main)
+             (* -1 delta_x y_main)
+             (* x_2 y_1)
+             (* -1 y_2 x_1)))
+       (sqrt (+
+              (sqr delta_y)
+              (sqr delta_x))))))
+
+(trace $Rectangle_Circle_Collision?)
+(trace $Point_In_Rectangle?)
+(trace $Distance_Line_Point)
