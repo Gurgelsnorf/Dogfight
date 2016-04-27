@@ -1,295 +1,261 @@
 #lang racket
 
-;cosine and sine valeues for the differnt angles defined as a value
-(define (vector_0)
-  (cons 1 0))
 
-(define (vector_1/16)
-  (cons .980785 .195090))
+;;;;;;;;;;;;;Requires;;;;;;;;;;;;;;;;;;;;;;
 
-(define (vector_2/16)
-  (cons .923880 .382683))
+(require "airplane.rkt")
+(require "direction.rkt")
+(provide (all-defined-out))
 
-(define (vector_3/16)
-  (cons .831470 .555570))
-
-(define (vector_4/16)
-  (cons .707107 .707107))
-
-(define (vector_5/16)
-  (cons .555570 .831470))
-
-(define (vector_6/16)
-  (cons .382683 .923880))
-
-(define (vector_7/16)
-  (cons .195090 .980785))
-
-(define (vector_8/16)
-  (cons 0 1))
-
-(define (vector_9/16)
-  (cons -.195090 .980785))
-
-(define (vector_10/16)
-  (cons -.382683 .923880))
-
-(define (vector_11/16)
-  (cons -.555570 .831470))
-
-(define (vector_12/16)
-  (cons -.707107 .707107))
-
-(define (vector_13/16)
-  (cons -.831470 .555570))
-
-(define (vector_14/16)
-  (cons -.923880 .382683))
-
-(define (vector_15/16)
-  (cons -.831470 .555570))
-
-(define (vector_1)
-  (cons -1 0))
-
-(define (vector_17/16)
-  (cons -.980785 -.195090))
-
-(define (vector_18/16)
-  (cons -.923880 -.382683)) 
-
-(define (vector_19/16)
-  (cons -.831470 -.555570))
-
-(define (vector_20/16)
-  (cons -.707107 -.707107))
-
-(define (vector_21/16)
-  (cons -.555570 -.831470))
-
-(define (vector_22/16)
-  (cons -.382683 -.923880))
-
-(define (vector_23/26)
-  (cons -.195090 -.980785))
-
-(define (vector_24/16)
-  (cons 0 -1))
-
-(define (vector_25/16)
-  (cons .195090 -.980785))
-
-(define (vector_26/16)
-  (cons .382683 -.923880))
-
-(define (vector_27/16)
-  (cons .555570 -.831470))
-
-(define (vector_28/16)
-  (cons .707107 -.707107))
-
-(define (vector_29/16)
-  (cons .831470 -.555570))
-
-(define (vector_30/16)
-  (cons .923880 -.382683))
-
-(define (vector_31/16)
-  (cons .980785 -.195090))
-
-
+;;;;;;;;;;;;;;;;;Directions and their minimum speed and gravity constant;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;define of the direction objects
 
 (define *angle_0*
   (new direction%
-       [vector vector_0]
+       [vector (cons 1 0)]
        [min_cap 0]
-       [gravity 0]))
+       [gravity 1]))
 
 (define *angle_1/16*
   (new direction%
-       [vector vector_1/16]
-       [min_cap ...]
-       [grvity ...]))
+       [vector (cons .980785 .195090)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_2/16*
   (new direction%
-       [vector vector_2/16]
-       [min_cap ...]
-       [gravity ...]))
+       [vector (cons .923880 .382683)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_3/16*
   (new direction%
-       [vector vector_3/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons .831470 .555570)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_4/16*
   (new direction%
-       [vector vector_4/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons .707107 .707107)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_5/16*
   (new direction%
-       [vector vector_5/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons .555570 .831470)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_6/16*
   (new direction%
-       [vector vector_6/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons .382683 .923880)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_7/16*
   (new direction%
-       [vector vector_7/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons .195090 .980785)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_8/16*
   (new direction%
-       [vector vector_8/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons 0 1)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_9/16*
   (new direction%
-       [vector vector_9/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.195090 .980785)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_10/16*
   (new direction%
-       [vector vector_10/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.382683 .923880)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_11/16*
   (new direction%
-       [vector vector_11/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.555570 .831470)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_12/16*
   (new direction%
-       [vector vector_12/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.707107 .707107)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_13/16*
   (new direction%
-       [vector vector_13/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.831470 .555570)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_14/16*
   (new direction%
-       [vector vector_14/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.923880 .382683)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_15/16*
   (new direction%
-       [vector vector_15/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.831470 .555570)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_16/16*
   (new direction%
-       [vector vector_16/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -1 0)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_17/16*
   (new direction%
-       [vector vector_17/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.980785 -.195090)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_18/16*
   (new direction%
-       [vector vector_18/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.923880 -.382683)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_19/16*
   (new direction%
-       [vector vector_19/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.831470 -.555570)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_20/16*
   (new direction%
-       [vector vector_20/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.707107 -.707107)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_21/16*
   (new direction%
-       [vector vector_21/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.555570 -.831470)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_22/16*
   (new direction%
-       [vector vector_22/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.382683 -.923880)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_23/16*
   (new direction%
-       [vector vector_23/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons -.195090 -.980785)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_24/16*
   (new direction%
-       [vector vector_24/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons 0 -1)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_25/16*
   (new direction%
-       [vector vector_25/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons .195090 -.980785)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_26/16*
   (new direction%
-       [vector vector_26/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons .382683 -.923880)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_27/16*
   (new direction%
-       [vector vector_27/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons .555570 -.831470)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_28/16*
   (new direction%
-       [vector vector_28/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons .707107 -.707107)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_29/16*
   (new direction%
-       [vector vector_29/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons .831470 -.555570)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_30/16*
   (new direction%
-       [vector vector_30/16]
-       [min-cap ...]
-       [gravity ...]))
+       [vector (cons .923880 -.382683)]
+       [min_cap 0]
+       [gravity 1]))
 
 (define *angle_31/16*
   (new direction%
-       [vector vector_31/16]
-       [min-cap ...]
-       [gravity ...]))
-       
+       [vector (cons .980785 -.195090)]
+       [min_cap 0]
+       [gravity 1]))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;Airplanes;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+; Corner position before rotation
+; bl = bottom left
+; br = bottom right
+; tl = top left
+; tr = top right
+
+(define *player1*
+  (new airplane%
+       [speed 5]
+       [direction 0]
+       [bl_corner (cons -1 -1)]
+       [br_corner (cons 1 -1)]
+       [tl_corner (cons -1 1)]
+       [tr_corner (cons 1 1)]))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;Hash defines;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define £Directions (hash 0 *angle_0*
+                          1 *angle_1/16*
+                          2 *angle_2/16*
+                          3 *angle_3/16*
+                          4 *angle_4/16*
+                          5 *angle_5/16*
+                          6 *angle_6/16*
+                          7 *angle_7/16*
+                          8 *angle_8/16*
+                          9 *angle_9/16*
+                          10 *angle_10/16*
+                          11 *angle_11/16*
+                          12 *angle_12/16*
+                          13 *angle_13/16*
+                          14 *angle_14/16*
+                          15 *angle_15/16*
+                          16 *angle_16/16*
+                          17 *angle_17/16*
+                          18 *angle_18/16*
+                          19 *angle_19/16*
+                          20 *angle_20/16*
+                          21 *angle_21/16*
+                          22 *angle_22/16*
+                          23 *angle_23/16*
+                          24 *angle_24/16*
+                          25 *angle_25/16*
+                          26 *angle_26/16*
+                          27 *angle_27/16*
+                          28 *angle_28/16*
+                          29 *angle_29/16*
+                          30 *angle_30/16*
+                          31 *angle_31/16*))
+                          

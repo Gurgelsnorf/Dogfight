@@ -1,0 +1,50 @@
+#lang racket
+(require "direction.rkt")
+
+;;;;;;;;;;;;;;;;;Player Commands;;;;;;;;;;;;;;;;;;;;;;;
+
+; Moves an object based on it's speed and direction
+(define ($Move-object object)
+  (begin
+    
+
+
+
+
+
+; Changes the speed of an object based on given value
+
+
+
+
+
+
+
+; Set the speed for an object
+
+
+
+
+
+
+; Change direction of an object based on given value
+
+
+
+
+
+
+; Set direction of an object
+
+
+
+
+
+
+
+
+
+
+
+
+

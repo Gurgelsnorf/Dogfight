@@ -1,0 +1,20 @@
+#lang racket
+(provide direction%)
+
+
+(define direction%
+  (class object%
+    (init-field
+     vector
+     min-cap
+     gravity)
+
+    (define/public (get-vector)
+      vector)
+
+    (define/public (get-min_cap)
+      min_cap)
+
+    (define/public (get-gravity)
+      gravity)
+    (super new)))
