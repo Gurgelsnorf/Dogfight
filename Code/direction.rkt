@@ -1,7 +1,10 @@
 #lang racket
 (provide direction%)
 
-
+;Here the direction% class is defined.
+;A direction% is defined by a direction-vector, a minimum
+;allowed speed in this direction, and how much gravity
+;takes its effect in this direction.
 (define direction%
   (class object%
     (init-field

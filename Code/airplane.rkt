@@ -1,6 +1,7 @@
 #lang racket
 (provide airplane%)
 
+;Here, the class airplane is defined.
 
 (define airplane%
   (class object%
