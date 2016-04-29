@@ -231,7 +231,7 @@ Efter detta är ett programvarv färdigt för fysikmotorn, och det som är kvar 
 I följande underrubrik beskrivs de olika datatyper och klasser som används i programmet.
 
 \subsubsection{Flying-unit}
-Datatypen \textbf{flying-unit} kommer att vara en överklass till alla flygande objekt, det vill säga spelare, hinder(exempelvis fåglar) och bonusar. Denna detatyp kommer även att representera projektiler som spelaren avfyrar, men då dessa projektiler inte har några extra egenskaper utöver de som beskrivs av \textbf{flying-unit}, så kommer denna klass att användas för att beskriva dem direkt.
+Datatypen \textbf{flying-unit} kommer att vara en överklass till alla flygande objekt, det vill säga spelare, hinder(exempelvis fåglar) och bonusar. Denna datatyp kommer även att representera projektiler som spelaren avfyrar, men då dessa projektiler inte har några extra egenskaper utöver de som beskrivs av \textbf{flying-unit}, så kommer denna klass att användas för att beskriva dem direkt.
 \vspace{0.2cm}
 
 \begin{tabular}{| c | c | p{8.3cm} |}
@@ -342,13 +342,59 @@ Datatypen \textbf{world} kommer att vara en klass som beskriver alla icke-rörli
 \end{tabular}
 
 \subsubsection{HUD}
-Datatypen \textbf{HUD} kommer att beskriva de objekt som ger information till spelaren, det vill säga hastighetsmätare, buffräknare, flaggor och hastighetsbuffindikator. Dessa skall kunna uppdateras i realtid, och beroende på vad som händer så skall bilderna både kunna förflyttas(visaren på hastighetsmätaren) eller ändras helt(antalet bonusar),
+Datatypen \textbf{HUD} kommer att beskriva de objekt som ger information till spelaren, det vill säga hastighetsmätare, buffräknare, flaggor och hastighetsbuffindikator. Dessa skall kunna uppdateras i realtid, och beroende på vad som händer så skall bilderna både kunna förflyttas(visaren på hastighetsmätaren) eller ändras helt(antalet bonusar).
+
+\vspace{0.2cm}
+
+\begin{tabular}{| c | c | p{8.8cm} |}
+	\hline
+	\textbf{Metod} & \textbf{Variabel} & \textbf{Beskrivning} \\
+	\hline
+	
+	update & - & Uppdaterar objektet, det vill säga uppdaterar vad som visas på skärmen. Exempelvis så kan hastighetsmätaren peka åt ett annat håll.\\
+	\hline
+	hide & - & Slutar visa objektet på skärmen. \\
+	\hline
+	render & position size & Renderar objektet på en ny position med en satt storlek. \\
+	\hline
+\end{tabular}
+
 
 \subsubsection{Background}
 Datatypen \textbf{background} kommer att beskriva den bakgrund vilket spelet spelas över, och även bakgrunden i menyerna. Denna kommer att vara statisk under spelets gång, och kommer därför bara att behöva uppdateras vid uppstart och när man går till menyn.
 
+\vspace{0.2cm}
+
+\begin{tabular}{| c | c | p{7cm} |}
+	\hline
+	\textbf{Metod} & \textbf{Variabel} & \textbf{Beskrivning} \\
+	\hline
+	
+	choose-background & background & Ändrar vilken bakgrund som visas, exempelvis meny- eller huvudspelsbakgrund.\\
+	\hline
+	render & - & Börjar visa bakgrunden på skärmen. \\
+	\hline
+	hide & - & Slutar visa bakgrunden på skärmen. \\
+	\hline
+\end{tabular}
+
 \subsubsection{Button}
 Datatypen \textbf{button} kommer att representera alla tryckbara knappar i menyerna och eventuellt i huvudspelet. Dessa ska utföra kommandon om spelaren trycker på detta område av skärmen med musen.
+
+\vspace{0.2cm}
+
+\begin{tabular}{| c | c | p{8.9cm} |}
+	\hline
+	\textbf{Metod} & \textbf{Variabel} & \textbf{Beskrivning} \\
+	\hline
+	
+	render & position size & Skapar knappen på en viss plats med en viss storlek.\\
+	\hline
+	delete & - & Tar bort knappen. \\
+	\hline
+	execute & - & Utför de kommandon som är bundna till knappen. \\
+	\hline
+\end{tabular}
 
 \subsubsection{Vector}
 Datatypen \textbf{vector} kommer att beskriva vektorer och punkter i koordinatsystemet, om kommer bestå av ett par där car-delen är x-värdet och cdr-delen y-värdet.
@@ -363,25 +409,5 @@ När det gäller tester så är det främst viktigt att rörelserna i koordinats
 Tidigt i implementeringen kommer vi främst att testa så att rörelser fungerar korrekt, så att föremål får rätt position i koordinatsystemet givet en riktning och en hastighet. När detta fungerar är huvudfokus att testa kollision av objekt och i sin tur att storlekar av objekt fungerar på rätt sätt. Här finns det även viktiga speciallfall att testa, till exempel om 3 objekt kolliderar med varandra under samma programvarv, då måste någon form av händelseprioritering göras. \\
 
 Senare i projektet kommer även grafiken att behöva testas, men då fysikmotorn då redan ska vara implementerad handlar detta främst om att se så att kollisioner och liknande inträffar synkroniserat med att de grafiska objekten kolliderar.
-
-\section{Tidsrapportering}
-
-\subsection{Gustav Danielsson}
-\begin{tabular}{|c|c|c|}
-\hline
-Vecka & \textbf{Arbetsuppgift} & \textbf{Tid(h)} \\ \hline
-14 & Skrivit kravspec & 4 \\ \hline
-Tot: & Summerad tid & 4 \\ \hline
-\end{tabular}
-
-\subsection{Marcus Dahlqvist}
-\begin{tabular}{|c|c|c|}
-\hline
-Vecka & \textbf{Arbetsuppgift} & \textbf{Tid(h)} \\ \hline
-14 & Skrivit kravspec & 8 \\ \hline
-Tot: & Summerad tid & 8 \\ \hline
-\end{tabular}
-
-
 
 \end{document}
