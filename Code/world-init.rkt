@@ -1,5 +1,6 @@
 #lang racket
 
+(require "world.rkt")
 (require "airplane.rkt")
 (require "direction.rkt")
 (provide (all-defined-out))
@@ -270,16 +271,33 @@ etc... To implement!
 ;_________________________________________________
 ;_________________________________________________
 
-(define *player1*
+(define *player_1*
   (new airplane%
        [speed 5]
        [direction 0]
-       [bl_corner (cons -1 -1)]
-       [br_corner (cons 1 -1)]
-       [tl_corner (cons -1 1)]
-       [tr_corner (cons 1 1)]))
+       [bl_corner (cons 0 0)]
+       [br_corner (cons 50 0)]
+       [tl_corner (cons 0 50)]
+       [tr_corner (cons 50 50)]))
+
+(define *player_2*
+  (new airplane%
+       [speed 5]
+       [direction 0]
+       [bl_corner (cons 50 100)]
+       [br_corner (cons 100 100)]
+       [tl_corner (cons 50 160)]
+       [tr_corner (cons 100 160)]))
 
 
+;_________________________________________________
+;_________________________________________________
+;------------Defining the main world--------------
+;_________________________________________________
+;_________________________________________________
 
+(define *world*
+  (new world%))
 
-                          
+(send *world* $Add_Flying_Unit *player_1*)
+(send *world* $Add_Flying_Unit *player_2*)

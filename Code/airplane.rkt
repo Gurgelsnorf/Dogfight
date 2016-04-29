@@ -1,13 +1,18 @@
 #lang racket
-(provide airplane%)
+
+(require "flying-unit.rkt")
+
+(provide (all-defined-out))
 
 ;Here, the class airplane is defined.
 
 (define airplane%
-  (class object%
+  (class flying_unit%
     (init-field
      speed
-     direction
+     direction)
+
+    (inherit-field
      bl_corner
      br_corner
      tl_corner
@@ -18,18 +23,6 @@
 
     (define/public ($Get_Direction)
       direction)
-
-    (define/public ($Get_Bl_Corner)
-      bl_corner)
-
-    (define/public ($Get_Br_Corner)
-      br_corner)
-
-    (define/public ($Get_Tl_Corner)
-      tl_corner)
-
-    (define/public ($Get_Tr_Corner)
-      tr_corner)
 
     (define/public ($Set_Speed new_speed)
       (set! speed new_speed))

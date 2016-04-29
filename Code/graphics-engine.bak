@@ -1,0 +1,83 @@
+#lang racket/gui
+(require "collision.rkt")
+  
+; Skapar fönstert
+(define *a-window*
+  (new frame%
+       [width 600]
+       [height 400]
+       [label "Detta är ett fönster"]))
+
+; Gör fönstret synligt
+(send *a-window* show #t)
+
+(define *edge*
+  (new panel%
+       [parent *a-window*]
+       [horiz-margin 10]
+       [vert-margin 10]
+       [style '(border)]))
+
+
+(define (render-square canvas dc)
+  (send dc translate 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#|
+(define *upper-box*
+  (new panel%
+       [parent *a-window*]
+       [enabled #t]
+       [style '(border)]
+      ; [min-height  (inexact->exact (* (send *a-window* get-height) 0.8))]
+       ;[stretchable-height (/ (send *a-window* get-height) 4)]
+       ))
+
+(define *lower-box*
+  (new panel%
+       [parent *a-window*]
+       [enabled #t]
+       [style '(border)]
+ ;      [min-height (inexact->exact (* (send *a-window* get-height) 0.2))]
+       ;[vert-margin (/ (send *a-window* get-height) 5)]
+       ;[alignment '(center bottom)]
+       ;[stretchable-height #t]
+       ))
+
+;(define *button*
+  (new button%
+       [parent *lower-box*]
+       [label "knapp!"])
+
+
+
+
+
+
+
+
+; Vad ska ritas på vår canvas?
+(define (render-fn canvas dc)
+(send dc set-brush "red" 'solid) ; Ändrar färg på vår pensel
+(send dc set-pen "green" 10 'solid) ; Ändrar färg på vår penna
+(send dc set-text-foreground "blue") ; Ändrar färg på vår text
+(send dc draw-rectangle 10 10 50 50)
+(send dc draw-text "Hallå där!" 200 200)
+(send dc set-brush (make-object color% 1 0 0) 'solid) ; Vi skapar en egen färg istället!
+(send dc draw-ellipse 240 240 100 100))
+; Skapar vår canvas
+(define *a-canvas* (new canvas%
+[parent *a-window*]
+[paint-callback render-fn]))
+|#

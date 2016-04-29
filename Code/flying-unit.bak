@@ -1,0 +1,7 @@
+#lang racket
+(define flying_unit%
+  (class rectangle%
+
+    ;To implement...
+
+    (super-new)))

@@ -1,0 +1,19 @@
+#lang racket
+(define world%
+  (class object%
+    (init-field
+     
+     [list_of_flying_units '()])
+    
+    (define/public ($Get_Flying_Units)
+      list_of_flying_units)
+    
+    (define/public ($Add_Flying_Unit flying_unit)
+      (set! list_of_flying_units
+            (cons flying_unit list_of_flying_units)))
+    
+    (define/public ($Delete_Flying_Unit flying_unit)
+      (set! list_of_flying_units
+            (filter (lambda (list_unit)
+                      (not (equal? list_unit flying_unit)))
+                    (list_of_flying_units))))))

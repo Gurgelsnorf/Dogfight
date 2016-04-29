@@ -1,6 +1,10 @@
 #lang racket
-(require "Basic-vector-functions.rkt")
+(require "basic-vector-functions.rkt")
 
+(require "rectangle.rkt") ;won't be required later,
+;only for testing!
+
+  
 ;Contains the procedures that find if the different
 ;object-types have collided or not. Look furthest down
 ;to find the main procedures, and directly above
@@ -12,30 +16,6 @@
 ;---------Defining rectangles for testing---------
 ;_________________________________________________
 ;_________________________________________________
-;A class for defining a rectangle object. Won't
-;necessarily be defined like this in the finished        NOTE
-;program, is mostly defined for testing.
-(define rectangle%
-  (class object%
-    (init-field
-     name       ;name tag for the rectangle 
-     bl_corner  ;bottom-left coordinate
-     br_corner  ;bottom-right coordinate
-     tl_corner  ;top-left coordinate
-     tr_corner) ;top-right coordinate
-    
-    ;Retreiveing the variables for the object
-    (define/public ($Get_Bl_Corner) bl_corner)
-    (define/public ($Get_Br_Corner) br_corner)
-    (define/public ($Get_Tl_Corner) tl_corner)
-    (define/public ($Get_Tr_Corner) tr_corner)
-    (define/public ($Get_Name) name)
-    (super-new)))
-
-
-;_________________________________________________
-;_________________________________________________
-;test rectangles
 
 (define *re1* (new rectangle%
                    [name 're1]

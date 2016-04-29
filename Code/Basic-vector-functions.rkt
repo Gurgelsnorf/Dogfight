@@ -57,4 +57,10 @@
   (cons ($Vector_Projection vector_1 vector_base)
         ($Vector_Ortagonal vector_1 vector_base)))
 
+;_________________________________________________
+;Takes 2 points and return their absolute distance.
+(define ($Point_Distance point_1 point_2)
+  ($Vector_Length ($Vector_Create point_1 point_2)))
+  
+
 
