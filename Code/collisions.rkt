@@ -152,24 +152,6 @@
 ;_________________________________________________
 ;_________________________________________________
 
-;Returns the last element of a list
-;Will be moved later to another file!                      NOTE
-(define ($Last_Element_List arg_list)
-  (let ([rest_of_list arg_list]
-        [list_length (length arg_list)])
-    
-    (cond [(null? list_length)
-           (raise-arguments-error 'last-element
-                                  "You cant enter a list with no elements!")]
-          [else (define (loop)
-                  (if (= list_length 1)
-                      (car rest_of_list)
-                      (begin (set! rest_of_list (cdr rest_of_list))
-                             (set! list_length (- list_length 1))
-                             (loop))))
-                (loop)])))
-
-;_________________________________________________
 
 ;Takes a rectangle and returns 2 axes perpendicular
 ;to its sides as a pair.

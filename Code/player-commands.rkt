@@ -1,7 +1,11 @@
 #lang racket
+
+(provide (all-defined-out))
+ 
 (require "direction.rkt")
 (require "airplane.rkt")
 (require "world-init.rkt")
+
 
 ;Here, the commands for interacting with the objects are defined.
 

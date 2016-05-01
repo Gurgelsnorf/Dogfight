@@ -41,5 +41,6 @@
 
     (define/public ($Set_Tr_Corner new_pos)
       (set! tr_corner new_pos))
+
     (super-new)))
      

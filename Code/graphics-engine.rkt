@@ -2,79 +2,141 @@
 (require "collisions.rkt")
 (require "world-init.rkt")
 (require "basic-vector-functions.rkt")
+(require "player-commands.rkt")
+(require "physics-engine.rkt")
 
-; Skapar fönster
+;Creates the main window
 (define *main_window*
   (new frame%
        [width 600]
        [height 400]
        [label "Detta är ett fönster"]))
 
-; Gör fönstret synligt
+;Makes the main window appear
 (send *main_window* show #t)
 
 
-#|
-(define x 0)
-(define (toggle-x)
-  (if (= x 0)
-      (set! x 1)
-      (set! x 0)))
+;_________________________________________________
+;Defines the class input-canvas%, which accepts inputs
+;for making stuff happen in the canvas.
 
-(define ($Render_Square canvas dc)
-  (if (= x 0)
-      (send dc set-brush "red" 'solid)
-      (send dc set-brush "blue" 'solid))
-  (send dc draw-rectangle  100 100 200 200))
+(define input-canvas%
+  (class canvas%
+    ; Vi lägger till ytterligare inargument
+    ; (procedurer som vi själva måste skriva!)
+    (init-field keyboard-handler) ; ska hantera tangentbord
+    ; mouse-handler) ; ska hantera mus
+    ; Vid ett knapptryck, anropa vår keyboard-handler
+    (define/override (on-char key-event)
+      (keyboard-handler key-event))
+    (super-new)))
 
+;_________________________________________________
+;The paint callback procedure for rendering flying
+;units. 
+;This is just a test, and will be changed later!                NOTE
 
-|#
-
-
-#||#
 (define ($Render_Flying canvas dc)
   (let (
         [list_of_flying_units
          (send *world* $Get_Flying_Units)]
         [brush_color "red"])
-          
-    ;(send dc scale 1 -1)
-    ;(send dc translate 0 -400)
     
+    
+    ;Paints all flying units
     (map (lambda (flying_unit)
-           (send dc set-origin 0 (send *edge* get-height))
+           (send dc set-origin 0 (send *flying_units* get-height))
            (send dc set-scale 1 -1)
            (let* (
                   [tl_corner (send flying_unit $Get_Tl_Corner)]
                   [tr_corner (send flying_unit $Get_Tr_Corner)]
                   [bl_corner (send flying_unit $Get_Bl_Corner)]
-                  [tl_x (car tl_corner)]
-                  [tl_y (cdr tl_corner)]
+                  [bl_x (car bl_corner)]
+                  [bl_y (cdr bl_corner)]
                   [height ($Point_Distance tl_corner bl_corner)]
                   [width ($Point_Distance tl_corner tr_corner)])
-
+             
              (cond
+               ;If collision with world has occured, it is painted black.
+               [(not (equal? ($Find_World_Collision flying_unit)
+                             'no_collision)) (set! brush_color "black")]
+               
+               ;Different colors for different objects (will be bitmaps later).
                [(equal? brush_color "red") (set! brush_color "blue")]
                [(equal? brush_color "blue") (set! brush_color "green")]
                [else (set! brush_color "red")])
-
-             (send dc set-brush brush_color 'solid)    
-             (send dc draw-rectangle tl_x tl_y width height)))
+             
+             (send dc set-brush brush_color 'solid)
+             (send dc set-pen "DeepPink" 0 'transparent)
+             (send dc draw-rectangle bl_x bl_y width height)))
          
          list_of_flying_units)
+    
+    
+    
+    ;Draws a box to indicate the worldsize to show when collision has occured.
+    (let ([world_width (send *world* $Get_Width)]
+          [world_height (send *world* $Get_Height)])
+      
+      (send dc set-pen "DeepPink" 2 'long-dash)
+      (send dc draw-line 0 0 world_width 0)
+      (send dc draw-line 0 0 0 world_height)
+      (send dc draw-line 0 world_height world_width world_height)
+      (send dc draw-line world_width 0 world_width world_height))))
 
-    (send dc set-origin 0 (* -1 (send *edge* get-height)))
-    (send dc set-scale 1 -1)))
 
 
 
 
 
 
-(define *edge*
+
+
+;Testing key-mappings, not working right now
+
+#|
+(define test-keymap
+  (new keymap%))
+
+(send test-keymap add-function "up" (lambda ()
+                                      ($Increase_Pos *player_1* 0 10)
+                                      (send *flying_units* refresh-now))
+      
+      (send test-keymap map-function "up" "up")
+      
+      (define test-key-event
+        (new key-event%
+             [key-code test-keymap]))
+      |#
+
+
+
+;Defining the canvas in which flying units are drawn.
+(define *flying_units*
   (new canvas%
        [parent *main_window*]
        [horiz-margin 20]
        [vert-margin 20]
        [style '(border)]
        [paint-callback $Render_Flying]))
+
+
+
+
+
+;For testing the graphics, will be removed later.         NOTE
+;Moves player 1 up, down, left and right.
+(define (up)
+  ($Increase_Pos *player_1* 0 50)
+  (send *flying_units* refresh-now))
+
+(define (down)
+  ($Increase_Pos *player_1* 0 -50)
+  (send *flying_units* refresh-now))
+(define (left)
+  ($Increase_Pos *player_1* -50 0)
+  (send *flying_units* refresh-now))
+
+(define (right)
+  ($Increase_Pos *player_1* 50 0)
+  (send *flying_units* refresh-now))

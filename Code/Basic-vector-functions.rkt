@@ -1,7 +1,21 @@
+;Note, should be renamed to "basic_procedures.rkt", but needs to be
+;renamed everywhere where it is required!
+;This is because i(marcus) placed $Last_eElement_List
+;here, thought it was better than having separate files
+;for different types of basic procedures used everywhere.
+
 #lang racket
 (provide (all-defined-out))
 
-;Here, some basic vector operations are defined. 
+
+
+
+;_________________________________________________
+;_________________________________________________
+;----------------Vector Procedures----------------
+;_________________________________________________
+;_________________________________________________
+
 ;Vectors are defined like: (cons X-value Y-value)
 
 
@@ -61,6 +75,31 @@
 ;Takes 2 points and return their absolute distance.
 (define ($Point_Distance point_1 point_2)
   ($Vector_Length ($Vector_Create point_1 point_2)))
+
+
+
+
+;_________________________________________________
+;_________________________________________________
+;---------Miscellaneous Basic Procedures----------
+;_________________________________________________
+;_________________________________________________
+
+;Returns the last element of a list                     
+(define ($Last_Element_List arg_list)
+  (let ([rest_of_list arg_list]
+        [list_length (length arg_list)])
+    
+    (cond [(null? list_length)
+           (raise-arguments-error 'last-element
+                                  "You cant enter a list with no elements!")]
+          [else (define (loop)
+                  (if (= list_length 1)
+                      (car rest_of_list)
+                      (begin (set! rest_of_list (cdr rest_of_list))
+                             (set! list_length (- list_length 1))
+                             (loop))))
+                (loop)])))
   
 
 

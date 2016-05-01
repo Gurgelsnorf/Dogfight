@@ -3,6 +3,7 @@
 (require "world.rkt")
 (require "airplane.rkt")
 (require "direction.rkt")
+(require "rectangle.rkt")
 (provide (all-defined-out))
 
 #|
@@ -276,18 +277,18 @@ etc... To implement!
        [speed 5]
        [direction 0]
        [bl_corner (cons 0 0)]
-       [br_corner (cons 50 0)]
-       [tl_corner (cons 0 50)]
-       [tr_corner (cons 50 50)]))
+       [br_corner (cons 100 0)]
+       [tl_corner (cons 0 100)]
+       [tr_corner (cons 100 100)]))
 
 (define *player_2*
   (new airplane%
        [speed 5]
        [direction 0]
-       [bl_corner (cons 50 100)]
-       [br_corner (cons 100 100)]
-       [tl_corner (cons 50 160)]
-       [tr_corner (cons 100 160)]))
+       [bl_corner (cons 155 155)]
+       [br_corner (cons 180 155)]
+       [tl_corner (cons 155 195)]
+       [tr_corner (cons 180 195)]))
 
 
 ;_________________________________________________
