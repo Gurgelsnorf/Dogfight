@@ -1,0 +1,26 @@
+#lang racket
+(require "world-init.rkt")
+
+(define ($Find_Collisions)
+  (let* (
+         [flying_units (send *world* $Get_Flying_Units)]
+         [no_world_collisions '()]
+         [world_collisions '()]
+         [world_collision_types
+          (map (lambda (flying_unit)
+                 (cons
+                  flying_unit
+                  ($World_Collision flying_unit)))
+               flying_units)])
+    
+    
+    (map (lambda (world_flying_collision)
+              (if (equal? (cdr world_flying_collision) 
+                          'no-collision)
+                    (set! no_world_collisions
+                          (cons (car world_flying_collision)))
+                    
+            (set! world_collisions world_flying_collision)))
+
+         world_collision_types)))
+                    
