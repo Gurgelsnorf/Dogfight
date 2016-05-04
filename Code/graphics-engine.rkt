@@ -1,7 +1,7 @@
 #lang racket/gui
 (require "collisions.rkt")
 (require "world-init.rkt")
-(require "basic-vector-functions.rkt")
+(require "basic-procedures.rkt")
 (require "player-commands.rkt")
 (require "physics-engine.rkt")
 
@@ -140,3 +140,8 @@
 (define (right)
   ($Increase_Pos *player_1* 50 0)
   (send *flying_units* refresh-now))
+
+
+(define *player_1_bitmap*
+  (make-object bitmap% 
+    "grafik/testplan.png"))

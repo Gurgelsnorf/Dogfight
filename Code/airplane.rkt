@@ -1,13 +1,13 @@
 #lang racket
 
-(require "flying-unit.rkt")
+(require "flying-unit-rectangular.rkt")
 
 (provide (all-defined-out))
 
 ;Here, the class airplane is defined.
 
 (define airplane%
-  (class flying_unit%
+  (class flying_unit_rectangular%
     (init-field
      speed
      direction)

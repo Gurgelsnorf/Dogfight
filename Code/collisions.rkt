@@ -1,5 +1,5 @@
 #lang racket
-(require "basic-vector-functions.rkt")
+(require "basic-procedures.rkt")
 
 (require "rectangle.rkt") ;won't be required later,
 ;only for testing!

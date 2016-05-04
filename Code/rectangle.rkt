@@ -1,5 +1,7 @@
 #lang racket
 
+(require "basic-procedures.rkt")
+
 (provide (all-defined-out))
 
 ;A class for defining a rectangle object. Won't
@@ -12,7 +14,10 @@
      br_corner  ;bottom-right coordinate
      tl_corner  ;top-left coordinate
      tr_corner  ;top-right coordinate
-     [name 'im-a-rectangle]) ;name tag for the rectangle
+     [name 'im-a-rectangle] ;name tag for the rectangle
+     [width 0] ;width of the rectangle
+     [height 0] ;Height of the rectangle
+     [angle 0]) ;The rotation angle of the rectangle
     
     ;Retreiveing the variables for the object
     (define/public ($Get_Bl_Corner) bl_corner)
@@ -20,4 +25,24 @@
     (define/public ($Get_Tl_Corner) tl_corner)
     (define/public ($Get_Tr_Corner) tr_corner)
     (define/public ($Get_Name) name)
+    (define/public ($Get_Width) width)
+    (define/public ($Get_Height) height)
+    (define/public ($Get_Angle) angle)
+
+
+    ;Changing the variables of the object
+    (define/public ($Set_Width new_width)
+      (set! width new_width))
+    (define/public ($Set_Height new_height)
+      (set! height new_height))
+    (define/public ($Set_Angle new_angle)
+      (set! angle new_angle))
+
+
+    ;Initial calculating of width and height:
+    (set! width ($Vector_Length ($Vector_Create bl_corner br_corner)))
+    (set! height ($Vector_Length ($Vector_Create bl_corner tl_corner)))
+      
+
+    
     (super-new)))
