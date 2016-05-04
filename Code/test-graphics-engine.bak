@@ -8,13 +8,9 @@
 ;Creates the main window
 (define *main_window*
   (new frame%
-       [width 1220]
-       [height 820]
-       [style (list 'no-resize-border)]
+       [width 600]
+       [height 400]
        [label "Detta är ett fönster"]))
-
-;(send *main_window* maximize #t)
-;(send *main_window* get-menu-bar)
 
 ;Makes the main window appear
 (send *main_window* show #t)
@@ -146,3 +142,8 @@
   (send *flying_units* refresh-now))
 
 
+(define *player_1_bitmap* 
+  (make-object bitmap%
+    (send *player_1* $Get_Width)
+    (send *player_1* $Get_Height)
+    "grafik/testplan.png"))

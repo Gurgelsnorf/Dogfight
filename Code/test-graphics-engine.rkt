@@ -10,14 +10,14 @@
   (new frame%
        [width 1220]
        [height 820]
-       [style (list 'no-resize-border)]
        [label "Detta är ett fönster"]))
-
-;(send *main_window* maximize #t)
-;(send *main_window* get-menu-bar)
 
 ;Makes the main window appear
 (send *main_window* show #t)
+
+
+;(send *main_window* maximize #t)
+;(send *main_window* get-menu-bar)
 
 
 ;_________________________________________________
@@ -34,6 +34,8 @@
     (define/override (on-char key-event)
       (keyboard-handler key-event))
     (super-new)))
+
+
 
 ;_________________________________________________
 ;The paint callback procedure for rendering flying
@@ -55,12 +57,14 @@
                   [tl_corner (send flying_unit $Get_Tl_Corner)]
                   [tr_corner (send flying_unit $Get_Tr_Corner)]
                   [bl_corner (send flying_unit $Get_Bl_Corner)]
-                  [bl_x (car bl_corner)]
-                  [bl_y (cdr bl_corner)]
-                  [height ($Point_Distance tl_corner bl_corner)]
-                  [width ($Point_Distance tl_corner tr_corner)])
+                  [width (send flying_unit $Get_Width)]
+                  [height (send flying_unit $Get_Height)]
+
+                  (send dc draw-bitmap (send flying_unit $Get_Bitmap
+
+                  
              
-             (cond
+             #|(cond
                ;If collision with world has occured, it is painted black.
                [(not (equal? ($Find_World_Collision flying_unit)
                              'no_collision)) (set! brush_color "black")]
@@ -72,8 +76,12 @@
              
              (send dc set-brush brush_color 'solid)
              (send dc set-pen "DeepPink" 0 'transparent)
-             (send dc draw-rectangle bl_x bl_y width height)))
-         
+             (send dc draw-rectangle bl_x bl_y width height)
+             (send dc draw-bitmap
+                   *player_1_bitmap*
+                   20
+                   20)))
+         |#
          list_of_flying_units)
     
     
@@ -146,3 +154,9 @@
   (send *flying_units* refresh-now))
 
 
+(define *player_1_bitmap* 
+  (make-object bitmap%
+    ;(send *player_1* $Get_Width)
+    ;(send *player_1* $Get_Height)
+    "grafik/test-flyg-80-39.png"
+    'png/alpha))

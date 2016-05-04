@@ -1,1 +1,0 @@
-("6.3" ("9f05ea6ed18381b0dbfb4d63761c5ae0c51fec94" . "dc99864ece2ca4b3fe307f6a90e0f0746797d189") #"C:\\Users\\Marcus D\\Documents\\GitHub\\Dogfight\\Code\\basic-procedures.rkt" #"C:\\Users\\Marcus D\\Documents\\GitHub\\Dogfight\\Code\\rectangle.rkt" (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))
