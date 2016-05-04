@@ -78,6 +78,10 @@
 
 
 
+;_________________________________________________
+;Rotates a vector based on an angle
+(define ($Single_Vector_Rotation vector theta)
+  (cons (- (* (car vector) (cos theta)) (* (cdr vector) (sin theta))) (+ (* (cdr vector) (cos theta)) (* (car vector) (sin theta)))))
 
 ;_________________________________________________
 ;_________________________________________________
