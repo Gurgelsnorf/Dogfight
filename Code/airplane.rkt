@@ -10,19 +10,27 @@
   (class flying_unit_rectangular%
     (init-field
      speed
-     direction)
+     direction
+     center_of_gravity)
 
     (inherit-field
      bl_corner
      br_corner
      tl_corner
-     tr_corner)
+     tr_corner
+     projected_bl_corner
+     projected_br_corner
+     projected_tl_corner
+     projected_tr_corner)
 
     (define/public ($Get_Speed)
       speed)
 
     (define/public ($Get_Direction)
       direction)
+
+    (define/public ($Get_Center_Of_Gravity)
+      center_of_gravity)
 
     (define/public ($Set_Speed new_speed)
       (set! speed new_speed))
@@ -41,6 +49,18 @@
 
     (define/public ($Set_Tr_Corner new_pos)
       (set! tr_corner new_pos))
+
+    (define/public ($Set_Projected_Bl_Corner new_pos)
+      (set! projected_bl_corner new_pos))
+
+    (define/public ($Set_Projected_Br_Corner new_pos)
+      (set! projected_br_corner new_pos))
+
+    (define/public ($Set_Projected_Tl_Corner new_pos)
+      (set! projected_tl_corner new_pos))
+
+    (define/public ($Set_Projected_Tr_Corner new_pos)
+      (set! projected_tr_corner new_pos))
 
     (super-new)))
      

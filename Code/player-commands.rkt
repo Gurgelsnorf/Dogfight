@@ -5,6 +5,7 @@
 (require "direction.rkt")
 (require "airplane.rkt")
 (require "world-init.rkt")
+(require "basic-procedures.rkt")
 
 
 ;Here, the commands for interacting with the objects are defined.
@@ -29,11 +30,35 @@
 (define ($Increase_Speed object new_speed)
   (send object $Set_Speed (+ new_speed (send object $Get_Speed))))
 
+;_________________________________________________
+;Rotates all coners on the projected angle
+(define ($Rotate_All_Corners object)
 
+  (send object $Set_Projected_Bl_Corner
+        ($Point_Move_Vector
+         ($Single_Vector_Rotation ($Two_Point_Verctor_Create (send object $Get_Center_Of_Gravity) (send object $Get_Bl_Corner)) (/ (* pi (send object $Get_Direction)) 16))
+         (send object $Get_Center_Of_Gravity)))
+
+  (send object $Set_Projected_Br_Corner
+        ($Point_Move_Vector
+         ($Single_Vector_Rotation ($Two_Point_Verctor_Create (send object $Get_Center_Of_Gravity) (send object $Get_Br_Corner)) (/ (* pi (send object $Get_Direction)) 16))
+         (send object $Get_Center_Of_Gravity)))
+
+  (send object $Set_Projected_Tl_Corner
+        ($Point_Move_Vector
+         ($Single_Vector_Rotation ($Two_Point_Verctor_Create (send object $Get_Center_Of_Gravity) (send object $Get_Tl_Corner)) (/ (* pi (send object $Get_Direction)) 16))
+         (send object $Get_Center_Of_Gravity)))
+
+  (send object $Set_Projected_Tr_Corner
+        ($Point_Move_Vector
+         ($Single_Vector_Rotation ($Two_Point_Verctor_Create (send object $Get_Center_Of_Gravity) (send object $Get_Tr_Corner)) (/ (* pi (send object $Get_Direction)) 16))
+         (send object $Get_Center_Of_Gravity))))
+
+  
 ;_________________________________________________
 ; Set the speed for an object.
 (define ($Set_Speed object new_speed)
-  (send object £$Set_Speed new_speed)) 
+  (send object $Set_Speed new_speed)) 
 
 
 ;_________________________________________________

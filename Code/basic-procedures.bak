@@ -84,17 +84,6 @@
   (cons (- (* (car vector) (cos theta)) (* (cdr vector) (sin theta))) (+ (* (cdr vector) (cos theta)) (* (car vector) (sin theta)))))
 
 ;_________________________________________________
-;Provides a vecor based on two points
-(define ($Two_Point_Verctor_Create dot1 dot2)
-  (cons (- (car dot2) (car dot1)) (- (cdr dot2) (cdr dot1))))
-
-
-;_________________________________________________
-;From a point in the plane and a vector creates a new point
-(define ($Point_Move_Vector vector point)
-  (cons (+ (car vector) (car point)) (+ (cdr vector) (cdr point))))
-
-;_________________________________________________
 ;_________________________________________________
 ;---------Miscellaneous Basic Procedures----------
 ;_________________________________________________

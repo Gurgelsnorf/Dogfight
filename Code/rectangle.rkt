@@ -14,6 +14,10 @@
      br_corner  ;bottom-right coordinate
      tl_corner  ;top-left coordinate
      tr_corner  ;top-right coordinate
+     projected_bl_corner
+     projected_br_corner
+     projected_tl_corner
+     projected_tr_corner
      [name 'im-a-rectangle] ;name tag for the rectangle
      [width 0] ;width of the rectangle
      [height 0] ;Height of the rectangle
