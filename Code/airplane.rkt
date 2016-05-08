@@ -32,6 +32,9 @@
     (define/public ($Get_Center_Of_Gravity)
       center_of_gravity)
 
+    (define/public ($Set_Center_Of_Gravity new_pos)
+      (set! center_of_gravity new_pos))
+
     (define/public ($Set_Speed new_speed)
       (set! speed new_speed))
 
@@ -61,6 +64,18 @@
 
     (define/public ($Set_Projected_Tr_Corner new_pos)
       (set! projected_tr_corner new_pos))
+
+    (define/public ($Get_Projected_Bl_Corner)
+      projected_bl_corner)
+    
+    (define/public ($Get_Projected_Br_Corner)
+      projected_br_corner)
+    
+    (define/public ($Get_Projected_Tl_Corner)
+      projected_tl_corner)
+    
+    (define/public ($Get_Projected_Tr_Corner)
+      projected_tr_corner)
 
     (super-new)))
      

@@ -3,6 +3,7 @@
 (require "world.rkt")
 (require "airplane.rkt")
 (require "direction.rkt")
+(require "rectangle.rkt")
 (provide (all-defined-out))
 
 #|

@@ -13,6 +13,15 @@
 ;NOTE: Some of these procedure will be moved at a later stage,
 ;when keyboard presses are implemented!
 
+
+
+;_________________________________________________
+; Moves an object based on it's speed and then rotates the projected angles
+(define ($Airplane_Full_Movement object)
+  (begin
+    ($Move_Airplane object)
+    ($Rotate_All_Corners object)))
+
 ;_________________________________________________
 ; Moves an object based on it's speed and direction      
 (define ($Move_Airplane object)
@@ -99,15 +108,22 @@
         (cons (+(car (send object $Get_Tr_Corner))
                 movement_x)
               (+ (cdr (send object $Get_Tr_Corner))
+                 movement_y)))
+
+(send object $Set_Center_Of_Gravity
+        (cons (+(car (send object $Get_Center_Of_Gravity))
+                movement_x)
+              (+ (cdr (send object $Get_Center_Of_Gravity))
                  movement_y))))
 
 
 ;_________________________________________________
 ; Set position of an object.                         NOTE: Should this be                                                  
-(define ($Set_Pos object posX posY)                  ;changed so that not
-  (send object $Set_Bl_Corner (cons posX posY))      ;all corners become the same?
-  (send object $Set_Br_Corner (cons posX posY))
-  (send object $Set_Tl_Corner (cons posX posY))
-  (send object $Set_Tr_Corner (cons posX posY)))
+(define ($Set_Pos object posXbl posYbl posXtr posYtr)                  ;changed so that not
+  (send object $Set_Bl_Corner (cons posXbl posYbl))      ;all corners become the same?
+  (send object $Set_Br_Corner (cons posXtr posYbl))
+  (send object $Set_Tl_Corner (cons posXbl posYtr))
+  (send object $Set_Tr_Corner (cons posXtr posYtr))
+  (send object $Set_Center_Of_Gravity (cons (/ (+ posXbl posXtr) 2) (/ (+ posYbl posYtr) 2))))
 
 
