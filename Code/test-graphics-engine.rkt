@@ -8,8 +8,8 @@
 ;Creates the main window
 (define *main_window*
   (new frame%
-       [width 1220]
-       [height 820]
+       [width 0]
+       [height 0]
        [label "Detta är ett fönster"]))
 
 ;Makes the main window appear
@@ -151,6 +151,8 @@
 (define *flying_units*
   (new canvas%
        [parent *main_window*]
+       [min-height 820]
+       [min-width 1200]
        [horiz-margin 20]
        [vert-margin 20]
        [style '(border)]

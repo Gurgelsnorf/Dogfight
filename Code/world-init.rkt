@@ -1,4 +1,4 @@
-#lang racket
+#lang racket/gui
 
 (require "world.rkt")
 (require "airplane.rkt")
@@ -298,7 +298,8 @@ etc... To implement!
        [projected_br_corner (cons 100 0)]
        [projected_tl_corner (cons 0 100)]
        [projected_tr_corner (cons 100 100)]
-       [center_of_gravity (cons 50 50)]))
+       [center_of_gravity (cons 50 50)]
+       [bitmap *player_1_bitmap*]))
 
 (define *player_2*
   (new airplane%
@@ -313,8 +314,7 @@ etc... To implement!
        [projected_tl_corner (cons 155 195)]
        [projected_tr_corner (cons 180 195)]
        [center_of_gravity (cons 167.5 175)]
-       [bitmap *player_2_bitmap*]
-       [bitmap *player_1_bitmap*]))
+       [bitmap *player_2_bitmap*]))
 
 
 ;_________________________________________________
