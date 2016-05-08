@@ -46,25 +46,51 @@
   (let (
         [list_of_flying_units
          (send *world* $Get_Flying_Units)]
+        [world_height (send *flying_units* get-height)]
+        [world_width (send *world* $Get_Width)]
         [brush_color "red"])
+
     
-    
+    ;(send dc set-scale 1 -1)
     ;Paints all flying units
     (map (lambda (flying_unit)
-           (send dc set-origin 0 (send *flying_units* get-height))
-           (send dc set-scale 1 -1)
-           (let* (
-                  [tl_corner (send flying_unit $Get_Tl_Corner)]
-                  [tr_corner (send flying_unit $Get_Tr_Corner)]
-                  [bl_corner (send flying_unit $Get_Bl_Corner)]
-                  [width (send flying_unit $Get_Width)]
-                  [height (send flying_unit $Get_Height)]
-
-                  (send dc draw-bitmap (send flying_unit $Get_Bitmap
-
-                  
+           (let (
+                 [bl_corner (send flying_unit $Get_Bl_Corner)]
+                 [angle (send flying_unit $Get_Angle)])
              
-             #|(cond
+             
+             (let* ([bl_corner (send flying_unit $Get_Bl_Corner)]
+                    [angle (send flying_unit $Get_Angle)])
+               
+               (send dc translate (car bl_corner) (cdr bl_corner))
+               (send dc rotate angle)
+
+               (send dc draw-bitmap (send flying_unit $Get_Bitmap)
+                     0
+                     0)
+
+               (send dc rotate (- angle))
+               (send dc translate (- (car bl_corner)) (- (cdr bl_corner)))
+               (define-values (x y) (send dc get-origin))
+               (printf "origin x:~n")
+               (display x)
+               (printf "~n~norigin y:~n")
+               (display y)
+               (define-values (z a) (send dc get-scale))
+               (printf "~n~n scale x:~n")
+               (display z)
+               (printf "~n~n scale y:~n")
+               (display a)
+               (printf "~n~n rotation:~n")
+               (display (send dc get-rotation))
+               (printf "~n~n transformation:~n")
+               (display (send dc get-transformation))
+               (newline)
+               )))
+         
+         
+         
+         #|(cond
                ;If collision with world has occured, it is painted black.
                [(not (equal? ($Find_World_Collision flying_unit)
                              'no_collision)) (set! brush_color "black")]
@@ -85,16 +111,14 @@
          list_of_flying_units)
     
     
-    
     ;Draws a box to indicate the worldsize to show when collision has occured.
-    (let ([world_width (send *world* $Get_Width)]
-          [world_height (send *world* $Get_Height)])
       
-      (send dc set-pen "DeepPink" 2 'long-dash)
-      (send dc draw-line 0 0 world_width 0)
-      (send dc draw-line 0 0 0 world_height)
-      (send dc draw-line 0 world_height world_width world_height)
-      (send dc draw-line world_width 0 world_width world_height))))
+    (send dc set-pen "DeepPink" 2 'long-dash)
+    (send dc draw-line 0 0 world_width 0)
+    (send dc draw-line 0 0 0 world_height)
+    (send dc draw-line 0 world_height world_width world_height)
+    (send dc draw-line world_width 0 world_width world_height)
+    ))
 
 
 
@@ -133,6 +157,9 @@
        [paint-callback $Render_Flying]))
 
 
+(send (send *flying_units* get-dc) set-scale 1 -1)
+(send (send *flying_units* get-dc) set-origin 0 (send *flying_units* get-height))
+
 
 
 
@@ -154,9 +181,4 @@
   (send *flying_units* refresh-now))
 
 
-(define *player_1_bitmap* 
-  (make-object bitmap%
-    ;(send *player_1* $Get_Width)
-    ;(send *player_1* $Get_Height)
-    "grafik/test-flyg-80-39.png"
-    'png/alpha))
+

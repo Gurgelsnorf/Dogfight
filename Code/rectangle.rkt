@@ -14,10 +14,11 @@
      br_corner  ;bottom-right coordinate
      tl_corner  ;top-left coordinate
      tr_corner  ;top-right coordinate
-     projected_bl_corner
-     projected_br_corner
-     projected_tl_corner
-     projected_tr_corner
+     [projected_bl_corner bl_corner]
+     [projected_br_corner br_corner]
+     [projected_tl_corner tl_corner]
+     [projected_tr_corner tr_corner]
+     [bitmap 'no-bitmap-choosen!]
      [name 'im-a-rectangle] ;name tag for the rectangle
      [width 0] ;width of the rectangle
      [height 0] ;Height of the rectangle
@@ -32,6 +33,7 @@
     (define/public ($Get_Width) width)
     (define/public ($Get_Height) height)
     (define/public ($Get_Angle) angle)
+    [define/public ($Get_Bitmap) bitmap]
 
 
     ;Changing the variables of the object
@@ -41,6 +43,8 @@
       (set! height new_height))
     (define/public ($Set_Angle new_angle)
       (set! angle new_angle))
+    (define/public ($Set_Bitmap new_bitmap)
+      (set! bitmap new_bitmap))
 
 
     ;Initial calculating of width and height:
