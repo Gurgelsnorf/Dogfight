@@ -267,6 +267,21 @@ etc... To implement!
 
 ;_________________________________________________
 ;_________________________________________________
+;----------------Defining bitmaps-----------------
+;_________________________________________________
+;_________________________________________________
+(define *player_1_bitmap* 
+  (make-object bitmap%
+    "grafik/test-flyg-80-39.png"
+    'png/alpha))
+
+(define *player_2_bitmap*
+  (make-object bitmap%
+    "grafik/test-flyg-80-39-green.png"
+    'png/alpha))
+
+;_________________________________________________
+;_________________________________________________
 ;----------------Defining players-----------------
 ;_________________________________________________
 ;_________________________________________________
@@ -297,7 +312,9 @@ etc... To implement!
        [projected_br_corner (cons 180 155)]
        [projected_tl_corner (cons 155 195)]
        [projected_tr_corner (cons 180 195)]
-       [center_of_gravity (cons 167.5 175)]))
+       [center_of_gravity (cons 167.5 175)]
+       [bitmap *player_2_bitmap*]
+       [bitmap *player_1_bitmap*]))
 
 
 ;_________________________________________________
@@ -309,5 +326,8 @@ etc... To implement!
 (define *world*
   (new world%))
 
+
+;_________________________________________________
+;Adding players to the world
 (send *world* $Add_Flying_Unit *player_1*)
 (send *world* $Add_Flying_Unit *player_2*)
