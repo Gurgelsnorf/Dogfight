@@ -16,7 +16,17 @@
 ;_________________________________________________
 ;_________________________________________________
 
-;Vectors are defined like: (cons X-value Y-value)
+;Creates a vector
+(define ($Vector x y)
+  (cons x y))
+
+;Returns the X-value of a vector.
+(define ($Vector_Get_X vector)
+  (car vector))
+
+;Returns the Y-value of a vector.
+(define ($Vector_Get_Y vector)
+  (cdr vector))
 
 
 
@@ -80,24 +90,24 @@
 
 ;_________________________________________________
 ;Rotates a vector based on an angle
-(define ($Single_Vector_Rotation vector theta)
-  (cons (- (* (car vector) (cos theta)) (* (cdr vector) (sin theta))) (+ (* (cdr vector) (cos theta)) (* (car vector) (sin theta)))))
-
-;_________________________________________________
-;Provides a vecor based on two points
-(define ($Two_Point_Verctor_Create dot1 dot2)
-  (cons (- (car dot2) (car dot1)) (- (cdr dot2) (cdr dot1))))
-
-
-;_________________________________________________
-;From a point in the plane and a vector creates a new point
-(define ($Point_Move_Vector vector point)
-  (cons (+ (car vector) (car point)) (+ (cdr vector) (cdr point))))
+(define ($Single_Vector_Rotation vector angle)
+  ($Vector (- (* ($Vector_Get_X vector) (cos angle))
+              (* ($Vector_Get_Y vector) (sin angle)))
+           (+ (* ($Vector_Get_Y vector) (cos angle))
+              (* ($Vector_Get_X vector) (sin angle)))))
 
 ;_________________________________________________
 ;_________________________________________________
 ;---------Miscellaneous Basic Procedures----------
 ;_________________________________________________
+;_________________________________________________
+
+;Takes 2 opposing corners of a rectangle and returns
+;the center of gravity for that rectangle.
+(define ($Calculate_Center_Of_Gravity projected_bl_corner projected_tr_corner)
+  ($Vector (/ (+ ($Vector_Get_X projected_bl_corner) ($Vector_Get_X projected_tr_corner) 2))
+           (/ (+ ($Vector_Get_Y projected_bl_corner)  ($Vector_Get_Y projected_tr_corner) 2))))
+
 ;_________________________________________________
 
 ;Returns the last element of a list                     

@@ -31,7 +31,7 @@
       [(<= £temp_speed (send £temp_angle $Get_Min_Cap))
        (printf "Too low speed, stalling ~n")]
       [else
-       ($Increase_Pos object (* £temp_speed (car (send £temp_angle $Get_Vector))) (* £temp_speed (cdr (send £temp_angle $Get_Vector))))])))
+       ($Increase_Pos object (* £temp_speed ($Vector_Get_X (send £temp_angle $Get_Vector))) (* £temp_speed (cdr (send £temp_angle $Get_Vector))))])))
 
 
 ;_________________________________________________
@@ -44,23 +44,23 @@
 (define ($Rotate_All_Corners object)
 
   (send object $Set_Projected_Bl_Corner
-        ($Point_Move_Vector
-         ($Single_Vector_Rotation ($Two_Point_Verctor_Create (send object $Get_Center_Of_Gravity) (send object $Get_Bl_Corner)) (/ (* pi (send object $Get_Direction)) 16))
+        ($Vector_Addition
+         ($Single_Vector_Rotation ($Vector_Create (send object $Get_Center_Of_Gravity) (send object $Get_Bl_Corner)) (/ (* pi (send object $Get_Direction)) 16))
          (send object $Get_Center_Of_Gravity)))
 
   (send object $Set_Projected_Br_Corner
-        ($Point_Move_Vector
-         ($Single_Vector_Rotation ($Two_Point_Verctor_Create (send object $Get_Center_Of_Gravity) (send object $Get_Br_Corner)) (/ (* pi (send object $Get_Direction)) 16))
+        ($Vector_Addition
+         ($Single_Vector_Rotation ($Vector_Create (send object $Get_Center_Of_Gravity) (send object $Get_Br_Corner)) (/ (* pi (send object $Get_Direction)) 16))
          (send object $Get_Center_Of_Gravity)))
 
   (send object $Set_Projected_Tl_Corner
-        ($Point_Move_Vector
-         ($Single_Vector_Rotation ($Two_Point_Verctor_Create (send object $Get_Center_Of_Gravity) (send object $Get_Tl_Corner)) (/ (* pi (send object $Get_Direction)) 16))
+        ($Vector_Addition
+         ($Single_Vector_Rotation ($Vector_Create (send object $Get_Center_Of_Gravity) (send object $Get_Tl_Corner)) (/ (* pi (send object $Get_Direction)) 16))
          (send object $Get_Center_Of_Gravity)))
 
   (send object $Set_Projected_Tr_Corner
-        ($Point_Move_Vector
-         ($Single_Vector_Rotation ($Two_Point_Verctor_Create (send object $Get_Center_Of_Gravity) (send object $Get_Tr_Corner)) (/ (* pi (send object $Get_Direction)) 16))
+        ($Vector_Addition
+         ($Single_Vector_Rotation ($Vector_Create (send object $Get_Center_Of_Gravity) (send object $Get_Tr_Corner)) (/ (* pi (send object $Get_Direction)) 16))
          (send object $Get_Center_Of_Gravity))))
 
   
@@ -87,43 +87,45 @@
 (define ($Increase_Pos object movement_x movement_y)
 
   (send object $Set_Bl_Corner
-        (cons (+ (car (send object $Get_Bl_Corner))
+        ($Vector (+ ($Vector_Get_X (send object $Get_Bl_Corner))
                  movement_x)
-              (+ (cdr (send object $Get_Bl_Corner))
+              (+ ($Vector_Get_Y (send object $Get_Bl_Corner))
                  movement_y)))
 
   (send object $Set_Br_Corner
-        (cons (+ (car (send object $Get_Br_Corner))
+        ($Vector (+ ($Vector_Get_X (send object $Get_Br_Corner))
                  movement_x)
-              (+ (cdr (send object $Get_Br_Corner))
+              (+ ($Vector_Get_Y (send object $Get_Br_Corner))
                  movement_y)))
   
   (send object $Set_Tl_Corner
-        (cons (+ (car (send object $Get_Tl_Corner))
+        ($Vector (+ ($Vector_Get_X (send object $Get_Tl_Corner))
                  movement_x)
-              (+ (cdr (send object $Get_Tl_Corner))
+              (+ ($Vector_Get_Y (send object $Get_Tl_Corner))
                  movement_y)))
 
   (send object $Set_Tr_Corner
-        (cons (+(car (send object $Get_Tr_Corner))
+        ($Vector (+($Vector_Get_X (send object $Get_Tr_Corner))
                 movement_x)
-              (+ (cdr (send object $Get_Tr_Corner))
+              (+ ($Vector_Get_Y (send object $Get_Tr_Corner))
                  movement_y)))
 
 (send object $Set_Center_Of_Gravity
-        (cons (+(car (send object $Get_Center_Of_Gravity))
+        ($Vector (+($Vector_Get_X (send object $Get_Center_Of_Gravity))
                 movement_x)
-              (+ (cdr (send object $Get_Center_Of_Gravity))
+              (+ ($Vector_Get_Y (send object $Get_Center_Of_Gravity))
                  movement_y))))
 
 
 ;_________________________________________________
-; Set position of an object.                         NOTE: Should this be                                                  
-(define ($Set_Pos object posXbl posYbl posXtr posYtr)                  ;changed so that not
-  (send object $Set_Bl_Corner (cons posXbl posYbl))      ;all corners become the same?
-  (send object $Set_Br_Corner (cons posXtr posYbl))
-  (send object $Set_Tl_Corner (cons posXbl posYtr))
-  (send object $Set_Tr_Corner (cons posXtr posYtr))
-  (send object $Set_Center_Of_Gravity (cons (/ (+ posXbl posXtr) 2) (/ (+ posYbl posYtr) 2))))
+; Set position of an object.                                                 
+(define ($Set_Pos object pos_x_bl pos_y_bl pos_x_tr pos_y_tr)
+  (send object $Set_Bl_Corner ($Vector pos_x_bl pos_y_bl))
+  (send object $Set_Br_Corner ($Vector pos_x_tr pos_y_bl))
+  (send object $Set_Tl_Corner ($Vector pos_x_bl pos_y_tr))
+  (send object $Set_Tr_Corner ($Vector pos_x_tr pos_y_tr))
+  (send object $Set_Center_Of_Gravity
+        ($Vector (/ (+ pos_x_bl pos_x_tr) 2)
+                 (/ (+ pos_y_bl pos_y_tr) 2))))
 
 

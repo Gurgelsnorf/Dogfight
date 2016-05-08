@@ -3,6 +3,7 @@
 (require "world.rkt")
 (require "airplane.rkt")
 (require "direction.rkt")
+(require "basic-procedures.rkt")
 (provide (all-defined-out))
 
 #|
@@ -290,30 +291,28 @@ etc... To implement!
   (new airplane%
        [speed 5]
        [direction 0]
-       [bl_corner (cons 0 0)]
-       [br_corner (cons 100 0)]
-       [tl_corner (cons 0 100)]
-       [tr_corner (cons 100 100)]
-       [projected_bl_corner (cons 0 0)]
-       [projected_br_corner (cons 100 0)]
-       [projected_tl_corner (cons 0 100)]
-       [projected_tr_corner (cons 100 100)]
-       [center_of_gravity (cons 50 50)]
+       [bl_corner ($Vector 0 0)]
+       [br_corner ($Vector 80 0)]
+       [tl_corner ($Vector 0 40)]
+       [tr_corner ($Vector 80 40)]
+       [projected_bl_corner ($Vector 0 0)]
+       [projected_br_corner ($Vector 80 0)]
+       [projected_tl_corner ($Vector 0 40)]
+       [projected_tr_corner ($Vector 80 40)]
        [bitmap *player_1_bitmap*]))
 
 (define *player_2*
   (new airplane%
        [speed 5]
        [direction 0]
-       [bl_corner (cons 155 155)]
-       [br_corner (cons 180 155)]
-       [tl_corner (cons 155 195)]
-       [tr_corner (cons 180 195)]
-       [projected_bl_corner (cons 155 155)]
-       [projected_br_corner (cons 180 155)]
-       [projected_tl_corner (cons 155 195)]
-       [projected_tr_corner (cons 180 195)]
-       [center_of_gravity (cons 167.5 175)]
+       [bl_corner ($Vector 100 90)]
+       [br_corner ($Vector 80 130)]
+       [tl_corner ($Vector 100 90)]
+       [tr_corner ($Vector 180 130)]
+       [projected_bl_corner ($Vector 100 90)]
+       [projected_br_corner ($Vector 80 130)]
+       [projected_tl_corner ($Vector 100 90)]
+       [projected_tr_corner ($Vector 180 130)]
        [bitmap *player_2_bitmap*]))
 
 

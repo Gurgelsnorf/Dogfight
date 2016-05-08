@@ -41,18 +41,18 @@
         (let* (
                [corner_x_coordinates
                 (sort (list
-                       (car (send flying_unit $Get_Bl_Corner))
-                       (car (send flying_unit $Get_Br_Corner))
-                       (car (send flying_unit $Get_Tl_Corner))
-                       (car (send flying_unit $Get_Tr_Corner)))
+                       ($Vector_Get_X (send flying_unit $Get_Bl_Corner))
+                       ($Vector_Get_X (send flying_unit $Get_Br_Corner))
+                       ($Vector_Get_X (send flying_unit $Get_Tl_Corner))
+                       ($Vector_Get_X (send flying_unit $Get_Tr_Corner)))
                       <)]
                
                [corner_y_coordinates
                 (sort (list
-                       (cdr (send flying_unit $Get_Bl_Corner))
-                       (cdr (send flying_unit $Get_Br_Corner))
-                       (cdr (send flying_unit $Get_Tl_Corner))
-                       (cdr (send flying_unit $Get_Tr_Corner)))
+                       ($Vector_Get_Y (send flying_unit $Get_Bl_Corner))
+                       ($Vector_Get_Y (send flying_unit $Get_Br_Corner))
+                       ($Vector_Get_Y (send flying_unit $Get_Tl_Corner))
+                       ($Vector_Get_Y (send flying_unit $Get_Tr_Corner)))
                       <)]
                
                [lowest_x (car corner_x_coordinates)]
@@ -71,10 +71,10 @@
                [radius (send flying_unit $Get_Radius)]
                [center (send flying_unit $Get_Center)]
                
-               [lowest_x (- (car center) radius)]
-               [lowest_y (- (cdr center) radius)]
-               [highest_x (+ (car center) radius)]
-               [highest_y (+ (cdr center) radius)])
+               [lowest_x (- ($Vector_Get_X center) radius)]
+               [lowest_y (- ($Vector_Get_Y center) radius)]
+               [highest_x (+ ($Vector_Get_X center) radius)]
+               [highest_y (+ ($Vector_Get_Y center) radius)])
           
           ($World_Collision_Comparison
            lowest_x lowest_y

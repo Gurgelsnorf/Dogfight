@@ -1,8 +1,14 @@
 #lang racket
-(require "Basic-vector-functions.rkt")
-(require racket/trace)
+(require "basic-procedures.rkt")
 
-;
+(require "rectangle.rkt") ;won't be required later,
+;only for testing!
+
+  
+;Contains the procedures that find if the different
+;object-types have collided or not. Look furthest down
+;to find the main procedures, and directly above
+;for a description and sub-procedures.
 
 
 ;_________________________________________________
@@ -10,30 +16,6 @@
 ;---------Defining rectangles for testing---------
 ;_________________________________________________
 ;_________________________________________________
-;A class for defining a rectangle object. Won't
-;necessarily be defined like this in the finished        NOTE
-;program, is mostly defined for testing.
-(define rectangle%
-  (class object%
-    (init-field
-     name       ;name tag for the rectangle 
-     bl_corner  ;bottom-left coordinate
-     br_corner  ;bottom-right coordinate
-     tl_corner  ;top-left coordinate
-     tr_corner) ;top-right coordinate
-    
-    ;Retreiveing the variables for the object
-    (define/public ($Get_Bl_Corner) bl_corner)
-    (define/public ($Get_Br_Corner) br_corner)
-    (define/public ($Get_Tl_Corner) tl_corner)
-    (define/public ($Get_Tr_Corner) tr_corner)
-    (define/public ($Get_Name) name)
-    (super-new)))
-
-
-;_________________________________________________
-;_________________________________________________
-;test rectangles
 
 (define *re1* (new rectangle%
                    [name 're1]
@@ -170,24 +152,6 @@
 ;_________________________________________________
 ;_________________________________________________
 
-;Returns the last element of a list
-;Will be moved later to another file!                      NOTE
-(define ($Last_Element_List arg_list)
-  (let ([rest_of_list arg_list]
-        [list_length (length arg_list)])
-    
-    (cond [(null? list_length)
-           (raise-arguments-error 'last-element
-                                  "You cant enter a list with no elements!")]
-          [else (define (loop)
-                  (if (= list_length 1)
-                      (car rest_of_list)
-                      (begin (set! rest_of_list (cdr rest_of_list))
-                             (set! list_length (- list_length 1))
-                             (loop))))
-                (loop)])))
-
-;_________________________________________________
 
 ;Takes a rectangle and returns 2 axes perpendicular
 ;to its sides as a pair.
@@ -522,7 +486,5 @@ __________________________________________________|#
                                    (cons rec_bl_corner rec_tl_corner)
                                    (cons rec_tl_corner rec_tr_corner)
                                    (cons rec_bl_corner rec_tl_corner)))))))))
-;-------------------------------------------------
-;-------------------------------------------------
-;-------------------------------------------------
-;-------------------------------------------------
+
+

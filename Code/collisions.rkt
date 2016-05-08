@@ -19,80 +19,80 @@
 
 (define *re1* (new rectangle%
                    [name 're1]
-                   [bl_corner (cons 2 2)]
-                   [br_corner (cons 6 2)]
-                   [tl_corner (cons 2 6)]
-                   [tr_corner (cons 6 6)]))
+                   [bl_corner ($Vector 2 2)]
+                   [br_corner ($Vector 6 2)]
+                   [tl_corner ($Vector 2 6)]
+                   [tr_corner ($Vector 6 6)]))
 
 (define *re2* (new rectangle%
                    [name 're2]
-                   [bl_corner (cons 1 1)]
-                   [br_corner (cons 3 1)]
-                   [tl_corner (cons 1 3)]
-                   [tr_corner (cons 3 3)]))
+                   [bl_corner ($Vector 1 1)]
+                   [br_corner ($Vector 3 1)]
+                   [tl_corner ($Vector 1 3)]
+                   [tr_corner ($Vector 3 3)]))
 
 (define *re3* (new rectangle%
                    [name 're3]
-                   [bl_corner (cons 1 7)]
-                   [br_corner (cons 2 7)]
-                   [tl_corner (cons 1 9)]
-                   [tr_corner (cons 2 9)]))
+                   [bl_corner ($Vector 1 7)]
+                   [br_corner ($Vector 2 7)]
+                   [tl_corner ($Vector 1 9)]
+                   [tr_corner ($Vector 2 9)]))
 
 (define *re4* (new rectangle%
                    [name 're4]
-                   [bl_corner (cons 10 2)]
-                   [br_corner (cons 11 2)]
-                   [tl_corner (cons 10 3)]
-                   [tr_corner (cons 11 3)]))
+                   [bl_corner ($Vector 10 2)]
+                   [br_corner ($Vector 11 2)]
+                   [tl_corner ($Vector 10 3)]
+                   [tr_corner ($Vector 11 3)]))
 
 (define *re5* (new rectangle%
                    [name 're5]
-                   [bl_corner (cons 5 1)]
-                   [br_corner (cons 8 1)]
-                   [tl_corner (cons 5 7)]
-                   [tr_corner (cons 8 7)]))
+                   [bl_corner ($Vector 5 1)]
+                   [br_corner ($Vector 8 1)]
+                   [tl_corner ($Vector 5 7)]
+                   [tr_corner ($Vector 8 7)]))
 
 (define *re6* (new rectangle%
                    [name 're6]
-                   [bl_corner (cons 6 2)]
-                   [br_corner (cons 12 2)]
-                   [tl_corner (cons 6 4)]
-                   [tr_corner (cons 12 4)]))
+                   [bl_corner ($Vector 6 2)]
+                   [br_corner ($Vector 12 2)]
+                   [tl_corner ($Vector 6 4)]
+                   [tr_corner ($Vector 12 4)]))
 
 (define *re7* (new rectangle%
                    [name 're7]
-                   [bl_corner (cons 5 5)]
-                   [br_corner (cons 6 5)]
-                   [tl_corner (cons 5 6)]
-                   [tr_corner (cons 6 6)]))
+                   [bl_corner ($Vector 5 5)]
+                   [br_corner ($Vector 6 5)]
+                   [tl_corner ($Vector 5 6)]
+                   [tr_corner ($Vector 6 6)]))
 
 (define *re8* (new rectangle%
                    [name 're8]
-                   [bl_corner (cons 7 7)]
-                   [br_corner (cons 12 7)]
-                   [tl_corner (cons 7 9)]
-                   [tr_corner (cons 12 9)]))
+                   [bl_corner ($Vector 7 7)]
+                   [br_corner ($Vector 12 7)]
+                   [tl_corner ($Vector 7 9)]
+                   [tr_corner ($Vector 12 9)]))
 
 (define *re9* (new rectangle%
                    [name 're9]
-                   [bl_corner (cons 3 5)]
-                   [br_corner (cons 7 7)]
-                   [tl_corner (cons 2 7)]
-                   [tr_corner (cons 6 9)]))
+                   [bl_corner ($Vector 3 5)]
+                   [br_corner ($Vector 7 7)]
+                   [tl_corner ($Vector 2 7)]
+                   [tr_corner ($Vector 6 9)]))
 
 (define *re10* (new rectangle%
                     [name 're10]
-                    [bl_corner (cons 7 7)]
-                    [br_corner (cons 10 8.5)]
-                    [tl_corner (cons 6 9)]
-                    [tr_corner (cons 9 10.5)]))
+                    [bl_corner ($Vector 7 7)]
+                    [br_corner ($Vector 10 8.5)]
+                    [tl_corner ($Vector 6 9)]
+                    [tr_corner ($Vector 9 10.5)]))
 
 (define *re11* (new rectangle%
                     [name 're11]
-                    [bl_corner (cons 5 1)]
-                    [br_corner (cons 6 2)]
-                    [tl_corner (cons 4 2)]
-                    [tr_corner (cons 5 3)]))
+                    [bl_corner ($Vector 5 1)]
+                    [br_corner ($Vector 6 2)]
+                    [tl_corner ($Vector 4 2)]
+                    [tr_corner ($Vector 5 3)]))
 
 
 ;_________________________________________________
@@ -105,7 +105,7 @@
   (class object%
     (init-field
      [radius 1]
-     [center (cons 0 0)])
+     [center ($Vector 0 0)])
     
     (define/public ($Get_Center)
       center)
@@ -124,27 +124,27 @@
 (define *ci2*
   (new circle%
        [radius 2]
-       [center (cons 2 3)]))
+       [center ($Vector 2 3)]))
 
 (define *ci3*
   (new circle%
        [radius 1]
-       [center (cons 1 1)]))
+       [center ($Vector 1 1)]))
 
 (define *ci4*
   (new circle%
        [radius 3]
-       [center (cons 0 -4)]))
+       [center ($Vector 0 -4)]))
 
 (define *ci5*
   (new circle%
        [radius 2]
-       [center (cons -5 -4)]))
+       [center ($Vector -5 -4)]))
 
 (define *ci6*
   (new circle%
        [radius 1]
-       [center (cons -5 -4)]))
+       [center ($Vector -5 -4)]))
 
 ;_________________________________________________
 ;_________________________________________________
@@ -157,20 +157,20 @@
 ;to its sides as a pair.
 (define ($Find_Perpendicular_Axes rectangle_object)
   
-  ;retrieving the necessary corners to make the axes.
-  (let ([tr_corner_x (car (send rectangle_object $Get_Tr_Corner))]
-        [tr_corner_y (cdr (send rectangle_object $Get_Tr_Corner))]
-        [tl_corner_x (car (send rectangle_object $Get_Tl_Corner))]
-        [tl_corner_y (cdr (send rectangle_object $Get_Tl_Corner))]
-        [br_corner_x (car (send rectangle_object $Get_Br_Corner))]
-        [br_corner_y (cdr (send rectangle_object $Get_Br_Corner))])
+  ;Retrieving the necessary corners to make the axes.
+  (let ([tr_corner_x ($Vector_Get_X (send rectangle_object $Get_Tr_Corner))]
+        [tr_corner_y ($Vector_Get_Y (send rectangle_object $Get_Tr_Corner))]
+        [tl_corner_x ($Vector_Get_X (send rectangle_object $Get_Tl_Corner))]
+        [tl_corner_y ($Vector_Get_Y (send rectangle_object $Get_Tl_Corner))]
+        [br_corner_x ($Vector_Get_X (send rectangle_object $Get_Br_Corner))]
+        [br_corner_y ($Vector_Get_Y (send rectangle_object $Get_Br_Corner))])
     
     (let (
           ;goes from the left side to the right,(parallel to the top and bottom side)
-          [axis_lr (cons (- tr_corner_x tl_corner_x)
+          [axis_lr ($Vector (- tr_corner_x tl_corner_x)
                          (- tr_corner_y tl_corner_y))]
           ;goes from the bottom to the top,(parallel to the left and right side) 
-          [axis_bt (cons (- tr_corner_x br_corner_x)
+          [axis_bt ($Vector (- tr_corner_x br_corner_x)
                          (- tr_corner_y br_corner_y))])
       
       ;returned as a pair
@@ -303,12 +303,12 @@
           line_point_2)
 
   ;Extracting the necessary values.
-  (let* ([x_1 (car line_point_1)]
-         [y_1 (cdr line_point_1)]
-         [x_2 (car line_point_2)]
-         [y_2 (cdr line_point_2)]
-         [x_main (car main_point)]
-         [y_main (cdr main_point)]
+  (let* ([x_1 ($Vector_Get_X line_point_1)]
+         [y_1 ($Vector_Get_Y line_point_1)]
+         [x_2 ($Vector_Get_X line_point_2)]
+         [y_2 ($Vector_Get_Y line_point_2)]
+         [x_main ($Vector_Get_X main_point)]
+         [y_main ($Vector_Get_Y main_point)]
          [delta_x (- x_2 x_1)]
          [delta_y (- y_2 y_1)])
 
@@ -443,9 +443,9 @@ __________________________________________________|#
     ;Checks if their projections on the perpendicular axes to 1
     ;of the rectangles overlap.
     (and ($Projection_Overlap?
-          (car perpendicular_axes_obj_a) rectangle_a rectangle_b)
+          ($Vector_Get_X perpendicular_axes_obj_a) rectangle_a rectangle_b)
          ($Projection_Overlap?
-          (cdr perpendicular_axes_obj_a) rectangle_a rectangle_b))))
+          ($Vector_Get_Y perpendicular_axes_obj_a) rectangle_a rectangle_b))))
 
 ;_________________________________________________
 
