@@ -22,7 +22,8 @@
 
     (map (lambda (flying_unit) (if (is-a? flying_unit flying_unit_rectangular%)
                                    ($Airplane_Full_Movement flying_unit)
-                                   (printf "To implement: Flying_unit_circular"))))))
+                                   (printf "To implement: Flying_unit_circular")))
+         flying_units)))
 
 
 ;_________________________________________________
