@@ -12,7 +12,7 @@
   (new frame%
        [width 0]
        [height 0]
-       [label "Detta är ett fönster"]))
+       [label "Dogfight!"]))
 
 ;Makes the main window appear
 (send *main_window* show #t)
@@ -64,13 +64,13 @@
                (send dc translate
                      projected_bl_corner_x
                      projected_bl_corner_y)
-               (send dc rotate angle)
+               (send dc rotate (- angle))
 
                (send dc draw-bitmap (send flying_unit $Get_Bitmap)
                      0
                      0)
 
-               (send dc rotate (- angle))
+               (send dc rotate angle)
                (send dc translate
                      (- projected_bl_corner_x)
                      (- projected_bl_corner_y))))
