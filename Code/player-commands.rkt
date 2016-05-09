@@ -6,6 +6,7 @@
 (require "airplane.rkt")
 (require "world-init.rkt")
 (require "basic-procedures.rkt")
+(require "flying-unit-rectangular.rkt")
 
 
 ;Here, the commands for interacting with the objects are defined.
@@ -13,6 +14,15 @@
 ;NOTE: Some of these procedure will be moved at a later stage,
 ;when keyboard presses are implemented!
 
+
+;_________________________________________________
+;Moves all units in *world*
+(define ($Move_All)
+  (let ([flying_units (send *world* $Get_Flying_Units)])
+
+    (map (lambda (flying_unit) (if (is-a? flying_unit flying_unit_rectangular%)
+                                   ($Airplane_Full_Movement flying_unit)
+                                   (printf "To implement: Flying_unit_circular"))))))
 
 
 ;_________________________________________________

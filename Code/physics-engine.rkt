@@ -1,10 +1,9 @@
 #lang racket
 
 (require "world-init.rkt")
-(require "airplane.rkt")
 (require "direction.rkt")
-(require "rectangle.rkt")
 (require "basic-procedures.rkt")
+(require "rectangle.rkt")
 
 (provide (all-defined-out))
 

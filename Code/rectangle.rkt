@@ -2,7 +2,7 @@
 
 (require "basic-procedures.rkt")
 
-(provide (all-defined-out))
+(provide rectangle%)
 
 ;A class for defining a rectangle object. Won't
 ;necessarily be defined like this in the finished

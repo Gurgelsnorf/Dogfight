@@ -2,7 +2,7 @@
 
 (require "flying-unit-rectangular.rkt")
 
-(provide (all-defined-out))
+(provide airplane%)
 
 ;Here, the class airplane is defined.
 

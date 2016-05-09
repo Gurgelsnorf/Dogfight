@@ -273,12 +273,12 @@ etc... To implement!
 ;_________________________________________________
 (define *player_1_bitmap* 
   (make-object bitmap%
-    "grafik/test-flyg-80-39.png"
+    "grafik/test-flyg-80-40.png"
     'png/alpha))
 
 (define *player_2_bitmap*
   (make-object bitmap%
-    "grafik/test-flyg-80-39-green.png"
+    "grafik/test-flyg-80-40-green.png"
     'png/alpha))
 
 ;_________________________________________________

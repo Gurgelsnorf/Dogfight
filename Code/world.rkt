@@ -19,7 +19,7 @@
      ;top left      :(0 height)
      ;top right     :(width height)
      
-     [height 800] ;The height of the sky,
+     [height 700] ;The height of the sky,
      [width 1200]) ;The width of the world.
     
     

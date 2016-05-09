@@ -1,7 +1,7 @@
 #lang racket
 (require "rectangle.rkt")
 
-(provide (all-defined-out))
+(provide flying_unit_rectangular%)
 
 (define flying_unit_rectangular%
   (class rectangle%
