@@ -16,6 +16,13 @@
 
 
 ;_________________________________________________
+;Sets an angle for the object and then rotates the projected corners based on that angle
+(define ($Set_Angle_Rotate object new_angle)
+  (begin
+    ($Set_Angle object new_angle)
+    ($Rotate_All_Corners object)))
+    
+;_________________________________________________
 ;Moves all units in *world*
 (define ($Move_All)
   (let ([flying_units (send *world* $Get_Flying_Units)])
