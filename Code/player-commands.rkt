@@ -16,6 +16,14 @@
 
 
 ;_________________________________________________
+;Increase the angle and then rotate based on the increse
+
+(define ($Increase_Angle_Rotate object angle_increase)
+  (begin
+    ($Increase_Angle object angle_increase)
+    ($Rotate_All_Corners object)))
+
+;_________________________________________________
 ;Sets an angle for the object and then rotates the projected corners based on that angle
 (define ($Set_Angle_Rotate object new_angle)
   (begin
