@@ -3,6 +3,7 @@
 (require "world.rkt")
 (require "airplane.rkt")
 (require "direction.rkt")
+(require "projectile.rkt")
 (require "basic-procedures.rkt")
 (provide (all-defined-out))
 
@@ -281,6 +282,10 @@ etc... To implement!
     "grafik/test-flyg-80-40-green.png"
     'png/alpha))
 
+(define *projectile_bitmap*
+  (make-object bitmap%
+    "grafik/bullet-11.png"
+    'png/alpha))
 ;_________________________________________________
 ;_________________________________________________
 ;----------------Defining players-----------------
@@ -315,6 +320,21 @@ etc... To implement!
        [projected_tr_corner ($Vector 180 130)]
        [bitmap *player_2_bitmap*]))
 
+;_________________________________________________
+;_________________________________________________
+;--------------Defining projectiles---------------
+;_________________________________________________
+;_________________________________________________
+;A help procedure for creating a projectile. 
+(define ($Make_Projectile center_ direction_ speed_)
+  (new projectile%
+       [radius 3]
+       [center center_]
+       [direction direction_]
+       [speed speed_]
+       [bitmap *projectile_bitmap*]))
+
+
 
 ;_________________________________________________
 ;_________________________________________________
@@ -325,8 +345,8 @@ etc... To implement!
 (define *world*
   (new world%))
 
-
 ;_________________________________________________
-;Adding players to the world
+;Adding units to the world
 (send *world* $Add_Flying_Unit *player_1*)
 (send *world* $Add_Flying_Unit *player_2*)
+(send *world* $Add_Flying_Unit ($Make_Projectile ($Vector 400 400) 3 10))
