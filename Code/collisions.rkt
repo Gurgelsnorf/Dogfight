@@ -9,14 +9,70 @@
 (require "flying-entity.rkt")
 (require "world-init.rkt")
 
+(require "player-commands.rkt")
+
 (provide (all-defined-out))
 
-  
-;Contains the procedures that find if the different
-;object-types have collided or not. Look furthest down
-;to find the main procedures, and directly above
-;for a description and sub-procedures.
 
+#| This file contains all procedures needed to detect collisions.
+
+The file is quite big, and is thus divided into multiple sections.
+
+;_________________________________________________
+Section Cheat Sheet:
+
+     1. Help procedures for single unit collisions
+     2. Single unit collisions
+
+     3. World Collision
+
+     4. Help procedures for multiple unit collisions
+
+     5. Main Collision Finder
+     6. Main Collision Handler
+
+;_________________________________________________
+Segment description:
+
+;The 2 first segments are:
+
+     *Help procedures for single unit collisions
+     *Single unit collisions
+
+Which contains all procedures needed for detecting
+if 2 given objects are currently colliding, and mostly
+consists of different geometric calculations.
+
+;-------------------------------------------------
+This is followed by the segment:
+
+     *World Collision
+
+That contains all procedures needed to check if
+an object has collided with the world.
+
+;-------------------------------------------------
+Next, the segment:
+
+     *Help procedures for multiple unit collisions
+
+Is defined, which containts all procedures that help
+find and handle all collisions in *world*
+
+;-------------------------------------------------
+Lastly, the 2 final segments are defined:
+
+     *Main Collision Finder
+     *Main Collision Handler
+
+The first which, when run, returns all collisions in *world*.
+
+The second includes the main procedure ($Collisions), that
+finds all collisions, and takes the corresponding actions
+for every type of collision. This is the procedure that will
+be called by the main loop in physics-engine later.
+
+|#
 
 ;_________________________________________________
 ;_________________________________________________
@@ -144,7 +200,7 @@
 
 ;_________________________________________________
 ;_________________________________________________
-;----Defining procedures used in the main ones----
+;----Help procedures for single unit collisions---
 ;_________________________________________________
 ;_________________________________________________
 
@@ -164,10 +220,10 @@
     (let (
           ;goes from the left side to the right,(parallel to the top and bottom side)
           [axis_lr ($Vector (- tr_corner_x tl_corner_x)
-                         (- tr_corner_y tl_corner_y))]
+                            (- tr_corner_y tl_corner_y))]
           ;goes from the bottom to the top,(parallel to the left and right side) 
           [axis_bt ($Vector (- tr_corner_x br_corner_x)
-                         (- tr_corner_y br_corner_y))])
+                            (- tr_corner_y br_corner_y))])
       
       ;returned as a pair
       (cons  axis_lr  axis_bt))))
@@ -281,7 +337,7 @@
                               vector_br_p
                               vector_br_tr)])
     
-
+    
     ;If this is true, then the point must be inside
     ;the rectangle.
     (and (< 0 comparison_value_1)
@@ -297,7 +353,7 @@
           main_point
           line_point_1
           line_point_2)
-
+  
   ;Extracting the necessary values.
   (let* ([x_1 ($Vector_Get_X line_point_1)]
          [y_1 ($Vector_Get_Y line_point_1)]
@@ -307,7 +363,7 @@
          [y_main ($Vector_Get_Y main_point)]
          [delta_x (- x_2 x_1)]
          [delta_y (- y_2 y_1)])
-
+    
     ;Equation for calculating the distance.
     (/ (abs (+
              (* delta_y x_main)
@@ -327,7 +383,7 @@
          main_point
          start_point_line
          end_point_line)
-
+  
   ;Calculating the necessary vectors/projections.
   (let* ([line
           ($Vector_Create start_point_line end_point_line)]
@@ -338,7 +394,7 @@
          [main_point_projection
           ($Vector_Projection vector_start_main
                               line)])
-
+    
     
     (cond
       ;If the angle between the line and the vector
@@ -349,7 +405,7 @@
              vector_start_main
              line))
        ($Vector_Length vector_start_main)]
-
+      
       ;If the projection is longer than the
       ;line segment, the end point is the
       ;closest point.
@@ -358,7 +414,7 @@
        ($Vector_Length ($Vector_Create
                         end_point_line
                         main_point))]
-
+      
       ;Otherwise, we can just calculate the
       ;perpendicular distance to the line.
       [else ($Distance_Line_Point
@@ -368,44 +424,9 @@
 
 ;_________________________________________________
 
-;Sorts a list of flying units ordered by collision
-;priority. Is returned like:
-;(append planes entities projectiles buffs).
-(define ($Sort_Unit_Types list_of_flying_units)
-  (let* (
-         [planes '()]
-         [entities '()]
-         [projectiles '()]
-         [buffs '()])
-    
-    (map (lambda (flying_unit)
-           ;Identifies the object type
-           (cond
-             [(is-a? airplane% flying_unit)
-              (set! planes (cons flying_unit planes))]
-             
-             [(is-a? flying_entity% flying_unit)
-              (set! entities (cons flying_unit entities))]
-             
-             [(is-a? projectile% flying_unit)
-              (set! projectiles (cons flying_unit projectiles))]
-             
-             ;If none of the above, only buff% remains
-             [else (set! buffs (cons flying_unit buffs))]))
-         
-         list_of_flying_units)
-
-        ;returned list with the objects in the
-    ;correct order.
-    (append planes
-            entities
-            projectiles
-            buffs)))
-
-
 ;_________________________________________________
 ;_________________________________________________
-;------------Collisions by object type------------
+;-------------Single unit collisions-------------
 ;_________________________________________________
 ;_________________________________________________
 
@@ -472,9 +493,9 @@ __________________________________________________|#
 (define ($Rectangle_Collision?
          rectangle_a
          rectangle_b)
-
+  
   (let ([perpendicular_axes_obj_a ($Find_Perpendicular_Axes rectangle_a)])
-
+    
     ;Checks if their projections on the perpendicular axes to 1
     ;of the rectangles overlap.
     (and ($Projection_Overlap?
@@ -487,27 +508,27 @@ __________________________________________________|#
 
 ;Returns #t if 2 a rectangle and circle overlap, else #f.
 (define ($Rectangle_Circle_Collision? rectangle circle)
-
-         ;Extracting the necessary values.
+  
+  ;Extracting the necessary values.
   (let* ([circle_center (send circle $Get_Center)]
          [circle_radius (send circle $Get_Radius)]
          [rec_br_corner (send rectangle $Get_Br_Corner)]
          [rec_bl_corner (send rectangle $Get_Bl_Corner)]
          [rec_tr_corner (send rectangle $Get_Tr_Corner)]
          [rec_tl_corner (send rectangle $Get_Tl_Corner)])
-
-         ;Checks if the circle center is inside
-         ;the rectangle.
+    
+    ;Checks if the circle center is inside
+    ;the rectangle.
     (or ($Point_In_Rectangle? circle_center
                               rec_br_corner
                               rec_bl_corner
                               rec_tr_corner)
-
+        
         ;The list of distances is searched. If some distance is
         ;shorter than the circle radius, a collision has occured.
         (not (null? (filter (lambda (distance)
                               (< distance circle_radius))
-
+                            
                             ;Returns a list of shorest distances
                             ;from every edge to the point.
                             (map
@@ -516,7 +537,7 @@ __________________________________________________|#
                                 circle_center
                                 (car corner_pair)
                                 (cdr corner_pair)))
-
+                             
                              ;list of all the edges start/end points.
                              (list (cons rec_bl_corner rec_br_corner)
                                    (cons rec_bl_corner rec_tl_corner)
@@ -532,11 +553,12 @@ __________________________________________________|#
   (cond
     [(and (is-a? object_1 rectangle%) (is-a? object_2 rectangle%))
      ($Rectangle_Collision? object_1 object_2)]
-
+    
     [(and (is-a? object_1 circle%) (is-a? object_2 circle%))
      ($Circle_Collision? object_1 object_2)]
-
+    
     [else ($Rectangle_Circle_Collision? object_1 object_2)]))
+
 
 ;_________________________________________________
 ;_________________________________________________
@@ -544,7 +566,8 @@ __________________________________________________|#
 ;_________________________________________________
 ;_________________________________________________
 
-;Here, the procedure which detect world collision are defined.
+;Here, the procedures needed to
+;detect world collision are defined.
 
 
 ;_________________________________________________
@@ -579,13 +602,16 @@ __________________________________________________|#
                [lowest_y (car corner_y_coordinates)]
                [highest_x ($Last_Element_List corner_x_coordinates)]
                [highest_y ($Last_Element_List corner_y_coordinates)])
-
-          ;
+          
+          ;The values are compared and a tag containing the
+          ;occured collision is returned(see
+          ;$World_Collision_Comparison for the name of the tags). 
           ($World_Collision_Comparison
            lowest_x lowest_y
            highest_x highest_y
            world_height world_width))
         
+        ;-----------------------------------------
         
         ;If not rectangular, it is guaranteed to be circular.
         (let* (
@@ -596,15 +622,16 @@ __________________________________________________|#
                [lowest_y (- ($Vector_Get_Y center) radius)]
                [highest_x (+ ($Vector_Get_X center) radius)]
                [highest_y (+ ($Vector_Get_Y center) radius)])
-
+          
           ;The values are compared and a tag containing the
-          ;occured collision is returned(see the help procedure
-          ;below for the name of the tags).
+          ;occured collision is returned(see
+          ;$World_Collision_Comparison for the name of the tags).
           ($World_Collision_Comparison
            lowest_x lowest_y
            highest_x highest_y
            world_height world_width)))))
 
+;_________________________________________________
 
 
 ;A help procedure to $Find_World_Collision that takes
@@ -615,30 +642,73 @@ __________________________________________________|#
          obj_lowest_x obj_lowest_y
          obj_highest_x obj_highest_y
          world_height world_width)
+  
   (cond
+    ;Returns the collision type as a tag.
     [(< obj_lowest_y 0) 'ground_collision]
-    [(< world_height obj_highest_y ) 'sky_collision]
-    [(< obj_lowest_x 0) 'left_collision]
-    [(< world_width obj_highest_x) 'right_collision]
+    [(< world_height obj_lowest_y ) 'sky_collision]
+    [(< obj_highest_x 0) 'left_collision]
+    [(< world_width obj_lowest_x) 'right_collision]
     [else 'no_collision]))
 
+
 ;_________________________________________________
 ;_________________________________________________
-;-----------Multiple object collisions------------
+;--Help procedures for multiple unit collisions---
 ;_________________________________________________
 ;_________________________________________________
 
-;Here, the procedures which handle multiple collsions
+;Here, the procedures which help handle multiple collsions
 ;are defined. This includes taking all units in *world*
 ;and checking what they have collided with, but also
 ;prioritizing which collision takes priority.
 
 ;_________________________________________________
 
+
+;Sorts a list of flying units ordered by collision
+;priority. Is returned like:
+;(append planes entities projectiles buffs)
+;,which is the priority order.
+(define ($Sort_Unit_Types list_of_flying_units)
+  (let* (
+         [planes '()]
+         [entities '()]
+         [projectiles '()]
+         [buffs '()])
+    
+    (map (lambda (flying_unit)
+           ;Identifies the object type
+           (cond
+             [(is-a? airplane% flying_unit)
+              (set! planes (cons flying_unit planes))]
+             
+             [(is-a? flying_entity% flying_unit)
+              (set! entities (cons flying_unit entities))]
+             
+             [(is-a? projectile% flying_unit)
+              (set! projectiles (cons flying_unit projectiles))]
+             
+             ;If none of the above, only buff% remains
+             [else (set! buffs (cons flying_unit buffs))]))
+         
+         list_of_flying_units)
+    
+    ;returned list with the objects in the
+    ;correct order.
+    (append planes
+            entities
+            projectiles
+            buffs)))
+
+;_________________________________________________
+
+
 ;Takes a list of flying units and returns 2 lists. The first
 ;is a list of all objects that have collided with the world,
 ;and the second one those that haven't.
 ;Returned as: (cons world_collision_list no_world_collision_list)
+
 (define ($Separate_World_Collisions list_of_flying_units)
   (let* (
          [world_collisions '()]
@@ -647,10 +717,10 @@ __________________________________________________|#
          ;Tags every flying unit with a world collision
          ;type, see $World_Collision for list.
          [world_collision_types (map (lambda (flying_unit)
-                                 (cons
-                                  flying_unit
-                                  ($Find_World_Collision flying_unit)))
-                               list_of_flying_units)])
+                                       (cons
+                                        flying_unit
+                                        ($Find_World_Collision flying_unit)))
+                                     list_of_flying_units)])
     
     
     ;Spliting collision and no collision into 2
@@ -679,23 +749,57 @@ __________________________________________________|#
 (define ($Collision_Detection flying_unit
                               sorted_flying_units)
   
-    (define (loop)
-      (cond
-        [(null? sorted_flying_units) 'no-collision]
-        [($Collision? flying_unit (car sorted_flying_units))
-         (cons flying_unit (car sorted_flying_units))]
-        [else (set! sorted_flying_units (cdr sorted_flying_units))
-              (loop)]))
-    (loop))
+  (define (loop)
+    (cond
+      [(null? sorted_flying_units) 'no-collision]
+      [($Collision? flying_unit (car sorted_flying_units))
+       (cons flying_unit (car sorted_flying_units))]
+      [else (set! sorted_flying_units (cdr sorted_flying_units))
+            (loop)]))
+  (loop))
+
+;_________________________________________________
+
+;Takes a list of units and removes them from world,
+;and runs their kill procedure.
+(define ($Kill_All kill_list)
+  (map (lambda (flying_unit)
+         (send *world* $Delete_Flying_unit flying_unit)
+         (send flying_unit $Kill))
+       kill_list))
+
+;_________________________________________________
+
+;Takes a list of planes and teleports them to
+;the right or left side.
+(define ($Teleport_All direction teleport_list)
+  
+  (let ([world_width (send *world* $Get_Width)])
+    
+    (if (equal? direction 'left)
+
+        ;to the left.
+        (map (lambda (plane)
+               ($Increase_Pos plane (- (+ world_width (send plane $Get_Width))) 0)
+               ($Rotate_All_Corners plane))
+             teleport_list)
+
+        ;to the right.
+        (map (lambda (plane)
+               ($Increase_Pos plane (+ world_width (send plane $Get_Width)) 0)
+               ($Rotate_All_Corners plane))
+             teleport_list))))
+
 
 ;_________________________________________________
 ;_________________________________________________
-;------------Main Collision Procedure-------------
+;-------------Main Collision Finder---------------
 ;_________________________________________________
 ;_________________________________________________
 
 ;Finds all the collisions that has occured in *world*.
-;is returned like 2 lists separated by type of collision like:
+;is returned like 2 lists separated world-unit collision and
+;unit-unit collision like:
 ;(cons world_collisions list_of_unit_collisions)
 (define ($Find_Collisions)
   (let* (
@@ -713,17 +817,17 @@ __________________________________________________|#
          ;are sorted in the order of priority(if multiple collisions
          ;occur, 1 is prioritized).
          [sorted_flying_units ($Sort_Unit_Types no_world_collisions)]
-
+         
          ;A list which containts pairs of all units that have
          ;a detected collison together.
          [list_of_unit_collisions
-
-
+          
+          
           ;After all the flying remaining flying units have been tagged,
           ;Those that have the tag 'no-collision are removed.
           (filter (lambda (flying_unit_collision)
                     (not (equal? (cdr flying_unit_collision 'no-collision))))
-
+                  
                   ;All flying units that didn't collide with the world are run
                   ;through 1 by 1 in the order of priority.
                   (map (lambda (flying_unit)
@@ -734,8 +838,177 @@ __________________________________________________|#
                                ($Collision_Detection flying_unit
                                                      (cdr sorted_flying_units))))
                        sorted_flying_units))])
-
-
+    
+    
     ;Finally, the 2 lists containing the collisions with the world
     ;and the units which collided are returned.
     (cons world_collisions list_of_unit_collisions)))
+
+
+;_________________________________________________
+;_________________________________________________
+;-------------Main Collision Handler--------------
+;_________________________________________________
+;_________________________________________________
+
+;Finds all occuring collisions in the world,
+;and takes the corresponding actions.
+(define ($Collisions)
+  (let* (
+         ;All collisions are found and separated into
+         ;world/unit collisions.
+         [collisions ($Find_Collisions)]
+         [world_collisions (car collisions)]
+         [flying_unit_collisions (cdr collisions)]
+         
+         ;Lists are created which will be filled with
+         ;the units that will be teleported/killed.
+         [kill_list '()]
+         [teleport_too_right_list '()]
+         [teleport_too_left_list '()])
+    
+    ;A loop for the world collisions.
+    (define (loop_world)
+      
+      ;If no world collisions left, continue to
+      ;unit collisions.
+      (if (null? world_collisions)
+          (loop_units)
+          
+          (let (
+                [flying_unit (caar world_collisions)]
+                [collision_tag (cdar world_collisions)])
+            
+            (cond
+              ;If a non airplane unit collides with the world,
+              ;it will be removed.
+              [(not (is-a? flying_unit airplane%))
+               (set! kill_list (cons flying_unit kill_list))]
+              
+              ;Else, take the corresponding action.
+              [(equal? collision_tag 'ground_collision)
+               (set! kill_list
+                     (cons flying_unit kill_list))]
+              
+              [(equal? collision_tag 'sky_collision)
+               (send flying_unit $Stalling)]
+              
+              [(equal? collision_tag 'left_collision)
+               (set! teleport_too_right_list
+                     (cons flying_unit teleport_too_right_list))]
+              
+              [(equal? collision_tag 'right_collision)
+               (set! teleport_too_left_list
+                     (cons flying_unit teleport_too_left_list))])
+            
+            ;Loop until no collisions left.
+            (set! world_collisions (cdr world_collisions))
+            (loop_world))))
+    
+    
+    ;A loop for the unit collisions.
+    (define (loop_units)
+      
+      ;Continue until no collisions left.
+      (when (not (null? flying_unit_collisions))
+        
+        (let (;Separate the units that will be compared first.
+              [unit_1 (caar flying_unit_collisions)]
+              [unit_2 (cdar flying_unit_collisions)])
+          
+          ;Detect unit type to take the correct action.
+          (cond
+            ;-------------------------------------
+            ;unit_1 plane
+            [(is-a? unit_1 airplane%)
+             (cond
+               
+               ;unit_2 buff
+               [(is-a? unit_2 buff%)
+                (set! kill_list (cons unit_2 kill_list))
+                (send unit_1 $Buff (send unit_2 $Get_Buff_Type))]
+               
+               ;if not a buff, all other cases means both the plane
+               ;and the other unit should be killed.
+               [else (set! kill_list
+                           (cons unit_1 (cons unit_2 kill_list)))])]
+            
+            ;-------------------------------------
+            ;unit_1 entity
+            [(is-a? unit_1 flying_entity%)
+             (cond
+               
+               ;unit_2 plane
+               [(is-a? unit_2 airplane%)
+                (set! kill_list (cons unit_1 (cons unit_2 kill_list)))]
+               
+               ;unit_2 entity
+               [(is-a? unit_2 flying_entity%)
+                (set! kill_list (cons unit_1 (cons unit_2 kill_list)))]
+               
+               ;unit_2 projectile
+               [(is-a? unit_2 projectile%)
+                (set! kill_list (cons unit_1 (cons unit_2 kill_list)))
+                (printf "To implement: spawn buff here!")]
+               
+               ;unit_2 buff
+               [(is-a? unit_2 buff%)
+                (set! kill_list (cons unit_2 kill_list))
+                (printf "To implement: buff entity!")])]
+            
+            ;-------------------------------------
+            ;unit_1 projectile
+            [(is-a? unit_1 projectile%)
+             (cond
+               
+               ;unit_2 entity
+               [(is-a? unit_2 flying_entity%)
+                (set! kill_list (cons unit_1 (cons unit_2 kill_list)))
+                (printf "To implement: spawn buff here!")]
+               
+               ;if not an entity, all other cases will be
+               ;killing both units
+               [else (set! kill_list (cons unit_1 (cons unit_2 kill_list)))])]
+            
+            ;-------------------------------------
+            ;unit_1 buff
+            [(is-a? unit_1 buff%)
+             (cond
+               
+               ;unit_2 plane
+               [(is-a? unit_2 airplane%)
+                (set! kill_list (cons unit_1 kill_list))
+                (send unit_2 $Buff (send unit_1 $Get_Buff_Type))]
+               
+               ;unit_2 entity
+               [(is-a? unit_2 flying_entity%)
+                (set! kill_list (cons unit_1 kill_list))
+                (printf "To implement: buff entity!")]
+               
+               ;unit_2 projectile
+               [(is-a? unit_2 projectile%)
+                (set! kill_list (cons unit_1 (cons unit_2 kill_list)))]
+               
+               ;unit_2 buff       NOTE: (this case doesn't make anyting happen,
+               ;since buffs should be able to overlap. Case is added
+               ;for easier overview or later changes. (super-buffs maybe?)
+               [(is-a? unit_2 buff%)
+                (void)])])
+          
+          ;-------------------------------------
+          
+          ;Finally, repeat for all units.
+          (set! flying_unit_collisions (cdr flying_unit_collisions))
+          (loop_units))))
+    
+    ;-------------------------------------
+    
+    
+    ;Start the loop, which will run loop_world and loop_units for
+    ;all units.
+    (loop_world)
+    
+    
+    ($Kill_All kill_list)
+    ($Teleport_All 'left teleport_too_left_list)
+    ($Teleport_All 'right teleport_too_right_list)))

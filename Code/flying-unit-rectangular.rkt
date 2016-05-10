@@ -8,7 +8,8 @@
 
     (init-field
      speed
-     direction)
+     direction
+     [dead #f])
 
 ;_________________________________________________
     
@@ -17,6 +18,8 @@
       speed)
     (define/public ($Get_Direction)
       direction)
+    (define/public ($Dead?)
+      dead)
     
 ;_________________________________________________
     
@@ -25,5 +28,9 @@
       (set! speed new_speed))
     (define/public ($Set_Direction new_direction)
       (set! direction new_direction))
-    
+
+    (define/public ($Kill)
+      (set! dead #t)
+      (printf "To implement: death-procedure"))
+            
     (super-new)))
