@@ -1,0 +1,13 @@
+#lang racket
+
+(provide circle%)
+
+(define circle%
+  (class object%
+
+    (init-field
+
+     center
+     radius)
+
+    (super-new)))

@@ -1,0 +1,10 @@
+#lang racket
+
+(require "flying-unit-circular.rkt")
+
+(provide buff%)
+
+(define buff%
+  (class flying_unit_circular%)
+
+  (super-new))

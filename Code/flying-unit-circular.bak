@@ -1,10 +1,13 @@
 #lang racket
-(require "rectangle.rkt")
 
-(provide flying_unit_rectangular%)
+(require "circle.rkt")
 
-(define flying_unit_rectangular%
-  (class rectangle%
+(provide projectile%)
+
+
+;Defines the class flying unit circular
+(define flying_unit_circular%
+  (class circle%
 
     (init-field
      speed
@@ -17,7 +20,7 @@
       speed)
     (define/public ($Get_Direction)
       direction)
-    
+
 ;_________________________________________________
     
     ;Sets the variables for the object:
@@ -25,5 +28,6 @@
       (set! speed new_speed))
     (define/public ($Set_Direction new_direction)
       (set! direction new_direction))
+
     
     (super-new)))

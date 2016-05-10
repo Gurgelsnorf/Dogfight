@@ -1,0 +1,22 @@
+#lang racket
+
+(require "flying-unit-rectangular.rkt")
+
+(provide flying_entity%)
+
+
+(define flying_entity%
+  (class flying-unit-rectangular%
+    (init-field
+
+     [buff_on_death #f]
+     [buff_type '()])
+
+
+    (define/public ($Drops_Buff?)
+      buff_on_death)
+
+    (define/public ($Get_Buff_Type)
+      buff_type)
+
+    (super-new)))
