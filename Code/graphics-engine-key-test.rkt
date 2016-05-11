@@ -35,10 +35,13 @@
 
     ;Paints all flying units 1 by 1.
     (map (lambda (flying_unit)
-             (let* ([projected_bl_corner (send flying_unit $Get_Projected_Bl_Corner)]
-                    [projected_bl_corner_x ($Vector_Get_X projected_bl_corner)]
-                    [projected_bl_corner_y ($Vector_Get_Y projected_bl_corner)]
-                    [angle (send flying_unit $Get_Angle)])
+           (if (is-a? flying_unit flying_unit_rectangular%)
+             (begin
+               (let* (
+                      [projected_bl_corner (send flying_unit $Get_Projected_Bl_Corner)]
+                      [projected_bl_corner_x ($Vector_Get_X projected_bl_corner)]
+                      [projected_bl_corner_y ($Vector_Get_Y projected_bl_corner)]
+                      [angle (send flying_unit $Get_Angle)])
                
                (send dc translate
                      projected_bl_corner_x
@@ -53,6 +56,23 @@
                (send dc translate
                      (- projected_bl_corner_x)
                      (- projected_bl_corner_y))))
+             (begin (let* (
+                          [center (send flying_unit $Get_Center)]
+                          [center_x ($Vector_Get_X center)]
+                          [center_y ($Vector_Get_Y center)])
+                          
+                      (send dc translate
+                            center_x
+                            center_y)
+
+                      (send dc draw-bitmap (send flying_unit $Get_Bitmap)
+                            0
+                            0)
+
+                      (send dc translate
+                            (- center_x)
+                            (- center_y))))))
+                            
          
          list_of_flying_units)
     
@@ -85,7 +105,6 @@
       ((eq? £Key_Code 'down) (begin
                                ($Move_All)
                                (send *flying_units* refresh-now))))))
-
 
 ;_________________________________________________
 ;Can be used to test if the dc coordinates are changed
@@ -121,6 +140,5 @@
 
 (send (send *flying_units* get-dc) set-scale 1 -1)
 (send (send *flying_units* get-dc) set-origin 0 (send *flying_units* get-height))
-
 
 

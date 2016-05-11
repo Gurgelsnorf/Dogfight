@@ -20,8 +20,17 @@
 
 (define ($Increase_Angle_Rotate object angle_increase)
   (begin
-    ($Increase_Angle object angle_increase)
-    ($Rotate_All_Corners object)))
+    (cond
+      [(<= 32 (+ angle_increase (send object $Get_Direction)))
+       ($Increase_Angle object (- angle_increase 32))
+       ($Rotate_All_Corners object)]
+      [(>= 0 (+ angle_increase (send object $Get_Direction)))
+       ($Increase_Angle object (+ angle_increase 32))
+       ($Rotate_All_Corners object)]
+      [else
+       ($Increase_Angle object angle_increase)
+       ($Rotate_All_Corners object)])))
+       
 
 ;_________________________________________________
 ;Sets an angle for the object and then rotates the projected corners based on that angle
