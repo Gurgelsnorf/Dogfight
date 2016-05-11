@@ -14,6 +14,7 @@
      br_corner  ;bottom-right coordinate
      tl_corner  ;top-left coordinate
      tr_corner  ;top-right coordinate
+     center_of_gravity ;The center of the rectangle 
      [projected_bl_corner bl_corner]
      [projected_br_corner br_corner]
      [projected_tl_corner tl_corner]
@@ -22,8 +23,7 @@
      [name 'im-a-rectangle] ;name tag for the rectangle
      [width 0] ;width of the rectangle
      [height 0] ;Height of the rectangle
-     [angle 0]
-     [center_of_gravity 0]) ;The rotation angle of the rectangle
+     [angle 0]) ;The rotation angle of the rectangle
 
 ;_________________________________________________
 
@@ -92,13 +92,6 @@
     (set! width ($Vector_Length ($Vector_Create bl_corner br_corner)))
     (set! height ($Vector_Length ($Vector_Create bl_corner tl_corner)))
 
-
-;_________________________________________________
-
-    ;Sets the initial center of gracity. 
-    (set! center_of_gravity
-          ($Calculate_Center_Of_Gravity
-           projected_bl_corner projected_tr_corner))
 
     
     (super-new)))

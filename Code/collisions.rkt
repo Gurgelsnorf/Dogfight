@@ -173,32 +173,32 @@ be called by the main loop in physics-engine later.
 (define *ci1*
   (new circle%
        [radius 1]
-       [center ($Vector 0 0)]))
+       [center_of_gravity ($Vector 0 0)]))
 
 (define *ci2*
   (new circle%
        [radius 2]
-       [center ($Vector 2 3)]))
+       [center_of_gravity ($Vector 2 3)]))
 
 (define *ci3*
   (new circle%
        [radius 1]
-       [center ($Vector 1 1)]))
+       [center_of_gravity ($Vector 1 1)]))
 
 (define *ci4*
   (new circle%
        [radius 3]
-       [center ($Vector 0 -4)]))
+       [center_of_gravity ($Vector 0 -4)]))
 
 (define *ci5*
   (new circle%
        [radius 2]
-       [center ($Vector -5 -4)]))
+       [center_of_gravity ($Vector -5 -4)]))
 
 (define *ci6*
   (new circle%
        [radius 1]
-       [center ($Vector -5 -4)]))
+       [center_of_gravity ($Vector -5 -4)]))
 
 ;_________________________________________________
 ;_________________________________________________
