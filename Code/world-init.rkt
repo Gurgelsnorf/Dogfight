@@ -294,6 +294,7 @@ etc... To implement!
 (define *bullet_death_bitmap*
   (make-object bitmap%
     "grafik/explosion-13.png"))
+
 ;_________________________________________________
 ;_________________________________________________
 ;----------------Defining players-----------------
@@ -321,8 +322,8 @@ etc... To implement!
        [speed 5]
        [direction 0]
        [bl_corner ($Vector 100 90)]
-       [br_corner ($Vector 180 130)]
-       [tl_corner ($Vector 100 90)]
+       [br_corner ($Vector 180 90)]
+       [tl_corner ($Vector 100 130)]
        [tr_corner ($Vector 180 130)]
        [center_of_gravity ($Vector 140 110)]
        [projected_bl_corner ($Vector 100 90)]
