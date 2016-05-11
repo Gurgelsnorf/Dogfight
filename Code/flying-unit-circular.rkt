@@ -11,7 +11,9 @@
 
     (init-field
      speed
-     direction)
+     direction
+     death_bitmap
+     [dead #f])
 
 ;_________________________________________________
     
@@ -20,6 +22,8 @@
       speed)
     (define/public ($Get_Direction)
       direction)
+    (define/public ($Dead?)
+      dead)
 
 ;_________________________________________________
     
@@ -29,5 +33,10 @@
     (define/public ($Set_Direction new_direction)
       (set! direction new_direction))
 
+;_________________________________________________
+
+    ;Removes the unit from play.
+    (define/public ($Kill)
+      (set! dead #t))
     
     (super-new)))

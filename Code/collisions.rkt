@@ -1,5 +1,7 @@
-#lang racket
+#lang racket/gui
 (require "basic-procedures.rkt")
+
+(require "graphics-engine.rkt")
 
 (require "rectangle.rkt")
 (require "circle.rkt")
@@ -481,8 +483,8 @@ __________________________________________________|#
 ;Returns #t if 2 circles overlap. else #f.
 (define ($Circle_Collision? circle_1 circle_2)
   (let ([distance ($Vector_Length ($Vector_Create
-                                   (send circle_1 $Get_Center)
-                                   (send circle_2 $Get_Center)))])
+                                   (send circle_1 $Get_Center_Of_Gravity)
+                                   (send circle_2 $Get_Center_Of_Gravity)))])
     (< distance (+ (send circle_1 $Get_Radius)
                    (send circle_2 $Get_Radius)))))
 
@@ -510,7 +512,7 @@ __________________________________________________|#
 (define ($Rectangle_Circle_Collision? rectangle circle)
   
   ;Extracting the necessary values.
-  (let* ([circle_center (send circle $Get_Center)]
+  (let* ([circle_center (send circle $Get_Center_Of_Gravity)]
          [circle_radius (send circle $Get_Radius)]
          [rec_br_corner (send rectangle $Get_Br_Corner)]
          [rec_bl_corner (send rectangle $Get_Bl_Corner)]
@@ -616,7 +618,7 @@ __________________________________________________|#
         ;If not rectangular, it is guaranteed to be circular.
         (let* (
                [radius (send flying_unit $Get_Radius)]
-               [center (send flying_unit $Get_Center)]
+               [center (send flying_unit $Get_Center_Of_Gravity)]
                
                [lowest_x (- ($Vector_Get_X center) radius)]
                [lowest_y (- ($Vector_Get_Y center) radius)]
@@ -765,7 +767,11 @@ __________________________________________________|#
 (define ($Kill_All kill_list)
   (map (lambda (flying_unit)
          (send *world* $Delete_Flying_unit flying_unit)
-         (send flying_unit $Kill))
+         (send flying_unit $Kill)
+         (send *flying_units* draw-bitmap
+               (send flying_unit $Get_Kill_Bitmap)
+               ($Vector_Get_X (send flying_unit $Get_Center_Of_Gravity))
+               ($Vector_Get_Y (send flying_unit $Get_Center_Of_Gravity))))
        kill_list))
 
 ;_________________________________________________

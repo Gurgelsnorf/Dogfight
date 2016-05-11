@@ -9,6 +9,7 @@
     (init-field
      speed
      direction
+     death_bitmap
      [dead #f])
 
 ;_________________________________________________
@@ -29,8 +30,11 @@
     (define/public ($Set_Direction new_direction)
       (set! direction new_direction))
 
+;_________________________________________________
+
+    ;Removes the unit from play.
     (define/public ($Kill)
       (set! dead #t)
-      (printf "To implement: death-procedure"))
+      death_bitmap)
             
     (super-new)))

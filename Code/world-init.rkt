@@ -286,6 +286,14 @@ etc... To implement!
   (make-object bitmap%
     "grafik/bullet-11.png"
     'png/alpha))
+
+(define *airplane_death_bitmap*
+  (make-object bitmap%
+    "grafik/explosion-70.png"))
+
+(define *bullet_death_bitmap*
+  (make-object bitmap%
+    "grafik/explosion-13.png"))
 ;_________________________________________________
 ;_________________________________________________
 ;----------------Defining players-----------------
@@ -304,7 +312,8 @@ etc... To implement!
        [projected_br_corner ($Vector 80 0)]
        [projected_tl_corner ($Vector 0 40)]
        [projected_tr_corner ($Vector 80 40)]
-       [bitmap *player_1_bitmap*]))
+       [bitmap *player_1_bitmap*]
+       [death_bitmap *airplane_death_bitmap*]))
 
 (define *player_2*
   (new airplane%
@@ -318,7 +327,8 @@ etc... To implement!
        [projected_br_corner ($Vector 80 130)]
        [projected_tl_corner ($Vector 100 90)]
        [projected_tr_corner ($Vector 180 130)]
-       [bitmap *player_2_bitmap*]))
+       [bitmap *player_2_bitmap*]
+       [death_bitmap *airplane_death_bitmap*]))
 
 ;_________________________________________________
 ;_________________________________________________
@@ -329,10 +339,11 @@ etc... To implement!
 (define ($Make_Projectile center_ direction_ speed_)
   (new projectile%
        [radius 3]
-       [center center_]
+       [center_of_gravity center_]
        [direction direction_]
        [speed speed_]
-       [bitmap *projectile_bitmap*]))
+       [bitmap *projectile_bitmap*]
+       [death_bitmap *bullet_death_bitmap*]))
 
 
 

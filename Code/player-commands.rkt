@@ -48,10 +48,9 @@
   (let* (
         [direction (send (hash-ref £Directions (send object $Get_Direction)) $Get_Vector)]
         [speed (send object $Get_Speed)]
-        [center (send object $Get_Center)]
+        [center (send object $Get_Center_Of_Gravity)]
         [movement_vector ($Vector_Multiplication speed direction)])
-    
-    (send object $Set_Center ($Vector_Addition center movement_vector)))) 
+       (send object $Set_Center ($Vector_Addition center movement_vector)))) 
 
 ;_________________________________________________
 ; Moves an object based on it's speed and then rotates the projected angles
