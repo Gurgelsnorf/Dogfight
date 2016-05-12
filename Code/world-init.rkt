@@ -341,7 +341,7 @@ etc... To implement!
 ;A help procedure for creating a projectile. 
 (define ($Make_Projectile center_ direction_ speed_)
   (new projectile%
-       [radius 3]
+       [radius 5.5]
        [center_of_gravity center_]
        [direction direction_]
        [speed speed_]
