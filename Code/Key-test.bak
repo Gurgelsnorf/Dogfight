@@ -1,0 +1,39 @@
+#lang racket/gui
+
+(require "collisions.rkt")
+(require "world-init.rkt")
+(require "basic-procedures.rkt")
+(require "player-commands.rkt")
+(require "physics-engine.rkt")
+(require "flying-unit-rectangular.rkt")
+(require "input-canvas.rkt")
+
+
+(define *main_window*
+  (new frame%
+       [width 0]
+       [height 0]
+       [label "Dogfight!"]))
+
+(send *main_window* show #t)
+
+
+(define ($Key_Test_Handler event)
+  (let
+      ((£Key_Code (send event get-key-code)))
+    (cond
+      ((eq? £Key_Code 'left) (printf "Left ~n"))
+      ((eq? £Key_Code 'right) (printf "Right ~n"))
+      ((eq? £Key_Code 'up) (printf "Up ~n"))
+      ((eq? £Key_Code 'down) (printf "Down ~n")))))
+
+
+(define *flying_units*
+  (new input-canvas-key%
+       [parent *main_window*]
+       [min-height 100]
+       [min-width 100]
+       [horiz-margin 0]
+       [vert-margin 0]
+       [style '(border)]
+       [key-handler $Airplane_Key_Controlls_Handler]))

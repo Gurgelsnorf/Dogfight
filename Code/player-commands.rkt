@@ -20,16 +20,20 @@
 
 (define ($Increase_Angle_Rotate object angle_increase)
   (begin
+    (let ([angle_value (* pi (/ (send object $Get_Direction) 16))])
     (cond
       [(<= 32 (+ angle_increase (send object $Get_Direction)))
        ($Increase_Angle object (- angle_increase 32))
-       ($Rotate_All_Corners object)]
+       ($Rotate_All_Corners object)
+       (send object $Set_Angle angle_value)]
       [(>= 0 (+ angle_increase (send object $Get_Direction)))
        ($Increase_Angle object (+ angle_increase 32))
-       ($Rotate_All_Corners object)]
+       ($Rotate_All_Corners object)
+       (send object $Set_Angle angle_value)]
       [else
        ($Increase_Angle object angle_increase)
-       ($Rotate_All_Corners object)])))
+       ($Rotate_All_Corners object)
+       (send object $Set_Angle angle_value)]))))
        
 
 ;_________________________________________________
@@ -37,7 +41,8 @@
 (define ($Set_Angle_Rotate object new_angle)
   (begin
     ($Set_Angle object new_angle)
-    ($Rotate_All_Corners object)))
+    ($Rotate_All_Corners object)
+    (send object $Set_Angle (* pi (/ new_angle 16)))))
     
 ;_________________________________________________
 ;Moves all units in *world*
