@@ -1,5 +1,4 @@
 #lang racket/gui
-(require "collisions.rkt")
 (require "world-init.rkt")
 (require "basic-procedures.rkt")
 (require "player-commands.rkt")
@@ -7,6 +6,9 @@
 (require "flying-unit-rectangular.rkt")
 (require "input-canvas.rkt")
 
+(provide *flying_units*)
+
+(define x 0)
 ;Creates the main window
 (define *main_window*
   (new frame%
@@ -83,6 +85,12 @@
     (send dc draw-line 0 0 0 world_height)
     (send dc draw-line 0 world_height world_width world_height)
     (send dc draw-line world_width 0 world_width world_height)
+    (when (= x 0) (send dc draw-bitmap (make-object bitmap%
+    "grafik/test-background.png"
+    'png/alpha)
+          0
+          0)
+      (set! x 1))
     ))
 
 
@@ -93,18 +101,12 @@
   (let
       ((£Key_Code (send event get-key-code)))
     (cond
-      ((eq? £Key_Code 'left) (begin
-                               ($Increase_Angle_Rotate *player_1* 1)
-                               (send *flying_units* refresh-now)))
-      ((eq? £Key_Code 'right) (begin
-                                ($Increase_Angle_Rotate *player_1* -1)
-                                (send *flying_units* refresh-now)))
-      ((eq? £Key_Code 'up) (begin
-                             ($Airplane_Full_Movement *player_1*)
-                             (send *flying_units* refresh-now)))
-      ((eq? £Key_Code 'down) (begin
-                               ($Move_All)
-                               (send *flying_units* refresh-now))))))
+      ((eq? £Key_Code 'left) (printf "left ~n"))
+      ((eq? £Key_Code 'right) (printf "right ~n"))
+      ((eq? £Key_Code 'up) (printf "up ~n"))
+      ((eq? £Key_Code 'down) (printf "down ~n")))))
+
+
 
 ;_________________________________________________
 ;Can be used to test if the dc coordinates are changed
@@ -142,3 +144,21 @@
 (send (send *flying_units* get-dc) set-origin 0 (send *flying_units* get-height))
 
 
+#|(define ($Render_Background canvas dc)
+  (send dc draw-bitmap   (make-object bitmap%
+    "grafik/test-background.png"
+    'png/alpha)
+        0
+        0))
+
+(define *background*
+  (new canvas%
+       [parent *main_window*]
+       [min-height (send *world* $Get_Height)]
+       [min-width (send *world* $Get_Width)]
+       [horiz-margin 0]
+       [vert-margin 0]
+       [style '(border)]
+       [paint-callback $Render_Background]))
+
+|#
