@@ -83,22 +83,71 @@
          
          list_of_flying_units)
     
-    ;_________________________________________________
+;_________________________________________________
     
     ;drawing the corpses, if any.
     (map (lambda (flying_unit)
-           (if (> (send flying_unit $Get_Corpse_Cooldown) 0)
-               
-               (begin (send flying_unit $Corpse_Cooldown)
-                      (send dc draw-bitmap
-                            (send flying_unit $Get_Kill_Bitmap)
+
+           ;If the cooldown has run out, the corpse is removed
+           ;from the world and isn't shown anymore
+           (if (< (send flying_unit $Get_Corpse_Cooldown) 0)
+               (send *world* $Delete_Corpse flying_unit)
+
+               ;Otherwise, it will be printed.
+              (let (
+                    [bl_corner_x 0]
+                    [bl_corner_y 0]
+                    [angle 0])
+
+                
+                (if (is-a? flying_unit flying_unit_rectangular%)
+
+                    ;Printing coordinates for rectangular units. 
+                    (begin
+                      (set! bl_corner_x
                             ($Vector_Get_X
-                             (send flying_unit $Get_Center_Of_Gravity))
+                             (send flying_unit $Get_Projected_Bl_Corner)))
+
+                      (set! bl_corner_y
                             ($Vector_Get_Y
-                             (send flying_unit $Get_Center_Of_Gravity))))
+                             (send flying_unit $Get_Projected_Bl_Corner)))
 
-               (send *world* $Delete_Corpse flying_unit)))
+                      (set! angle (send flying_unit $Get_Angle)))
 
+                    ;Printing coordinates for circular units.
+                    (begin
+                      (set! bl_corner_x
+                            (- ($Vector_Get_X (send flying_unit $Get_Center_Of_Gravity))
+                               (send flying_unit $Get_Radius)))
+                      
+                      (set! bl_corner_y
+                            (- ($Vector_Get_Y (send flying_unit $Get_Center_Of_Gravity))
+                               (send flying_unit $Get_Radius)))
+                      
+                      (set! angle (/ (* pi (send flying_unit $Get_Direction) 16)))))
+
+
+                ;The cooldown for printing the corpse is counted down.
+                ;If 0, the corpse won't be printed any more.
+                (send flying_unit $Corpse_Cooldown)
+
+                (send dc translate
+                      bl_corner_x
+                      bl_corner_y)
+                
+                (send dc rotate (- angle))
+
+                (send dc draw-bitmap
+                      (send flying_unit $Get_Kill_Bitmap)
+                      0
+                      0)
+
+                (send dc rotate angle)
+                (send dc translate
+                      (- bl_corner_x)
+                      (- bl_corner_y)))))
+           
+         ;Do this for all corpses.
          (send *world* $Get_Corpses))))
 
 

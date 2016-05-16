@@ -199,3 +199,35 @@
                  (/ (+ pos_y_bl pos_y_tr) 2))))
 
 
+;_________________________________________________
+;If shooting is allowed, shooting is set to #f and
+;a projectile is created in the world.
+(define ($Shoot airplane)
+  (when (send airplane $Shoot_Allowed?)
+      (send airplane $Set_Shoot_Allowed #f)
+
+    (let* (
+           [plane_speed (send airplane $Get_Speed)]
+           
+           [plane_direction (send airplane $Get_Direction)]
+           
+           [plane_direction_vector
+            (send (hash-ref £Directions plane_direction) $Get_Vector)]
+           
+           [plane_center (send airplane $Get_Center_Of_Gravity)]
+           
+           [plane_width (send airplane $Get_Width)])
+      
+      (send *world* $Add_Flying_Unit
+            ($Make_Projectile
+             ;The center of the projectile is 0.1 widths
+             ;outside the plane straight in front of it.
+             ($Vector_Addition plane_center
+                               ($Vector_Multiplication (* plane_width 0.55)  
+                                                       plane_direction_vector))
+             ;The projectile flies in the same direction as the airplane
+             plane_direction
+
+             ;The projectile is double the speed of the plane.
+             (* plane_speed 2))))))
+      

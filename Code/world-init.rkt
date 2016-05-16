@@ -299,7 +299,7 @@ etc... To implement!
 
 (define *airplane_death_bitmap*
   (make-object bitmap%
-    "grafik/explosion-66.png"
+    "grafik/explosion-60.png"
     'png/alpha))
 
 (define *projectile_death_bitmap*

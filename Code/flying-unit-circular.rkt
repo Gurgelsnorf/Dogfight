@@ -49,7 +49,7 @@
     ;Removes the unit from play.
     (define/public ($Kill)
       (set! dead #t)
-      (set corpse_cooldown 5))
+      (set! corpse_cooldown 5))
 
     ;Counts corpse_cooldown down once. When it
     ;reaches 0, the corpse won't be drawn

@@ -2,6 +2,7 @@
 
 (require "flying-unit-rectangular.rkt")
 
+
 (provide (all-defined-out))
 
 ;Here, the class airplane is defined.
@@ -9,33 +10,33 @@
 (define airplane%
   (class flying_unit_rectangular%
     (init-field
-     [turn_left #f]
-     [turn_right #f]
-     [shoot #f])
+     [turn_left_allowed #f]
+     [turn_right_allowed #f]
+     [shoot_allowed #f])
+
     
 
-;_________________________________________
-;Commands for get and set for the variables
+;_________________________________________________
+;Getting The variables of the airplane
+    (define/public ($Turn_Left_Allowed?)
+      turn_left_allowed)
 
+    (define/public ($Turn_Right_Allowed?)
+      turn_right_allowed)
 
-    (define/public ($Get_Turn_Left)
-      turn_left)
+    (define/public ($Shoot_Allowed?)
+      shoot_allowed)
 
-    (define/public ($Get_Turn_Right)
-      turn_right)
+;_________________________________________________
+;Setting the varables for the airplane
+    (define/public ($Set_Turn_Left_Allowed setter)
+      (set! turn_left_allowed setter))
 
-    (define/public ($Get_Shoot)
-      shoot)
+    (define/public ($Set_Turn_Right_Allowed setter)
+      (set! turn_right_allowed setter))
 
-    (define/public ($Set_Turn_Left setter)
-      (set! turn_left setter))
-
-    (define/public ($Set_Turn_Right setter)
-      (set! turn_right setter))
-
-    (define/public ($Set_Shoot setter)
-      (set! shoot setter))
-
+    (define/public ($Set_Shoot_Allowed setter)
+      (set! shoot_allowed setter))
 
     (super-new)))
 
