@@ -15,6 +15,25 @@
 ;when keyboard presses are implemented!
 
 
+
+;_________________________________________________________________________
+;Keyboard affected movement requires a timed loop
+(define ($Key_Board_Full_Movement)
+  (begin
+    (let
+       ((£Player_1_Angle
+         (+ (if (£Player_1_Turn_Left) (1) 0) (if (£Player_1_Turn_Right) (-1) 0)))
+        (£Player_2_Angle
+         (+ (if (£Player_2_Turn_Left) (1) 0) (if (£Player_2_Turn_Right) (-1) 0))))
+      ($Increase_Angle_Rotate *player_1* £Player_1_Angle)
+      ($Increase_Angle_Rotate *player_2* £Player_1_Angle))
+    ($Move_All)))
+    
+
+
+
+
+
 ;_________________________________________________
 ;Increase the angle and then rotate based on the increse
 

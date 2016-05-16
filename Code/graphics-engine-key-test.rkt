@@ -20,6 +20,8 @@
 (send *main_window* show #t)
 
 
+
+
 ;(send *main_window* maximize #t)
 ;(send *main_window* get-menu-bar)
 
@@ -102,15 +104,19 @@
       ((£Key_Code (send event get-key-code))
        (£Key_Release_Code (send event get-key-release-code)))
     (cond
-      ((eq? £Key_Code 'left) (printf "left ~n"))
-      ((eq? £Key_Code 'right) (printf "right ~n"))
-      ((eq? £Key_Code 'up) (printf "up ~n"))
-      ((eq? £Key_Code 'down) (printf "down ~n")))
+      ((eq? £Key_Code 'left) (set! £Player_1_Turn_Left #t))
+      ((eq? £Key_Code 'right) (set! £Player_1_Turn_Right #t))
+      ((eq? £Key_Code 'up) (set! £Player_1_Shoot #t))
+      ((eq? £Key_Code 'a) (set! £Player_2_Turn_Left #t))
+      ((eq? £Key_Code 'd) (set! £Player_2_Turn_Right #t))
+      ((eq? £Key_Code 's) (set! £Player_2_Shoot #t)))
     (cond
-      ((eq? £Key_Release_Code 'left) (printf "Rleft ~n"))
-      ((eq? £Key_Release_Code 'right) (printf "Rright ~n"))
-      ((eq? £Key_Release_Code 'up) (printf "Rup ~n"))
-      ((eq? £Key_Release_Code 'down) (printf "Rdown ~n")))))
+      ((eq? £Key_Release_Code 'left) (set! £Player_1_Turn_Left #f))
+      ((eq? £Key_Release_Code 'right) (set! £Player_1_Turn_Right #f))
+      ((eq? £Key_Release_Code 'up) (set! £Player_1_Shoot #f))
+      ((eq? £Key_Release_Code 'a) (set! £Player_2_Turn_Left #f))
+      ((eq? £Key_Release_Code 's) (set! £Player_2_Turn_Right #f))
+      ((eq? £Key_Release_Code 'd) (set! £Player_2_Shoot #f)))))
 
 
 ;_________________________________________________
