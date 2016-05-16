@@ -274,12 +274,22 @@ etc... To implement!
 ;_________________________________________________
 (define *player_1_bitmap* 
   (make-object bitmap%
-    "grafik/test-flyg-80-40.png"
+    "grafik/yellow-red-60-30.png"
     'png/alpha))
 
 (define *player_2_bitmap*
   (make-object bitmap%
-    "grafik/test-flyg-80-40-green.png"
+    "grafik/green-cyan-60-30.png"
+    'png/alpha))
+
+(define *player_3_bitmap*
+  (make-object bitmap%
+    "grafik/green-brown-60-30.png"
+    'png/alpha))
+
+(define *player_4_bitmap*
+  (make-object bitmap%
+    "grafik/blue-pink-60-30.png"
     'png/alpha))
 
 (define *projectile_bitmap*
@@ -289,11 +299,13 @@ etc... To implement!
 
 (define *airplane_death_bitmap*
   (make-object bitmap%
-    "grafik/explosion-70.png"))
+    "grafik/explosion-66.png"
+    'png/alpha))
 
-(define *bullet_death_bitmap*
+(define *projectile_death_bitmap*
   (make-object bitmap%
-    "grafik/explosion-13.png"))
+    "grafik/explosion-13.png"
+    'png/alpha))
 
 ;_________________________________________________
 ;_________________________________________________
@@ -305,15 +317,15 @@ etc... To implement!
   (new airplane%
        [speed 5]
        [direction 0]
-       [bl_corner ($Vector 0 20)]
+       [bl_corner ($Vector 20 20)]
        [br_corner ($Vector 80 20)]
-       [tl_corner ($Vector 0 60)]
-       [tr_corner ($Vector 80 60)]
-       [center_of_gravity ($Vector 40 20)]
-       [projected_bl_corner ($Vector 0 0)]
-       [projected_br_corner ($Vector 80 0)]
-       [projected_tl_corner ($Vector 0 40)]
-       [projected_tr_corner ($Vector 80 40)]
+       [tl_corner ($Vector 20 50)]
+       [tr_corner ($Vector 80 50)]
+       [center_of_gravity ($Vector 50 35)]
+       [projected_bl_corner ($Vector 20 20)]
+       [projected_br_corner ($Vector 80 20)]
+       [projected_tl_corner ($Vector 20 50)]
+       [projected_tr_corner ($Vector 80 50)]
        [bitmap *player_1_bitmap*]
        [death_bitmap *airplane_death_bitmap*]))
 
@@ -321,15 +333,15 @@ etc... To implement!
   (new airplane%
        [speed 5]
        [direction 0]
-       [bl_corner ($Vector 100 90)]
+       [bl_corner ($Vector 120 90)]
        [br_corner ($Vector 180 90)]
-       [tl_corner ($Vector 100 130)]
-       [tr_corner ($Vector 180 130)]
-       [center_of_gravity ($Vector 140 110)]
-       [projected_bl_corner ($Vector 100 90)]
-       [projected_br_corner ($Vector 80 130)]
-       [projected_tl_corner ($Vector 100 90)]
-       [projected_tr_corner ($Vector 180 130)]
+       [tl_corner ($Vector 120 120)]
+       [tr_corner ($Vector 180 120)]
+       [center_of_gravity ($Vector 150 115)]
+       [projected_bl_corner ($Vector 120 90)]
+       [projected_br_corner ($Vector 180 90)]
+       [projected_tl_corner ($Vector 120 120)]
+       [projected_tr_corner ($Vector 180 120)]
        [bitmap *player_2_bitmap*]
        [death_bitmap *airplane_death_bitmap*]))
 
@@ -346,7 +358,7 @@ etc... To implement!
        [direction direction_]
        [speed speed_]
        [bitmap *projectile_bitmap*]
-       [death_bitmap *bullet_death_bitmap*]))
+       [death_bitmap *projectile_death_bitmap*]))
 
 
 
