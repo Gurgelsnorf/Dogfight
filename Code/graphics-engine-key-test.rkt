@@ -104,19 +104,19 @@
       ((£Key_Code (send event get-key-code))
        (£Key_Release_Code (send event get-key-release-code)))
     (cond
-      ((eq? £Key_Code 'left) (set! £Player_1_Turn_Left #t))
-      ((eq? £Key_Code 'right) (set! £Player_1_Turn_Right #t))
-      ((eq? £Key_Code 'up) (set! £Player_1_Shoot #t))
-      ((eq? £Key_Code 'a) (set! £Player_2_Turn_Left #t))
-      ((eq? £Key_Code 'd) (set! £Player_2_Turn_Right #t))
-      ((eq? £Key_Code 's) (set! £Player_2_Shoot #t)))
+      ((eq? £Key_Code 'left) (send *player_1* $Set_Turn_Left #t))
+      ((eq? £Key_Code 'right) (send *player_1* $Set_Turn_Right #t))
+      ((eq? £Key_Code 'up) (send *player_1* $Set_Shoot #t))
+      ((eq? £Key_Code 'a) (send *player_2* $Set_Turn_Left #t))
+      ((eq? £Key_Code 'd) (send *player_2* $Set_Turn_Right #t))
+      ((eq? £Key_Code 's) (send *player_2* $Set_Shoot #t)))
     (cond
-      ((eq? £Key_Release_Code 'left) (set! £Player_1_Turn_Left #f))
-      ((eq? £Key_Release_Code 'right) (set! £Player_1_Turn_Right #f))
-      ((eq? £Key_Release_Code 'up) (set! £Player_1_Shoot #f))
-      ((eq? £Key_Release_Code 'a) (set! £Player_2_Turn_Left #f))
-      ((eq? £Key_Release_Code 's) (set! £Player_2_Turn_Right #f))
-      ((eq? £Key_Release_Code 'd) (set! £Player_2_Shoot #f)))))
+      ((eq? £Key_Release_Code 'left) (send *player_1* $Set_Turn_Left #t))
+      ((eq? £Key_Release_Code 'right) (send *player_1* $Set_Turn_Right #t))
+      ((eq? £Key_Release_Code 'up) (send *player_1* $Set_Shoot #t))
+      ((eq? £Key_Release_Code 'a) (send *player_2* $Set_Turn_Left #t))
+      ((eq? £Key_Release_Code 's) (send *player_2* $Set_Turn_Right #t))
+      ((eq? £Key_Release_Code 'd) (send *player_2* $Set_Shoot #t)))))
 
 
 ;_________________________________________________
