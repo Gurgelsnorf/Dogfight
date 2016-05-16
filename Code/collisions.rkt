@@ -1,4 +1,4 @@
-#lang racket
+#lang racket/gui
 (require "basic-procedures.rkt")
 
 (require "graphics-engine.rkt")
@@ -212,12 +212,12 @@ be called by the main loop in physics-engine later.
 (define ($Find_Perpendicular_Axes rectangle_object)
   
   ;Retrieving the necessary corners to make the axes.
-  (let ([tr_corner_x ($Vector_Get_X (send rectangle_object $Get_Tr_Corner))]
-        [tr_corner_y ($Vector_Get_Y (send rectangle_object $Get_Tr_Corner))]
-        [tl_corner_x ($Vector_Get_X (send rectangle_object $Get_Tl_Corner))]
-        [tl_corner_y ($Vector_Get_Y (send rectangle_object $Get_Tl_Corner))]
-        [br_corner_x ($Vector_Get_X (send rectangle_object $Get_Br_Corner))]
-        [br_corner_y ($Vector_Get_Y (send rectangle_object $Get_Br_Corner))])
+  (let ([tr_corner_x ($Vector_Get_X (send rectangle_object $Get_Projected_Tr_Corner))]
+        [tr_corner_y ($Vector_Get_Y (send rectangle_object $Get_Projected_Tr_Corner))]
+        [tl_corner_x ($Vector_Get_X (send rectangle_object $Get_Projected_Tl_Corner))]
+        [tl_corner_y ($Vector_Get_Y (send rectangle_object $Get_Projected_Tl_Corner))]
+        [br_corner_x ($Vector_Get_X (send rectangle_object $Get_Projected_Br_Corner))]
+        [br_corner_y ($Vector_Get_Y (send rectangle_object $Get_Projected_Br_Corner))])
     
     (let (
           ;goes from the left side to the right,(parallel to the top and bottom side)
@@ -266,22 +266,22 @@ be called by the main loop in physics-engine later.
          ;are needed since they result in the same axis anyways.
          ;You however need all 4 for the second rectnagle.
          [proj_main_1 ($Vector_Projection
-                       (send main_rectangle $Get_Tr_Corner)
+                       (send main_rectangle $Get_Projected_Tr_Corner)
                        axis)]
          [proj_main_2 ($Vector_Projection
-                       (send main_rectangle $Get_Bl_Corner)
+                       (send main_rectangle $Get_Projected_Bl_Corner)
                        axis)]
          [proj_second_1 ($Vector_Projection
-                         (send second_rectangle $Get_Tr_Corner)
+                         (send second_rectangle $Get_Projected_Tr_Corner)
                          axis)]
          [proj_second_2 ($Vector_Projection
-                         (send second_rectangle $Get_Tl_Corner)
+                         (send second_rectangle $Get_Projected_Tl_Corner)
                          axis)]
          [proj_second_3 ($Vector_Projection
-                         (send second_rectangle $Get_Br_Corner)
+                         (send second_rectangle $Get_Projected_Br_Corner)
                          axis)]
          [proj_second_4 ($Vector_Projection
-                         (send second_rectangle $Get_Bl_Corner)
+                         (send second_rectangle $Get_Projected_Bl_Corner)
                          axis)]
          
          ;The scalar comparision-values are defined for the
@@ -514,10 +514,10 @@ __________________________________________________|#
   ;Extracting the necessary values.
   (let* ([circle_center (send circle $Get_Center_Of_Gravity)]
          [circle_radius (send circle $Get_Radius)]
-         [rec_br_corner (send rectangle $Get_Br_Corner)]
-         [rec_bl_corner (send rectangle $Get_Bl_Corner)]
-         [rec_tr_corner (send rectangle $Get_Tr_Corner)]
-         [rec_tl_corner (send rectangle $Get_Tl_Corner)])
+         [rec_br_corner (send rectangle $Get_Projected_Br_Corner)]
+         [rec_bl_corner (send rectangle $Get_Projected_Bl_Corner)]
+         [rec_tr_corner (send rectangle $Get_Projected_Tr_Corner)]
+         [rec_tl_corner (send rectangle $Get_Projected_Tl_Corner)])
 
     
     
@@ -593,18 +593,18 @@ __________________________________________________|#
         (let* (
                [corner_x_coordinates
                 (sort (list
-                       ($Vector_Get_X (send flying_unit $Get_Bl_Corner))
-                       ($Vector_Get_X (send flying_unit $Get_Br_Corner))
-                       ($Vector_Get_X (send flying_unit $Get_Tl_Corner))
-                       ($Vector_Get_X (send flying_unit $Get_Tr_Corner)))
+                       ($Vector_Get_X (send flying_unit $Get_Projected_Bl_Corner))
+                       ($Vector_Get_X (send flying_unit $Get_Projected_Br_Corner))
+                       ($Vector_Get_X (send flying_unit $Get_Projected_Tl_Corner))
+                       ($Vector_Get_X (send flying_unit $Get_Projected_Tr_Corner)))
                       <)]
                
                [corner_y_coordinates
                 (sort (list
-                       ($Vector_Get_Y (send flying_unit $Get_Bl_Corner))
-                       ($Vector_Get_Y (send flying_unit $Get_Br_Corner))
-                       ($Vector_Get_Y (send flying_unit $Get_Tl_Corner))
-                       ($Vector_Get_Y (send flying_unit $Get_Tr_Corner)))
+                       ($Vector_Get_Y (send flying_unit $Get_Projected_Bl_Corner))
+                       ($Vector_Get_Y (send flying_unit $Get_Projected_Br_Corner))
+                       ($Vector_Get_Y (send flying_unit $Get_Projected_Tl_Corner))
+                       ($Vector_Get_Y (send flying_unit $Get_Projected_Tr_Corner)))
                       <)]
                
                [lowest_x (car corner_x_coordinates)]
@@ -778,7 +778,8 @@ __________________________________________________|#
   (map (lambda (flying_unit)
          (send *world* $Delete_Flying_Unit flying_unit)
          (send flying_unit $Kill)
-         (send *flying_units* draw-bitmap
+         (send (send *flying_units* get-dc)
+               draw-bitmap
                (send flying_unit $Get_Kill_Bitmap)
                ($Vector_Get_X (send flying_unit $Get_Center_Of_Gravity))
                ($Vector_Get_Y (send flying_unit $Get_Center_Of_Gravity))))
@@ -1055,7 +1056,7 @@ __________________________________________________|#
     ;all units.
     (loop_world)
     
-    
+    (print kill_list)
     ($Kill_All kill_list)
     ($Teleport_All 'left teleport_too_left_list)
     ($Teleport_All 'right teleport_too_right_list)))

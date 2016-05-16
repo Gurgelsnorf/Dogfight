@@ -10,6 +10,7 @@
      speed
      direction
      death_bitmap
+     [death_bitmap_cooldown 0]
      [dead #f])
 
 ;_________________________________________________
@@ -21,6 +22,14 @@
       direction)
     (define/public ($Dead?)
       dead)
+
+
+    ;Returns the kill bitmap and counts death_bitmap_cooldown
+    ;down. If the cooldown is 0, #f is returned.
+    (define/public ($Get_Kill_Bitmap_Cooldown)
+      (if (= death_bitmap_cooldown 0)
+          #f
+          death_bitmap))
     
 ;_________________________________________________
     
@@ -35,6 +44,6 @@
     ;Removes the unit from play.
     (define/public ($Kill)
       (set! dead #t)
-      death_bitmap)
+      (set! death_bitmap_cooldown 5))
             
     (super-new)))

@@ -24,6 +24,8 @@
       direction)
     (define/public ($Dead?)
       dead)
+    (define/public ($Get_Kill_Bitmap)
+      death_bitmap)
 
 ;_________________________________________________
     

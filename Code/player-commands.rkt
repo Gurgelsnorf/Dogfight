@@ -20,7 +20,7 @@
 
 (define ($Increase_Angle_Rotate object angle_increase)
   (begin
-    (let ([angle_value (* pi (/ (send object $Get_Direction) 16))])
+    (let ([angle_value (* pi (/ (+ (send object $Get_Direction) angle_increase) 16))])
     (cond
       [(<= 32 (+ angle_increase (send object $Get_Direction)))
        ($Increase_Angle object (- angle_increase 32))

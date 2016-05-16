@@ -9,6 +9,8 @@
     (init-field
      
      [list_of_flying_units '()] ;List of the flying units in the world.
+     [list_of_corpses '()] ;List of all the dead units that should be
+     ;printed,
      
      
      ;The worlds bottom-left corner coordinates are at (0 0),
@@ -32,7 +34,9 @@
     
     (define/public ($Get_Width)
       width)
-    
+
+    (define/public ($Get_Corpses)
+      (list_of_corpses))
 
     
     ;Adds a flying unit to the world.
@@ -45,7 +49,7 @@
       (set! list_of_flying_units
             (filter (lambda (list_unit)
                       (not (equal? list_unit flying_unit)))
-                    (list_of_flying_units))))
+                    list_of_flying_units)))
     
     (super-new)))
 
