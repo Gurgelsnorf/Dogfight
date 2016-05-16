@@ -4,7 +4,8 @@
 
 ;_____________________________________________________________
 ;Main loop
-
+(define ($Gameplay_Looping)
+  (printf "lel ~n"))
 
 
 ;_____________________________________________________________
@@ -20,7 +21,8 @@
 (define *clock_timer*
   (new timer%
        [notify-callback $Gameplay_Looping]))
-
+;_____________________________________________________________
+;Jäveln som startar tidsuppateringar
 (send *clock_timer* start 1000 #f)
 
 
@@ -37,6 +39,21 @@
 ;timer for next uppdate
 ;_____________________________________________________________
 
-(define ($Gameplay_Looping)
-  (begin
-    (:::::::)))
+(define (play)
+  ;open menu
+  ;etc...
+
+  ;When you press start in menu:
+  (let (
+        [timer clock-timer])
+    (define (main-loop)
+      ;collisions
+      ;movement...
+
+      ;if keypress pause
+      ;send timer stop
+
+      (wait))
+
+    (main-loop)))
+    
