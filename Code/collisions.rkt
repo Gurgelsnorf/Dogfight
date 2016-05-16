@@ -777,12 +777,8 @@ __________________________________________________|#
 (define ($Kill_All kill_list)
   (map (lambda (flying_unit)
          (send *world* $Delete_Flying_Unit flying_unit)
-         (send flying_unit $Kill)
-         (send (send *flying_units* get-dc)
-               draw-bitmap
-               (send flying_unit $Get_Kill_Bitmap)
-               ($Vector_Get_X (send flying_unit $Get_Center_Of_Gravity))
-               ($Vector_Get_Y (send flying_unit $Get_Center_Of_Gravity))))
+         (send *world* $Add_Corpse flying_unit)
+         (send flying_unit $Kill))
        kill_list))
 
 ;_________________________________________________

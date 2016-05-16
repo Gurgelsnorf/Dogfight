@@ -36,7 +36,7 @@
       width)
 
     (define/public ($Get_Corpses)
-      (list_of_corpses))
+      list_of_corpses)
 
     
     ;Adds a flying unit to the world.
@@ -50,6 +50,17 @@
             (filter (lambda (list_unit)
                       (not (equal? list_unit flying_unit)))
                     list_of_flying_units)))
+
+    ;Adds a flying unit to the list of corpses
+    (define/public ($Add_Corpse corpse)
+      (set! list_of_corpses (cons corpse list_of_corpses)))
+
+    ;Removes a flying unit from the list of corpses.
+    (define/public ($Delete_Corpse corpse)
+      (set! list_of_corpses
+            (filter (lambda (list_corpse)
+                      (not (equal? corpse list_corpse)))
+                    list_of_corpses)))
     
     (super-new)))
 

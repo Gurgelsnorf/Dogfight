@@ -7,11 +7,17 @@
   (class rectangle%
 
     (init-field
-     speed
-     direction
-     death_bitmap
-     [death_bitmap_cooldown 0]
-     [dead #f])
+
+     speed ;Speed of the unit
+
+     direction ;The direction of the unit. (goes from 0-31, 0 is straight to the
+     ;right, 4 is up and left, etc. (32 parts counter-clockwise in the unit circle)). 
+
+     death_bitmap ;bitmap shown when dead
+
+     [corpse_cooldown 0] ;that bitmap is only shown for a short while
+
+     [dead #f]) ;Is the unit out of play?
 
 ;_________________________________________________
     
@@ -22,14 +28,10 @@
       direction)
     (define/public ($Dead?)
       dead)
-
-
-    ;Returns the kill bitmap and counts death_bitmap_cooldown
-    ;down. If the cooldown is 0, #f is returned.
-    (define/public ($Get_Kill_Bitmap_Cooldown)
-      (if (= death_bitmap_cooldown 0)
-          #f
-          death_bitmap))
+    (define/public ($Get_Corpse_Cooldown)
+      corpse_cooldown)
+    (define/public ($Get_Kill_Bitmap)
+          death_bitmap)
     
 ;_________________________________________________
     
@@ -44,6 +46,13 @@
     ;Removes the unit from play.
     (define/public ($Kill)
       (set! dead #t)
-      (set! death_bitmap_cooldown 5))
-            
+      (set! corpse_cooldown 5))
+
+    ;Counts corpse_cooldown down once. When it
+    ;reaches 0, the corpse won't be drawn
+    ;on the map.
+    (define/public ($Corpse_Cooldown)
+      (set! corpse_cooldown (- corpse_cooldown 1)))
+
     (super-new)))
+

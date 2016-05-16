@@ -83,14 +83,33 @@
          
          list_of_flying_units)
     
+    ;_________________________________________________
     
+    ;drawing the corpses, if any.
+    (map (lambda (flying_unit)
+           (if (> (send flying_unit $Get_Corpse_Cooldown) 0)
+               
+               (begin (send flying_unit $Corpse_Cooldown)
+                      (send dc draw-bitmap
+                            (send flying_unit $Get_Kill_Bitmap)
+                            ($Vector_Get_X
+                             (send flying_unit $Get_Center_Of_Gravity))
+                            ($Vector_Get_Y
+                             (send flying_unit $Get_Center_Of_Gravity))))
+
+               (send *world* $Delete_Corpse flying_unit)))
+
+         (send *world* $Get_Corpses))))
+
+
+#|   
     ;Draws a box to indicate the worldsize to show when collision has occured. 
     (send dc set-pen "DeepPink" 2 'long-dash)
     (send dc draw-line 0 0 world_width 0)
     (send dc draw-line 0 0 0 world_height)
     (send dc draw-line 0 world_height world_width world_height)
     (send dc draw-line world_width 0 world_width world_height)))
-
+|#
 
 ;_________________________________________________
 ;Can be used to test if the dc coordinates are changed
