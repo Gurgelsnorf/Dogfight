@@ -246,7 +246,7 @@
       [(<= buff_seed 7) (set! randomed_buff_type 'speed-buff)]
 
       ;5/16 chance
-      [(<= buff_seed 12) (set! randomed_buff_type 'attack-buff)]
+      [(<= buff_seed 12) (set! randomed_buff_type 'shooting-buff)]
 
       ;3/16 chance
       [else (set! randomed_buff_type 'health-buff)])

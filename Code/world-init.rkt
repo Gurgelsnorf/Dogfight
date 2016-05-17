@@ -364,6 +364,8 @@ etc... To implement!
 (define *player_1*
   (new airplane%
        [speed 5]
+       [base_speed 5]
+       [base_shooting_speed 0.5]
        [direction 0]
        [bl_corner ($Vector 20 20)]
        [br_corner ($Vector 80 20)]
@@ -380,6 +382,8 @@ etc... To implement!
 (define *player_2*
   (new airplane%
        [speed 5]
+       [base_speed 5]
+       [base_shooting_speed 5]
        [direction 0]
        [bl_corner ($Vector 120 90)]
        [br_corner ($Vector 180 90)]
