@@ -60,7 +60,7 @@
       (send *clock_shooting* start (/ 1000 shooting_speed) #t))   ;Time should be tested!
 
     ;Starts the cooldown for turning again
-    (define/public ($Cooldown_Turn_Left)
+    (define/public ($Cooldown_Turn)
       (set! turn_allowed #f)
       (send *clock_turning* start 100 #t))                       ;Time should be tested! 
 
