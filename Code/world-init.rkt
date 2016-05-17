@@ -9,6 +9,9 @@
 (require "building.rkt")
   
 (require "basic-procedures.rkt")
+
+(require "clock-class.rkt")
+
 (provide (all-defined-out))
 
 #|
@@ -426,5 +429,7 @@ etc... To implement!
 (send *world* $Add_Flying_Unit *player_2*)
 (send *world* $Add_Flying_Unit ($Make_Projectile ($Vector 400 400) 3 10))
 
-
+(define *start_clock*
+  (new clocking%
+    [Should_Run #f]))
 
