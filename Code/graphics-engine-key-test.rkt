@@ -6,6 +6,7 @@
 (require "flying-unit-rectangular.rkt")
 (require "input-canvas.rkt")
 
+
 (provide *flying_units*)
 
 (define x 0)
@@ -104,19 +105,21 @@
       ((£Key_Code (send event get-key-code))
        (£Key_Release_Code (send event get-key-release-code)))
     (cond
-      ((eq? £Key_Code 'left) (send *player_1* $Set_Turn_Left #t))
-      ((eq? £Key_Code 'right) (send *player_1* $Set_Turn_Right #t))
-      ((eq? £Key_Code 'up) (send *player_1* $Set_Shoot #t))
-      ((eq? £Key_Code 'a) (send *player_2* $Set_Turn_Left #t))
-      ((eq? £Key_Code 'd) (send *player_2* $Set_Turn_Right #t))
-      ((eq? £Key_Code 's) (send *player_2* $Set_Shoot #t)))
+      ((eq? £Key_Code 'left) (printf "left ~n"))
+      ((eq? £Key_Code 'right) (send *player_1* $Set_Turn_Right_Allowed #t))
+      ((eq? £Key_Code 'up) (send *player_1* $Set_Shoot_Allowed #t))
+      ((eq? £Key_Code 'a) (send *player_2* $Set_Turn_Left_Allowed #t))
+      ((eq? £Key_Code 'd) (send *player_2* $Set_Turn_Right_Allowed #t))
+      ((eq? £Key_Code 's) (send *player_2* $Set_Shoot_Allowed #t))
+      ((eq? £Key_Code 'r) (send *start_clock* $Set_Clock_Run #t))
+      ((eq? £Key_Code 'escape) (send *start_clock* $Set_Clock_Run #f)))    
     (cond
-      ((eq? £Key_Release_Code 'left) (send *player_1* $Set_Turn_Left #t))
-      ((eq? £Key_Release_Code 'right) (send *player_1* $Set_Turn_Right #t))
-      ((eq? £Key_Release_Code 'up) (send *player_1* $Set_Shoot #t))
-      ((eq? £Key_Release_Code 'a) (send *player_2* $Set_Turn_Left #t))
-      ((eq? £Key_Release_Code 's) (send *player_2* $Set_Turn_Right #t))
-      ((eq? £Key_Release_Code 'd) (send *player_2* $Set_Shoot #t)))))
+      ((eq? £Key_Release_Code 'left) (send *player_1* $Set_Turn_Left_Allowed #t))
+      ((eq? £Key_Release_Code 'right) (send *player_1* $Set_Turn_Right_Allowed #t))
+      ((eq? £Key_Release_Code 'up) (send *player_1* $Set_Shoot_Allowed #t))
+      ((eq? £Key_Release_Code 'a) (send *player_2* $Set_Turn_Left_Allowed #t))
+      ((eq? £Key_Release_Code 's) (send *player_2* $Set_Turn_Right_Allowed #t))
+      ((eq? £Key_Release_Code 'd) (send *player_2* $Set_Shoot_Allowed #t)))))
 
 
 ;_________________________________________________

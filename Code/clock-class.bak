@@ -1,0 +1,13 @@
+#lang racket
+(provide "world-init.rkt")
+
+
+(define clocking%
+  (class object%
+    (init-field
+     Should_Run)
+
+    (define/public ($Get_Clock_Run?)
+      Should_Run)
+
+    (super-new)))
