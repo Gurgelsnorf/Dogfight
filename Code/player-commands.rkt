@@ -7,6 +7,7 @@
 (require "world-init.rkt")
 (require "basic-procedures.rkt")
 (require "flying-unit-rectangular.rkt")
+(require "buff.rkt")
 
 
 ;Here, the commands for interacting with the objects are defined.
@@ -204,7 +205,7 @@
 ;a projectile is created in the world.
 (define ($Shoot airplane)
   (when (send airplane $Shoot_Allowed?)
-      (send airplane $Set_Shoot_Allowed #f)
+    (send airplane $Cooldown_Shoot)
 
     (let* (
            [plane_speed (send airplane $Get_Speed)]
@@ -230,4 +231,31 @@
 
              ;The projectile is double the speed of the plane.
              (* plane_speed 2))))))
-      
+
+
+
+
+;Spawns a random buff at this location.
+(define ($Spawn_Buff location)
+  (let (
+        [buff_seed (random 16)]
+        [randomed_buff_type 0])
+
+    (cond
+      ;1/2 chance
+      [(<= buff_seed 7) (set! randomed_buff_type 'speed-buff)]
+
+      ;5/16 chance
+      [(<= buff_seed 12) (set! randomed_buff_type 'attack-buff)]
+
+      ;3/16 chance
+      [else (set! randomed_buff_type 'health-buff)])
+
+    (send *world* $Add_Flying_Unit (new buff%
+
+          [center location]
+          [radius 12.5]
+          [speed 5]
+          [direction 24]
+          [buff_type randomed_buff_type]))))
+    

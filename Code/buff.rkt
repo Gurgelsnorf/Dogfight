@@ -9,13 +9,7 @@
 
     (init-field
 
-     [buff_type ((lambda ()
-                  (let ([seed (random 1)])
-                    (cond
-                      [(= seed 0) 'flying_speed]
-                      [(= seed 1) 'shooting_speed]
-                      ;Implement more later
-                      ))))])
+     buff_type)
 
     (define/public ($Get_Buff_Type)
       buff_type)

@@ -16,7 +16,7 @@
      direction ;The direction of the unit. (goes from 0-31, 0 is straight to the
      ;right, 4 is up and left, etc. (32 parts counter-clockwise in the unit circle)). 
 
-     death_bitmap ;bitmap shown when dead
+     [death_bitmap 0] ;bitmap shown when dead
 
      [corpse_cooldown 0] ;that bitmap is only shown for a short while
 

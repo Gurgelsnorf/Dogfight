@@ -944,7 +944,7 @@ __________________________________________________|#
                      (cons flying_unit kill_list))]
               
               [(equal? collision_tag 'sky_collision)
-               (send flying_unit $Stalling)]
+               (send flying_unit $Stalling)]                                ;IMPLEMENT STALLING!
               
               [(equal? collision_tag 'left_collision)
                (set! teleport_too_right_list
@@ -965,7 +965,7 @@ __________________________________________________|#
       ;Continue until no collisions left.
       (when (not (null? flying_unit_collisions))
         
-        (let (;Separate the units that will be compared first.
+        (let ( ;Separate the units that will be compared first.
               [unit_1 (caar flying_unit_collisions)]
               [unit_2 (cdar flying_unit_collisions)])
           
@@ -979,7 +979,7 @@ __________________________________________________|#
                ;unit_2 buff
                [(is-a? unit_2 buff%)
                 (set! kill_list (cons unit_2 kill_list))
-                (send unit_1 $Buff (send unit_2 $Get_Buff_Type))]
+                (send unit_1 $Buff (send unit_2 $Get_Buff_Type))]            ;BUFF AIRPLANE
                
                ;if not a buff, all other cases means both the plane
                ;and the other unit should be killed.
@@ -1002,12 +1002,12 @@ __________________________________________________|#
                ;unit_2 projectile
                [(is-a? unit_2 projectile%)
                 (set! kill_list (cons unit_1 (cons unit_2 kill_list)))
-                (printf "To implement: spawn buff here!")]
+                ($Spawn_Buff (send unit_1 $Get_Center_Of_Gravity))]
                
                ;unit_2 buff
                [(is-a? unit_2 buff%)
                 (set! kill_list (cons unit_2 kill_list))
-                (printf "To implement: buff entity!")])]
+                (printf "To implement: buff entity!")])]                    ;BUFF ENTITY
             
             ;-------------------------------------
             ;unit_1 projectile
@@ -1017,7 +1017,7 @@ __________________________________________________|#
                ;unit_2 entity
                [(is-a? unit_2 flying_entity%)
                 (set! kill_list (cons unit_1 (cons unit_2 kill_list)))
-                (printf "To implement: spawn buff here!")]
+                ($Spawn_Buff (send unit_2 $Get_Center_Of_Gravity))]
                
                ;if not an entity, all other cases will be
                ;killing both units
@@ -1031,12 +1031,12 @@ __________________________________________________|#
                ;unit_2 plane
                [(is-a? unit_2 airplane%)
                 (set! kill_list (cons unit_1 kill_list))
-                (send unit_2 $Buff (send unit_1 $Get_Buff_Type))]
+                (send unit_2 $Buff (send unit_1 $Get_Buff_Type))]           ;BUFF PLAYER
                
                ;unit_2 entity
                [(is-a? unit_2 flying_entity%)
                 (set! kill_list (cons unit_1 kill_list))
-                (printf "To implement: buff entity!")]
+                (printf "To implement: buff entity!")]                      ;BUFF ENTITY
                
                ;unit_2 projectile
                [(is-a? unit_2 projectile%)
