@@ -1,0 +1,1 @@
+("6.4" ("bc2bd89484702fdeecf75fe71a9f13a50347508d" . "ad8554daa97129e6db3499809b9b541c9d2c50a9") #"C:\\Users\\thegr\\OneDrive\\Documents\\GitHub\\Dogfight\\Code\\rectangle.rkt" (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))

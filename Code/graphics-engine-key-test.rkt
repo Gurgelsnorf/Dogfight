@@ -7,7 +7,9 @@
 (require "input-canvas.rkt")
 
 
+
 (provide *flying_units*)
+(provide (all-defined-out))
 
 (define x 0)
 ;Creates the main window
@@ -114,12 +116,12 @@
       ((eq? £Key_Code 'r) (send *start_clock* $Set_Clock_Run #t))
       ((eq? £Key_Code 'escape) (send *start_clock* $Set_Clock_Run #f)))    
     (cond
-      ((eq? £Key_Release_Code 'left) (send *player_1* $Set_Turn_Left_Allowed #t))
-      ((eq? £Key_Release_Code 'right) (send *player_1* $Set_Turn_Right_Allowed #t))
-      ((eq? £Key_Release_Code 'up) (send *player_1* $Set_Shoot_Allowed #t))
-      ((eq? £Key_Release_Code 'a) (send *player_2* $Set_Turn_Left_Allowed #t))
-      ((eq? £Key_Release_Code 's) (send *player_2* $Set_Turn_Right_Allowed #t))
-      ((eq? £Key_Release_Code 'd) (send *player_2* $Set_Shoot_Allowed #t)))))
+      ((eq? £Key_Release_Code 'left) (send *player_1* $Set_Turn_Left_Allowed #f))
+      ((eq? £Key_Release_Code 'right) (send *player_1* $Set_Turn_Right_Allowed #f))
+      ((eq? £Key_Release_Code 'up) (send *player_1* $Set_Shoot_Allowed #f))
+      ((eq? £Key_Release_Code 'a) (send *player_2* $Set_Turn_Left_Allowed #f))
+      ((eq? £Key_Release_Code 's) (send *player_2* $Set_Turn_Right_Allowed #f))
+      ((eq? £Key_Release_Code 'd) (send *player_2* $Set_Shoot_Allowed #f)))))
 
 
 ;_________________________________________________

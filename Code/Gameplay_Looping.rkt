@@ -5,6 +5,8 @@
 (require "physics-engine.rkt")
 (require "flying-unit-rectangular.rkt")
 (require "input-canvas.rkt")
+(require "graphics-engine-key-test.rkt")
+(provide *flying_units*)
 
 
 ;_____________________________________________________________
