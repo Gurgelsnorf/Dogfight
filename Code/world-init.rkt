@@ -1,9 +1,13 @@
 #lang racket/gui
 
 (require "world.rkt")
-(require "airplane.rkt")
+
 (require "direction.rkt")
+
+(require "airplane.rkt")
 (require "projectile.rkt")
+(require "building.rkt")
+  
 (require "basic-procedures.rkt")
 (provide (all-defined-out))
 
@@ -309,6 +313,47 @@ etc... To implement!
 
 ;_________________________________________________
 ;_________________________________________________
+;---------------Defining Building-----------------
+;_________________________________________________
+;_________________________________________________
+(define *player_1_building*
+  (new building%
+       [bl_corner ($Vector 0 50)]
+       [br_corner($Vector 150 50)]
+       [tl_corner ($Vector 0 150)]
+       [tr_corner ($Vector 150 150)]
+       [center_of_gravity ($Vector 75 100)]))
+
+(define *player_2_building*
+  (new building%
+       [bl_corner ($Vector 450 50)]
+       [br_corner($Vector 600 50)]
+       [tl_corner ($Vector 450 150)]
+       [tr_corner ($Vector 600 150)]
+       [center_of_gravity ($Vector 525 100)]))
+
+(define *player_3_building*
+  (new building%
+       [bl_corner ($Vector 600 50)]
+       [br_corner($Vector 750 50)]
+       [tl_corner ($Vector 600 150)]
+       [tr_corner ($Vector 750 150)]
+       [center_of_gravity ($Vector 675 100)]))
+
+(define *player_4_building*
+  (new building%
+       [bl_corner ($Vector 1050 50)]
+       [br_corner($Vector 1200 50)]
+       [tl_corner ($Vector 1050 150)]
+       [tr_corner ($Vector 1200 150)]
+       [center_of_gravity ($Vector 1125 100)]))
+  
+
+
+
+
+;_________________________________________________
+;_________________________________________________
 ;----------------Defining players-----------------
 ;_________________________________________________
 ;_________________________________________________
@@ -369,7 +414,11 @@ etc... To implement!
 ;_________________________________________________
 
 (define *world*
-  (new world%))
+  (new world%
+  [list_of_buildings (list *player_1_building*
+                           *player_2_building*
+                           *player_3_building*
+                           *player_4_building*)]))
 
 ;_________________________________________________
 ;Adding units to the world

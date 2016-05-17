@@ -586,7 +586,8 @@ __________________________________________________|#
 (define ($Find_World_Collision flying_unit)
   (let (
         [world_width (send *world* $Get_Width)]
-        [world_height (send *world* $Get_Height)])
+        [sky_height (send *world* $Get_Sky_Height)]
+        [ground_height (send *world* $Get_Ground_Height)])
     
     ;If its a rectangular unit
     (if (is-a? flying_unit rectangle%)
@@ -618,7 +619,8 @@ __________________________________________________|#
           ($World_Collision_Comparison
            lowest_x lowest_y
            highest_x highest_y
-           world_height world_width))
+           world_width sky_height ground_height
+           flying_unit))
         
         ;-----------------------------------------
         
@@ -639,7 +641,8 @@ __________________________________________________|#
           ($World_Collision_Comparison
            lowest_x lowest_y
            highest_x highest_y
-           world_height world_width)))))
+           world_width sky_height ground_height
+           flying_unit)))))
 
 ;_________________________________________________
 
@@ -651,14 +654,19 @@ __________________________________________________|#
 (define ($World_Collision_Comparison
          obj_lowest_x obj_lowest_y
          obj_highest_x obj_highest_y
-         world_height world_width)
+         world_width sky_height ground_height
+         flying_unit)
   
   (cond
     ;Returns the collision type as a tag.
-    [(< obj_lowest_y 0) 'ground_collision]
-    [(< world_height obj_lowest_y ) 'sky_collision]
+    [(< obj_lowest_y ground_height) 'ground_collision]
+    [(< sky_height obj_lowest_y) 'sky_collision]
     [(< obj_highest_x 0) 'left_collision]
     [(< world_width obj_lowest_x) 'right_collision]
+    [(ormap (lambda (building)
+              ($Collision? building flying_unit))
+            (send *world* $Get_Buildings))
+     'building_collision]
     [else 'no_collision]))
 
 
@@ -930,7 +938,8 @@ __________________________________________________|#
                (set! kill_list (cons flying_unit kill_list))]
               
               ;Else, take the corresponding action.
-              [(equal? collision_tag 'ground_collision)
+              [(or (equal? collision_tag 'ground_collision)
+                   (equal? collision_tag 'building_collision))
                (set! kill_list
                      (cons flying_unit kill_list))]
               

@@ -35,7 +35,7 @@
         [brush_color "red"])
     
     (send dc draw-bitmap (make-object bitmap%
-                           "grafik/test-background.png"
+                           "grafik/background.png"
                            'png/alpha)
           0
           0)
