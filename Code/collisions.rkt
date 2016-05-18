@@ -976,13 +976,19 @@ __________________________________________________|#
             [(is-a? unit_1 airplane%)
              (cond
                
-               ;unit_2 buff
+               ;if unit_2 is a buff, buff the airplane
                [(is-a? unit_2 buff%)
                 (set! kill_list (cons unit_2 kill_list))
                 (send unit_1 $Buff (send unit_2 $Get_Buff_Type))]
-               
-               ;if not a buff, all other cases means both the plane
-               ;and the other unit should be killed.
+
+               ;If the plane is immune to damage, or the other unit
+               ;is a plane immune to damage, nothing will happen.
+               [(or (send unit_1 $Immune_To_Damage?)
+                    (and (is-a? unit_2 airplane%)
+                         (send unit_2 $Immune_To_Damage?)))
+                (void)]
+
+               ;Otherwise, all other cases result in both units dying.
                [else (set! kill_list
                            (cons unit_1 (cons unit_2 kill_list)))])]
             
@@ -990,37 +996,45 @@ __________________________________________________|#
             ;unit_1 entity
             [(is-a? unit_1 flying_entity%)
              (cond
+                           
+               ;If unit_2 is a buff, buff the entity.
+               [(is-a? unit_2 buff%)
+                (set! kill_list (cons unit_2 kill_list))
+                (send unit_1 $Buff_Entity)]
+
                
-               ;unit_2 plane
-               [(is-a? unit_2 airplane%)
-                (set! kill_list (cons unit_1 (cons unit_2 kill_list)))]
-               
-               ;unit_2 entity
-               [(is-a? unit_2 flying_entity%)
-                (set! kill_list (cons unit_1 (cons unit_2 kill_list)))]
-               
-               ;unit_2 projectile
+               ;If unit_2 is a projectile, kill both and spawn a buff.
                [(is-a? unit_2 projectile%)
                 (set! kill_list (cons unit_1 (cons unit_2 kill_list)))
                 ($Spawn_Buff (send unit_1 $Get_Center_Of_Gravity))]
                
-               ;unit_2 buff
-               [(is-a? unit_2 buff%)
-                (set! kill_list (cons unit_2 kill_list))
-                (send unit_1 $Buff_Entity)])]
+               ;If unit_2 is plane immune to damage, nothing will happen.
+               [(and (is-a? unit_2 airplane%)
+                     (send unit_2 $Immune_To_Damage?))
+                (void)]
+               
+               ;Otherwise, all other cases result in both units dying.
+               [(is-a? unit_2 flying_entity%)
+                (set! kill_list (cons unit_1 (cons unit_2 kill_list)))])]
+               
+
+   
             
             ;-------------------------------------
             ;unit_1 projectile
             [(is-a? unit_1 projectile%)
              (cond
                
-               ;unit_2 entity
+               ;If unit_2 is an entity, kill both and spawn a buff.
                [(is-a? unit_2 flying_entity%)
                 (set! kill_list (cons unit_1 (cons unit_2 kill_list)))
                 ($Spawn_Buff (send unit_2 $Get_Center_Of_Gravity))]
-               
-               ;if not an entity, all other cases will be
-               ;killing both units
+
+               ;If unit_2 is an airplane immune to damage, nothing will happen
+               [(and (is-a? unit_2 airplane%) (send unit_2 $Immune_To_Damage?))
+                (void)]
+
+               ;All other cases will be killing both units.
                [else (set! kill_list (cons unit_1 (cons unit_2 kill_list)))])]
             
             ;-------------------------------------
@@ -1028,17 +1042,17 @@ __________________________________________________|#
             [(is-a? unit_1 buff%)
              (cond
                
-               ;unit_2 plane
+               ;If unit_2 is a plane, buff the plane.
                [(is-a? unit_2 airplane%)
                 (set! kill_list (cons unit_1 kill_list))
                 (send unit_2 $Buff (send unit_1 $Get_Buff_Type))]
                
-               ;unit_2 entity
+               ;If unit_2 is an entity, buff the entity
                [(is-a? unit_2 flying_entity%)
                 (set! kill_list (cons unit_1 kill_list))
                 (send unit_2 $Buff_Entity)]
                
-               ;unit_2 projectile
+               ;If unit_2 is a projectile, kill both units.
                [(is-a? unit_2 projectile%)
                 (set! kill_list (cons unit_1 (cons unit_2 kill_list)))]
                
