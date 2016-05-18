@@ -57,7 +57,7 @@
      ;Starts the cooldown for shooting again.
     (define/public ($Cooldown_Shoot)
       (set! shoot_allowed #f)
-      (send *clock_shooting* start (/ 1000 shooting_speed) #t))   ;Time should be tested!
+      (send *clock_shooting* start (inexact->exact (/ 1000 shooting_speed)) #t))   ;Time should be tested!
 
     ;Starts the cooldown for turning again
     (define/public ($Cooldown_Turn)
@@ -68,12 +68,14 @@
     ;The timer that counts down the shooting cooldown.
     (define *clock_shooting*
       (new timer%
-           [notify-callback (set! shoot_allowed #t)]))
+           [notify-callback (lambda ()
+                              (set! shoot_allowed #t))]))
 
     ;The timer that counts down the turning cooldown.
     (define *clock_turning*
       (new timer%
-           [notify-callback (set! turn_allowed #t)]))
+           [notify-callback (lambda ()
+                              (set! turn_allowed #t))]))
 
 ;_________________________________________________
     ;When a player dies, they should also be able to respawn
@@ -86,7 +88,8 @@
     ;The timer that counts the respawning cooldown
     (define *clock_respawning*
       (new timer%
-           [notify-callback (set! respawn_allowed #t)]))
+           [notify-callback (lambda ()
+                              (set! respawn_allowed #t))]))
 
 ;_________________________________________________
     ;Buffs the plane given a buff type.

@@ -6,6 +6,7 @@
 
 (require "airplane.rkt")
 (require "projectile.rkt")
+(require "flying-entity.rkt")
 (require "building.rkt")
   
 (require "basic-procedures.rkt")
@@ -304,6 +305,32 @@ etc... To implement!
     "grafik/bullet-11.png"
     'png/alpha))
 
+(define *bird_bitmap*
+  (make-object bitmap%
+    "grafik/bird-31-25.png"
+    'png/alpha))
+
+(define *balloons_bitmap*
+  (make-object bitmap%
+    "grafik/balloons-40.png"
+    'png/alpha))
+
+(define *health_buff_bitmap*
+  (make-object bitmap%
+    "grafik/health-buff.png"
+    'png/alpha))
+
+(define *speed_buff_bitmap*
+  (make-object bitmap%
+    "grafik/speed-buff.png"
+    'png/alpha))
+
+(define *shooting_buff_bitmap*
+  (make-object bitmap%
+    "grafik/shooting-buff.png"
+    'png/alpha))
+
+
 (define *airplane_death_bitmap*
   (make-object bitmap%
     "grafik/explosion-60.png"
@@ -313,6 +340,17 @@ etc... To implement!
   (make-object bitmap%
     "grafik/explosion-13.png"
     'png/alpha))
+
+(define *bird_death_bitmap*
+  (make-object bitmap%
+    "grafik/smoke-31-25.png"
+    'png/alpha))
+
+(define *buff_death_bitmap*
+  (make-object bitmap%
+    "grafik/glow-31-25.png"
+    'png/alpha))
+  
 
 ;_________________________________________________
 ;_________________________________________________
@@ -367,15 +405,15 @@ etc... To implement!
        [base_speed 5]
        [base_shooting_speed 0.5]
        [direction 0]
-       [bl_corner ($Vector 20 20)]
-       [br_corner ($Vector 80 20)]
-       [tl_corner ($Vector 20 50)]
-       [tr_corner ($Vector 80 50)]
-       [center_of_gravity ($Vector 50 35)]
-       [projected_bl_corner ($Vector 20 20)]
-       [projected_br_corner ($Vector 80 20)]
-       [projected_tl_corner ($Vector 20 50)]
-       [projected_tr_corner ($Vector 80 50)]
+       [bl_corner ($Vector 300 300)]
+       [br_corner ($Vector 360 300)]
+       [tl_corner ($Vector 300 330)]
+       [tr_corner ($Vector 360 330)]
+       [center_of_gravity ($Vector 330 315)]
+       [projected_bl_corner ($Vector 300 300)]
+       [projected_br_corner ($Vector 360 300)]
+       [projected_tl_corner ($Vector 300 330)]
+       [projected_tr_corner ($Vector 360 330)]
        [bitmap *player_1_bitmap*]
        [death_bitmap *airplane_death_bitmap*]))
 
@@ -411,6 +449,24 @@ etc... To implement!
        [speed speed_]
        [bitmap *projectile_bitmap*]
        [death_bitmap *projectile_death_bitmap*]))
+
+(define ($Make_Bird bl_corner_x bl_corner_y buff_type_)
+  (let (
+        [bird
+         (new flying_entity%
+              [bl_corner ($Vector bl_corner_x bl_corner_y)]
+              [br_corner ($Vector (+ bl_corner_x 31) bl_corner_y)]
+              [tl_corner ($Vector bl_corner_x (+ bl_corner_y 25))]
+              [tr_corner ($Vector (+ bl_corner_x 31) (+ bl_corner_y 25))]
+              [center_of_gravity ($Vector (+ bl_corner_x 15.5) (+ bl_corner_y 12.5))]
+              [bitmap *bird_bitmap*]
+              [death_bitmap *bird_death_bitmap*]
+              [speed 10]
+              [direction 0]
+              [buff_type buff_type_]
+              [buff_on_death #t])])
+        bird))
+       
 
 
 

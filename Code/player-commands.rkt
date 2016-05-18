@@ -239,23 +239,38 @@
 (define ($Spawn_Buff location)
   (let (
         [buff_seed (random 16)]
-        [randomed_buff_type 0])
+        [randomed_buff_type 0]
+        [bitmap_ 0])
 
     (cond
       ;1/2 chance
-      [(<= buff_seed 7) (set! randomed_buff_type 'speed-buff)]
+      [(<= buff_seed 7) (set! randomed_buff_type 'speed-buff)
+                        (set! bitmap_ *speed_buff_bitmap*)]
 
       ;5/16 chance
-      [(<= buff_seed 12) (set! randomed_buff_type 'shooting-buff)]
+      [(<= buff_seed 12) (set! randomed_buff_type 'shooting-buff)
+                         (set! bitmap_ *shooting_buff_bitmap*)]
 
       ;3/16 chance
-      [else (set! randomed_buff_type 'health-buff)])
+      [else (set! randomed_buff_type 'health-buff)
+            (set! bitmap_ *health_buff_bitmap*)])
 
     (send *world* $Add_Flying_Unit (new buff%
 
-          [center location]
+          [center_of_gravity location]
           [radius 12.5]
           [speed 5]
           [direction 24]
-          [buff_type randomed_buff_type]))))
+          [buff_type randomed_buff_type]
+          [bitmap bitmap_]
+          [death_bitmap *buff_death_bitmap*]))))
+
+(define ($Spawn_Bird bl_corner_x bl_corner_y buff_type direction)
+  (let (
+        [bird ($Make_Bird bl_corner_x bl_corner_y buff_type)])
+
+    ($Increase_Angle_Rotate bird direction)
+
+    (send *world* $Add_Flying_Unit bird)))
+
     
