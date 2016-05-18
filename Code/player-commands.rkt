@@ -201,7 +201,7 @@
 
 
 ;_________________________________________________
-;If shooting is allowed, shooting is set to #f and
+;If shooting is allowed, shooting_allowed is set to #f and
 ;a projectile is created in the world.
 (define ($Shoot airplane)
   (when (send airplane $Shoot_Allowed?)
@@ -232,9 +232,7 @@
              ;The projectile is double the speed of the plane.
              (* plane_speed 2))))))
 
-
-
-
+;_________________________________________________
 ;Spawns a random buff at this location.
 (define ($Spawn_Buff location)
   (let (
@@ -255,8 +253,9 @@
       [else (set! randomed_buff_type 'health-buff)
             (set! bitmap_ *health_buff_bitmap*)])
 
-    (send *world* $Add_Flying_Unit (new buff%
-
+    ;spawning the buff 
+    (send *world* $Add_Flying_Unit
+          (new buff%
           [center_of_gravity location]
           [radius 12.5]
           [speed 5]
@@ -264,6 +263,9 @@
           [buff_type randomed_buff_type]
           [bitmap bitmap_]
           [death_bitmap *buff_death_bitmap*]))))
+
+;_________________________________________________
+;Spawns a bird at a location.
 
 (define ($Spawn_Bird bl_corner_x bl_corner_y buff_type direction)
   (let (
@@ -273,4 +275,7 @@
 
     (send *world* $Add_Flying_Unit bird)))
 
-    
+(define ($Spawn_Player player)
+  (when (send player $Respawn_Allowed?)
+    (send player $Respawn)
+    (send *world* $Add_Flying_Unit player)))

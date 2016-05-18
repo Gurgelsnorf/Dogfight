@@ -404,16 +404,24 @@ etc... To implement!
        [speed 5]
        [base_speed 5]
        [base_shooting_speed 0.5]
+       [respawn_bl_corner ($Vector 160 65)]
+       [respawn_br_corner ($Vector 220 65)]
+       [respawn_tl_corner ($Vector 160 95)]
+       [respawn_tr_corner ($Vector 220 95)]
+       [respawn_center_of_gravity ($Vector 190 80)]
+       [respawn_direction 0]
+       [respawn_angle 0]
+       [bl_corner ($Vector 160 65)]
+       [br_corner ($Vector 220 65)]
+       [tl_corner ($Vector 160 95)]
+       [tr_corner ($Vector 220 95)]
+       [center_of_gravity ($Vector 190 80)]
+       [projected_bl_corner ($Vector 160 65)]
+       [projected_br_corner ($Vector 220 65)]
+       [projected_tl_corner ($Vector 160 95)]
+       [projected_tr_corner ($Vector 220 95)]
        [direction 0]
-       [bl_corner ($Vector 300 300)]
-       [br_corner ($Vector 360 300)]
-       [tl_corner ($Vector 300 330)]
-       [tr_corner ($Vector 360 330)]
-       [center_of_gravity ($Vector 330 315)]
-       [projected_bl_corner ($Vector 300 300)]
-       [projected_br_corner ($Vector 360 300)]
-       [projected_tl_corner ($Vector 300 330)]
-       [projected_tr_corner ($Vector 360 330)]
+       [angle 0]
        [bitmap *player_1_bitmap*]
        [death_bitmap *airplane_death_bitmap*]))
 
@@ -422,22 +430,84 @@ etc... To implement!
        [speed 5]
        [base_speed 5]
        [base_shooting_speed 5]
-       [direction 0]
-       [bl_corner ($Vector 120 90)]
-       [br_corner ($Vector 180 90)]
-       [tl_corner ($Vector 120 120)]
-       [tr_corner ($Vector 180 120)]
-       [center_of_gravity ($Vector 150 115)]
-       [projected_bl_corner ($Vector 120 90)]
-       [projected_br_corner ($Vector 180 90)]
-       [projected_tl_corner ($Vector 120 120)]
-       [projected_tr_corner ($Vector 180 120)]
+       [respawn_bl_corner ($Vector 980 65)]
+       [respawn_br_corner ($Vector 1040 65)]
+       [respawn_tl_corner ($Vector 980 95)]
+       [respawn_tr_corner ($Vector 1040 95)]
+       [respawn_center_of_gravity ($Vector 1010 80)]
+       [respawn_direction 16]
+       [respawn_angle pi] 
+       [bl_corner ($Vector 980 65)]
+       [br_corner ($Vector 1040 65)]
+       [tl_corner ($Vector 980 95)]
+       [tr_corner ($Vector 1040 95)]
+       [center_of_gravity ($Vector 1010 80)]
+       [projected_bl_corner ($Vector 980 65)]
+       [projected_br_corner ($Vector 1040 65)]
+       [projected_tl_corner ($Vector 980 95)]
+       [projected_tr_corner ($Vector 1040 95)]
+       [direction 16]
+       [angle pi]
        [bitmap *player_2_bitmap*]
        [death_bitmap *airplane_death_bitmap*]))
+
+(define *player_3*
+  (new airplane%
+       [speed 5]
+       [base_speed 5]
+       [base_shooting_speed 0.5]
+       [respawn_bl_corner ($Vector 380 65)]
+       [respawn_br_corner ($Vector 440 65)]
+       [respawn_tl_corner ($Vector 380 95)]
+       [respawn_tr_corner ($Vector 440 95)]
+       [respawn_center_of_gravity ($Vector 410 80)]
+       [respawn_direction 16]
+       [respawn_angle pi]
+       [bl_corner ($Vector 380 65)]
+       [br_corner ($Vector 440 65)]
+       [tl_corner ($Vector 380 95)]
+       [tr_corner ($Vector 440 95)]
+       [center_of_gravity ($Vector 410 80)]
+       [projected_bl_corner ($Vector 380 65)]
+       [projected_br_corner ($Vector 440 65)]
+       [projected_tl_corner ($Vector 380 95)]
+       [projected_tr_corner ($Vector 440 95)]
+       [direction 16]
+       [angle pi]
+       [bitmap *player_3_bitmap*]
+       [death_bitmap *airplane_death_bitmap*]))
+
+(define *player_4*
+  (new airplane%
+       [speed 5]
+       [base_speed 5]
+       [base_shooting_speed 0.5]
+       [respawn_bl_corner ($Vector 760 65)]
+       [respawn_br_corner ($Vector 820 65)]
+       [respawn_tl_corner ($Vector 760 95)]
+       [respawn_tr_corner ($Vector 820 95)]
+       [respawn_center_of_gravity ($Vector 790 80)]
+       [respawn_direction 0]
+       [respawn_angle 0]
+       [bl_corner ($Vector 760 65)]
+       [br_corner ($Vector 820 65)]
+       [tl_corner ($Vector 760 95)]
+       [tr_corner ($Vector 820 95)]
+       [center_of_gravity ($Vector 790 80)]
+       [projected_bl_corner ($Vector 760 65)]
+       [projected_br_corner ($Vector 820 65)]
+       [projected_tl_corner ($Vector 760 95)]
+       [projected_tr_corner ($Vector 820 95)]
+       [direction 0]
+       [angle 0]
+       [bitmap *player_4_bitmap*]
+       [death_bitmap *airplane_death_bitmap*]))
+
 
 ;_________________________________________________
 ;_________________________________________________
 ;--------------Defining projectiles---------------
+;-------------------& entities--------------------
 ;_________________________________________________
 ;_________________________________________________
 ;A help procedure for creating a projectile. 
@@ -450,6 +520,8 @@ etc... To implement!
        [bitmap *projectile_bitmap*]
        [death_bitmap *projectile_death_bitmap*]))
 
+;_________________________________________________
+;A help procedure for creating a bird.
 (define ($Make_Bird bl_corner_x bl_corner_y buff_type_)
   (let (
         [bird
@@ -485,8 +557,8 @@ etc... To implement!
 
 ;_________________________________________________
 ;Adding units to the world
-(send *world* $Add_Flying_Unit *player_1*)
-(send *world* $Add_Flying_Unit *player_2*)
+;(send *world* $Add_Flying_Unit *player_1*)
+;(send *world* $Add_Flying_Unit *player_2*)
 (send *world* $Add_Flying_Unit ($Make_Projectile ($Vector 400 400) 3 10))
 
 (define *start_clock*

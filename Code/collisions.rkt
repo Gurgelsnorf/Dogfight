@@ -979,7 +979,7 @@ __________________________________________________|#
                ;unit_2 buff
                [(is-a? unit_2 buff%)
                 (set! kill_list (cons unit_2 kill_list))
-                (send unit_1 $Buff (send unit_2 $Get_Buff_Type))]            ;BUFF AIRPLANE
+                (send unit_1 $Buff (send unit_2 $Get_Buff_Type))]
                
                ;if not a buff, all other cases means both the plane
                ;and the other unit should be killed.
@@ -1007,7 +1007,7 @@ __________________________________________________|#
                ;unit_2 buff
                [(is-a? unit_2 buff%)
                 (set! kill_list (cons unit_2 kill_list))
-                (printf "To implement: buff entity!")])]                    ;BUFF ENTITY
+                (send unit_1 $Buff_Entity)])]
             
             ;-------------------------------------
             ;unit_1 projectile
@@ -1031,12 +1031,12 @@ __________________________________________________|#
                ;unit_2 plane
                [(is-a? unit_2 airplane%)
                 (set! kill_list (cons unit_1 kill_list))
-                (send unit_2 $Buff (send unit_1 $Get_Buff_Type))]           ;BUFF PLAYER
+                (send unit_2 $Buff (send unit_1 $Get_Buff_Type))]
                
                ;unit_2 entity
                [(is-a? unit_2 flying_entity%)
                 (set! kill_list (cons unit_1 kill_list))
-                (printf "To implement: buff entity!")]                      ;BUFF ENTITY
+                (send unit_2 $Buff_Entity)]
                
                ;unit_2 projectile
                [(is-a? unit_2 projectile%)

@@ -11,8 +11,16 @@
   (class flying_unit_rectangular%
     (init-field
 
-     [turn_allowed #t]
-     [shoot_allowed #t]
+     respawn_bl_corner
+     respawn_br_corner
+     respawn_tl_corner
+     respawn_tr_corner
+     respawn_center_of_gravity
+     respawn_direction
+     respawn_angle
+
+     [turn_allowed #f]
+     [shoot_allowed #f]
      [respawn_allowed #t]
 
      [shooting_speed 0.5] ;shots per second
@@ -27,7 +35,18 @@
 
     (inherit-field
      dead
-     speed)
+     speed
+     bl_corner
+     br_corner
+     tl_corner
+     tr_corner
+     projected_bl_corner
+     projected_br_corner
+     projected_tl_corner
+     projected_tr_corner
+     center_of_gravity
+     direction
+     angle)
 
     
 
@@ -38,6 +57,9 @@
 
     (define/public ($Shoot_Allowed?)
       shoot_allowed)
+
+    (define/public ($Respawn_Allowed?)
+      respawn_allowed)
 
     (define/public ($Get_Lives)
       lives)
@@ -83,6 +105,8 @@
     (define/override ($Kill)
       (send *clock_respawning* start 3000 #t)
       (set! lives (- lives 1))
+      (set! shoot_allowed #f)
+      (set! turn_allowed #f)
       (super $Kill))
 
     ;The timer that counts the respawning cooldown
@@ -125,8 +149,36 @@
          
         [(equal? buff_type 'health-buff)
          (set! lives (+ lives 1))]))
-         
-    
+
+;_________________________________________________
+    (define/public ($Respawn)
+      (set! active_speed_buffs 0)
+      (set! active_shooting_buffs 0)
+      
+      (set! speed base_speed)
+      (set! shooting_speed base_shooting_speed)
+      
+      (set! bl_corner respawn_bl_corner)
+      (set! projected_bl_corner respawn_bl_corner)
+
+      (set! br_corner respawn_br_corner)
+      (set! projected_br_corner respawn_br_corner)
+
+      (set! tl_corner respawn_tl_corner)
+      (set! projected_tl_corner respawn_tl_corner)
+
+      (set! tr_corner respawn_tr_corner)
+      (set! projected_tr_corner respawn_tr_corner)
+        
+      (set! center_of_gravity respawn_center_of_gravity)
+                           
+      (set! direction respawn_direction)
+      (set! angle respawn_angle)
+
+      (set! respawn_allowed #f)
+      (set! shoot_allowed #t)
+      (set! turn_allowed #t))
+      
     (super-new)))
 
 

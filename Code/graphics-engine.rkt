@@ -124,7 +124,7 @@
                             (- ($Vector_Get_Y (send flying_unit $Get_Center_Of_Gravity))
                                (send flying_unit $Get_Radius)))
                       
-                      (set! angle (/ (* pi (send flying_unit $Get_Direction) 16)))))
+                      (set! angle (/ (* pi (send flying_unit $Get_Direction)) 16))))
 
 
                 ;The cooldown for printing the corpse is counted down.
