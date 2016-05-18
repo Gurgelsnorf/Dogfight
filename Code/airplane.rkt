@@ -23,6 +23,10 @@
      [shoot_allowed #f]
      [respawn_allowed #t]
 
+     [activate_turn_right #f]
+     [activate_turn_left #f]
+     [activate_shoot #f]
+
      [shooting_speed 0.5] ;shots per second
 
      [active_speed_buffs 0]
@@ -64,6 +68,15 @@
     (define/public ($Get_Lives)
       lives)
 
+    (define/public ($Get_Activate_Turn_Left)
+      (activate_turn_left))
+
+    (define/public ($Get_activate_Turn_Right)
+      (activate_turn_right))
+
+    (define/public ($Get_Activate_Shoot)
+      (activate_shoot))
+
 ;_________________________________________________
 ;Setting the varables for the airplane
 
@@ -72,6 +85,21 @@
 
     (define/public ($Set_Shoot_Allowed setter)
       (set! shoot_allowed setter))
+
+    (define/public ($Set_Turn_Left_Allowed setter)
+      (set! turn_allowed setter))
+
+    (define/public ($Set_Turn_Right_Allowed setter)
+      (set! turn_allowed setter))
+
+    (define/public ($Set_Activate_Turn_Right setter)
+      (set! activate_turn_right setter))
+
+    (define/public ($Set_Activate_Turn_Left setter)
+      (set! activate_turn_left setter))
+
+    (define/public ($Set_Activate_Shoot setter)
+      (set! activate_shoot setter))
 
 
 ;_________________________________________________
