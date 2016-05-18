@@ -305,9 +305,14 @@ etc... To implement!
     "grafik/bullet-11.png"
     'png/alpha))
 
-(define *bird_bitmap*
+(define *bird_left_bitmap*
   (make-object bitmap%
-    "grafik/bird-31-25.png"
+    "grafik/bird-31-25-left.png"
+    'png/alpha))
+
+(define *bird_right_bitmap*
+  (make-object bitmap%
+    "grafik/bird-31-25-right.png"
     'png/alpha))
 
 (define *balloons_bitmap*
@@ -522,7 +527,7 @@ etc... To implement!
 
 ;_________________________________________________
 ;A help procedure for creating a bird.
-(define ($Make_Bird bl_corner_x bl_corner_y buff_type_)
+(define ($Make_Bird bl_corner_x bl_corner_y speed_ orientation)
   (let (
         [bird
          (new flying_entity%
@@ -531,12 +536,13 @@ etc... To implement!
               [tl_corner ($Vector bl_corner_x (+ bl_corner_y 25))]
               [tr_corner ($Vector (+ bl_corner_x 31) (+ bl_corner_y 25))]
               [center_of_gravity ($Vector (+ bl_corner_x 15.5) (+ bl_corner_y 12.5))]
-              [bitmap *bird_bitmap*]
+              ;If it spawns on the left, the bitmap faces right, and vice versa.
+              [bitmap (if (equal? orientation 'left)
+                          *bird_right_bitmap*
+                          *bird_left_bitmap*)]
               [death_bitmap *bird_death_bitmap*]
-              [speed 10]
-              [direction 0]
-              [buff_type buff_type_]
-              [buff_on_death #t])])
+              [speed speed_]
+              [direction 0])])
         bird))
        
 

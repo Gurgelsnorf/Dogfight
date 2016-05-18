@@ -1,4 +1,4 @@
-#lang racket
+#lang racket/gui
 (provide (all-defined-out))
 
 
@@ -12,7 +12,8 @@
      [list_of_flying_units '()] ;List of the flying units in the world.
      [list_of_corpses '()] ;List of all the dead units that should be
      ;printed.
-     
+
+     [spawn_entity_allowed #t]
      
      
      ;The worlds bottom-left corner coordinates are at (0 0),
@@ -27,7 +28,8 @@
      [width 1200] ;The width of the world.
      [sky_height 650] ;The height at which the upper sky limit starts
      [ground_height 50]) ;The height at which the ground stops.
-    
+
+;_________________________________________________    
     
     ;Returns the variables of the world
     (define/public ($Get_Flying_Units)
@@ -50,8 +52,11 @@
 
     (define/public ($Get_Corpses)
       list_of_corpses)
-    
 
+    (define/public ($Spawn_Entity_Allowed?)
+      spawn_entity_allowed)
+    
+;_________________________________________________
     
     ;Adds a flying unit to the world.
     (define/public ($Add_Flying_Unit flying_unit)
@@ -65,6 +70,8 @@
                       (not (equal? list_unit flying_unit)))
                     list_of_flying_units)))
 
+;_________________________________________________
+    
     ;Adds a flying unit to the list of corpses
     (define/public ($Add_Corpse corpse)
       (set! list_of_corpses (cons corpse list_of_corpses)))
@@ -75,6 +82,18 @@
             (filter (lambda (list_corpse)
                       (not (equal? corpse list_corpse)))
                     list_of_corpses)))
+    
+;_________________________________________________
+    ;Starts the cooldown for spawning another entity
+    (define/public ($Cooldown_Entity_Spawner)
+      (set! spawn_entity_allowed #f)
+      (send *clock_spawn_entity* start (+ 9000 (random 6001)) #t))
+
+    ;The timer that counts down the spawn entity cooldown.
+    (define *clock_spawn_entity*
+      (new timer%
+           [notify-callback (lambda ()
+                              (set! spawn_entity_allowed #t))]))
     
     (super-new)))
 

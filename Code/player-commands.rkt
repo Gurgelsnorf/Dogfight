@@ -39,21 +39,23 @@
 ;Increase the angle and then rotate based on the increse
 
 (define ($Increase_Angle_Rotate object angle_increase)
-  (begin
-    (let ([angle_value (* pi (/ (+ (send object $Get_Direction) angle_increase) 16))])
+  
+  (let (
+        [angle_value (* pi (/ (+ (send object $Get_Direction) angle_increase) 16))])
+
     (cond
       [(<= 32 (+ angle_increase (send object $Get_Direction)))
-       ($Increase_Angle object (- angle_increase 32))
-       ($Rotate_All_Corners object)
-       (send object $Set_Angle angle_value)]
+       ($Increase_Angle object (- angle_increase 32))]
+
       [(>= 0 (+ angle_increase (send object $Get_Direction)))
-       ($Increase_Angle object (+ angle_increase 32))
-       ($Rotate_All_Corners object)
-       (send object $Set_Angle angle_value)]
+       ($Increase_Angle object (+ angle_increase 32))]
+
       [else
-       ($Increase_Angle object angle_increase)
-       ($Rotate_All_Corners object)
-       (send object $Set_Angle angle_value)]))))
+       ($Increase_Angle object angle_increase)])
+
+
+    ($Rotate_All_Corners object)
+    (send object $Set_Angle angle_value)))
        
 
 ;_________________________________________________
@@ -144,7 +146,11 @@
 ;_________________________________________________
 ; Change direction of an object based on given value.
 (define ($Increase_Angle object new_angle)
-  (send object $Set_Direction (+ (send object $Get_Direction) new_angle)))
+  (let ( [new_direction (+ (send object $Get_Direction) new_angle)])
+
+    (if (equal? new_direction 32)
+        (send object $Set_Direction 0)
+        (send object $Set_Direction new_direction))))
 
 
 ;_________________________________________________
@@ -266,16 +272,58 @@
 
 ;_________________________________________________
 ;Spawns a bird at a location.
-
-(define ($Spawn_Bird bl_corner_x bl_corner_y buff_type direction)
+(define ($Spawn_Bird bl_corner_x bl_corner_y direction speed orientation)
   (let (
-        [bird ($Make_Bird bl_corner_x bl_corner_y buff_type)])
+        [bird ($Make_Bird bl_corner_x bl_corner_y speed orientation)])
 
     ($Increase_Angle_Rotate bird direction)
 
     (send *world* $Add_Flying_Unit bird)))
 
-(define ($Spawn_Player player)
+;_________________________________________________
+;Spawns an entity at a "random" place if allowed. 
+(define ($Entity_Spawner)
+  (when (send *world* $Spawn_Entity_Allowed?)
+
+    (send *world* $Cooldown_Entity_Spawner)
+
+    (let (
+          [height_seed (+ 350 (random 251))]
+          
+          [side_seed (if (equal? (random 2) 0)
+                         'left
+                         'right)]
+          
+          [direction_seed (+ (- 3) (random 7))]
+          
+          [speed_seed (+ 5 (* 2 (random 4)))])
+
+    ($Spawn_Bird
+     
+     (if (equal? side_seed 'left)
+         (- 30)
+         1199)
+
+     height_seed
+     
+     (if (equal? side_seed 'left)
+         direction_seed
+         (+ direction_seed 16))
+
+     speed_seed
+
+     side_seed))))
+     
+         
+
+
+
+
+
+
+         
+;_________________________________________________
+         (define ($Spawn_Player player)
   (when (send player $Respawn_Allowed?)
     (send player $Respawn)
     (send *world* $Add_Flying_Unit player)))
