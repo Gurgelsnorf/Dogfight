@@ -22,8 +22,14 @@
      [turn_allowed #f]
      [shoot_allowed #f]
      [respawn_allowed #t]
+
      [immune_to_damage #t]
      
+
+     [activate_turn_right #f]
+     [activate_turn_left #f]
+     [activate_shoot #f]
+
      [shooting_speed 0.5] ;shots per second
      
      [active_speed_buffs 0]
@@ -49,10 +55,8 @@
      direction
      angle)
     
-    
-    
-    ;_________________________________________________
-    ;Getting The variables of the airplane
+;_________________________________________________
+;Getting The variables of the airplane
     (define/public ($Turn_Allowed?)
       turn_allowed)
     
@@ -67,9 +71,19 @@
 
     (define/public ($Immune_To_Damage?)
       immune_to_damage)
-    ;_________________________________________________
-    ;Setting the varables for the airplane
     
+    (define/public ($Get_Activate_Turn_Left)
+      activate_turn_left)
+
+    (define/public ($Get_Activate_Turn_Right)
+      activate_turn_right)
+
+    (define/public ($Get_Activate_Shoot)
+      activate_shoot)
+
+;_________________________________________________
+;Setting the varables for the airplane
+
     (define/public ($Set_Turn_Allowed setter)
       (set! turn_allowed setter))
     
@@ -79,10 +93,25 @@
     (define/public ($Set_Immune_To_Damage setter)
       (set! immune_to_damage setter))
     
-    
-    ;_________________________________________________
-    
-    ;Starts the cooldown for shooting again.
+    (define/public ($Set_Turn_Left_Allowed setter)
+      (set! turn_allowed setter))
+
+    (define/public ($Set_Turn_Right_Allowed setter)
+      (set! turn_allowed setter))
+
+    (define/public ($Set_Activate_Turn_Right setter)
+      (set! activate_turn_right setter))
+
+    (define/public ($Set_Activate_Turn_Left setter)
+      (set! activate_turn_left setter))
+
+    (define/public ($Set_Activate_Shoot setter)
+      (set! activate_shoot setter))
+
+
+;_________________________________________________
+
+     ;Starts the cooldown for shooting again.
     (define/public ($Cooldown_Shoot)
       (set! shoot_allowed #f)
       (send *clock_shooting* start (inexact->exact (/ 1000 shooting_speed)) #t))   ;Time should be tested!
