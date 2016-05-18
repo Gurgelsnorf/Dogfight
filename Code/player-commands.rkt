@@ -18,14 +18,21 @@
 
 
 ;_________________________________________________________________________
+;Activate shoot button
+
+(define ($Game_Loop_Shooting)
+  (if (send *player_1* $Get_Activate_Shoot) ($Shoot *player_1*) 0)
+  (if (send *player_2* $Get_Activate_Shoot) ($Shoot *player_2*) 0))
+
+;_________________________________________________________________________
 ;Keyboard affected movement requires a timed loop
 (define ($Key_Board_Full_Movement)
   (begin
     (let
-       ((£Player_1_Angle
-         (+ (if (send *player_1* $Turn_Left_Allowed?) (1) 0) (if (send *player_1* $Turn_Right_Allowed?) (-1) 0)))
-        (£Player_2_Angle
-         (+ (if (send *player_2* $Turn_Left_Allowed?) (1) 0) (if (send *player_1* $Turn_Right_Allowed?) (-1) 0))))
+       ([£Player_1_Angle
+         (+ (if (send *player_1* $Get_Activate_Turn_Left) 1 0) (if (send *player_1* $Get_Activate_Turn_Right) -1 0))]
+        [£Player_2_Angle
+         (+ (if (send *player_2* $Get_Activate_Turn_Left) 1 0) (if (send *player_1* $Get_Activate_Turn_Right) -1 0))])
       ($Increase_Angle_Rotate *player_1* £Player_1_Angle)
       ($Increase_Angle_Rotate *player_2* £Player_1_Angle))
     ($Move_All)))

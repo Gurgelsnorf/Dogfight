@@ -6,12 +6,16 @@
 (require "flying-unit-rectangular.rkt")
 (require "input-canvas.rkt")
 (require "graphics-engine-key-test.rkt")
-
+(require "collisions.rkt")
 
 ;_____________________________________________________________
 ;Main loop
 (define ($Gameplay_Looping)
-  (printf "lel ~n"))
+  (begin
+    ($Key_Board_Full_Movement)
+    ($Collisions)
+    ($Game_Loop_Shooting)
+    (send *flying_units* refresh-now)))
 
 
 ;_____________________________________________________________

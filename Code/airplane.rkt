@@ -69,13 +69,13 @@
       lives)
 
     (define/public ($Get_Activate_Turn_Left)
-      (activate_turn_left))
+      activate_turn_left)
 
-    (define/public ($Get_activate_Turn_Right)
-      (activate_turn_right))
+    (define/public ($Get_Activate_Turn_Right)
+      activate_turn_right)
 
     (define/public ($Get_Activate_Shoot)
-      (activate_shoot))
+      activate_shoot)
 
 ;_________________________________________________
 ;Setting the varables for the airplane
