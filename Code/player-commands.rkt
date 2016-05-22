@@ -344,7 +344,7 @@
 
 ;Checks for victory and returns if it's a tie, who who
 ;won or if the game should keep playing.
-(define ($Victory)
+(define ($Victory?)
   
 
   (if (< (length (send *world* $Get_Active_Players)) 2)
@@ -372,3 +372,21 @@
           ;If 0 players left, that means they died at the same time,
           ;and it's is thereby a tie.
           [(= number_of_remaining_players 0) 'tie])))))
+
+
+#| Procedure that takes the winning conditions. 
+
+(begin (cond
+         [(equal? argument 'keep-playing) (void)]
+
+         [(equal? argument 'tie) 
+          (send (send *flying_units* get-dc) draw-bitmap 'tie-bitmap
+                0
+                0)
+          (pause timer)]
+         
+         [else (send (send *flying_units* get-dc) draw-bitmap (send argument $Get_Victory_Bitmap)
+                     0
+                     0)])) |#
+
+
