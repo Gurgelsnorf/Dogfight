@@ -20,7 +20,6 @@
      [projected_tl_corner tl_corner]
      [projected_tr_corner tr_corner]
      [bitmap 'no-bitmap-choosen!]
-     [name 'im-a-rectangle] ;name tag for the rectangle
      [width 0] ;width of the rectangle
      [height 0] ;Height of the rectangle
      [angle 0]) ;The rotation angle of the rectangle
@@ -32,7 +31,6 @@
     (define/public ($Get_Br_Corner) br_corner)
     (define/public ($Get_Tl_Corner) tl_corner)
     (define/public ($Get_Tr_Corner) tr_corner)
-    (define/public ($Get_Name) name)
     (define/public ($Get_Width) width)
     (define/public ($Get_Height) height)
     (define/public ($Get_Angle) angle)

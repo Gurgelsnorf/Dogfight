@@ -329,3 +329,46 @@
     (send player $Respawn)
     (send *world* $Add_Flying_Unit player)
     (send *world* $Add_Active_Player player)))
+
+
+
+;Checks if a player should be forcefully respawned
+;And respawns them if they should.
+(define ($Force_Respawn)
+  (for-each (lambda (player)
+           (when (send player $Force_Respawn?)
+             ($Spawn_Player player)))
+            (send *world* $Get_Active_Players)))
+
+;_________________________________________________
+
+;Checks for victory and returns if it's a tie, who who
+;won or if the game should keep playing.
+(define ($Victory)
+  
+
+  (if (< (length (send *world* $Get_Active_Players)) 2)
+  ;If less than 2 players are playing, no one can win.
+      'keep-playing
+
+      (let ([remaining_players '()])
+
+        ;Remaining_players is set to all players that are active and
+        ;haven't lost(lives = 0) yet.
+        (for-each (lambda (player)
+                  (when (not (send player $Lost?))
+                    (set! remaining_players (cons player remaining_players))))
+                (send *world* $Get_Active_Players))
+
+      (let ([number_of_remaining_players (length remaining_players)])
+
+        (cond
+          ;If 2 or more players are still playing, nothing happens.
+          [(>= number_of_remaining_players 2) 'keep-playing]
+
+          ;If only 1 player left, that player has won! 
+          [(= number_of_remaining_players 1) (car remaining_players)]
+
+          ;If 0 players left, that means they died at the same time,
+          ;and it's is thereby a tie.
+          [(= number_of_remaining_players 0) 'tie])))))

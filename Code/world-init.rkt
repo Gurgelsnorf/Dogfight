@@ -427,6 +427,7 @@ etc... To implement!
 
 (define *player_1*
   (new airplane%
+       [name "Player 1"]
        [speed 5]
        [base_speed 5]
        [base_shooting_speed 0.5]
@@ -455,6 +456,7 @@ etc... To implement!
 
 (define *player_2*
   (new airplane%
+       [name "Player 2"]
        [speed 5]
        [base_speed 5]
        [base_shooting_speed 5]
@@ -483,6 +485,7 @@ etc... To implement!
 
 (define *player_3*
   (new airplane%
+       [name "Player 3"]
        [speed 5]
        [base_speed 5]
        [base_shooting_speed 0.5]
@@ -511,6 +514,7 @@ etc... To implement!
 
 (define *player_4*
   (new airplane%
+       [name "Player 4"]
        [speed 5]
        [base_speed 5]
        [base_shooting_speed 0.5]

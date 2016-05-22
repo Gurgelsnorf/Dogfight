@@ -22,11 +22,14 @@
      flag_bl_corner
      flag_bitmap
 
+     name
+
      [in_play #f]
      
      [turn_allowed #f]
      [shoot_allowed #f]
      [respawn_allowed #t]
+     [force_respawn #f]
 
      [immune_to_damage #t]
      
@@ -41,6 +44,7 @@
      [active_shooting_buffs 0]
      
      [lives 4]
+     [lost #f]
      
      [base_speed 5]
      [base_shooting_speed 0.5])
@@ -74,12 +78,18 @@
     
     (define/public ($Respawn_Allowed?)
       respawn_allowed)
+
+    (define/public ($Force_Respawn?)
+      force_respawn)
     
     (define/public ($Get_Lives)
       lives)
 
     (define/public ($Immune_To_Damage?)
       immune_to_damage)
+
+    (define/public ($Lost?)
+      lost)
     
     (define/public ($Get_Activate_Turn_Left)
       activate_turn_left)
@@ -161,10 +171,11 @@
 
       ;If 0 lives, repsawn allowed is permanently #f.
       (if (= lives 0)
-          (set! respawn_allowed #f)
+          (begin (set! respawn_allowed #f)
+                 (set! lost #t))
           (send *clock_respawning* start 3000 #t))
 
-        (set! shoot_allowed #f)
+      (set! shoot_allowed #f)
       (set! turn_allowed #f)
       (super $Kill)
 
@@ -180,15 +191,24 @@
     (define *clock_respawning*
       (new timer%
            [notify-callback (lambda ()
-                              (set! respawn_allowed #t))]))
+                              (set! respawn_allowed #t)
+                              (send *clock_force_respawning* start 5000 #t))]))
+
+    (define *clock_force_respawning*
+      (new timer%
+           [notify-callback (lambda ()
+                              (set! force_respawn #t))]))
     
     
     ;_________________________________________________
     ;Respawns the player
     (define/public ($Respawn)
 
-      ;All buffs are reset.
+      ;The player is added to play. This is only for calculating
+      ;victory conditions.
       (set! in_play #t)
+      
+      ;All buffs are reset.
       (set! active_speed_buffs 0)
       (set! active_shooting_buffs 0)
 
@@ -224,7 +244,12 @@
       ;You are immune to damage for a short while
       ;when respawning.
       (set! immune_to_damage #t)
-      (send *clock_immunity* start 4000 #t))
+      (send *clock_immunity* start 4000 #t)
+
+      ;You are now longer forced to respawn.
+      (set! force_respawn #f)
+      (send *clock_force_respawning* stop))
+
 
 
     
