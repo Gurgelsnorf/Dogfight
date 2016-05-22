@@ -159,6 +159,7 @@
     (define/override ($Kill)
       (set! lives (- lives 1))
 
+      ;If 0 lives, repsawn allowed is permanently #f.
       (if (= lives 0)
           (set! respawn_allowed #f)
           (send *clock_respawning* start 3000 #t))
