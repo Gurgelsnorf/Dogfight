@@ -1,6 +1,7 @@
 #lang racket/gui
 
 (require "flying-unit-rectangular.rkt")
+(require "basic-procedures.rkt")
 
 
 (provide (all-defined-out))
@@ -18,6 +19,10 @@
      respawn_center_of_gravity
      respawn_direction
      respawn_angle
+     flag_bl_corner
+     flag_bitmap
+
+     [in_play #f]
      
      [turn_allowed #f]
      [shoot_allowed #f]
@@ -57,6 +62,10 @@
     
 ;_________________________________________________
 ;Getting The variables of the airplane
+
+    (define/public (In_Play?)
+      in_play)
+    
     (define/public ($Turn_Allowed?)
       turn_allowed)
     
@@ -81,6 +90,11 @@
     (define/public ($Get_Activate_Shoot)
       activate_shoot)
 
+    (define/public ($Get_Flag_Bl_Corner)
+      flag_bl_corner)
+
+    (define/public ($Get_Flag_Bitmap)
+      flag_bitmap)
 ;_________________________________________________
 ;Setting the varables for the airplane
 
@@ -107,6 +121,9 @@
 
     (define/public ($Set_Activate_Shoot setter)
       (set! activate_shoot setter))
+
+    (define ($Set_Flag_Height height)
+      (set! flag_bl_corner ($Vector ($Vector_Get_X flag_bl_corner) height)))
 
 
 ;_________________________________________________
@@ -140,11 +157,23 @@
     ;When a player dies, they should also be able to respawn
     ;after a certain time.
     (define/override ($Kill)
-      (send *clock_respawning* start 3000 #t)
       (set! lives (- lives 1))
-      (set! shoot_allowed #f)
+
+      (if (= lives 0)
+          (set! respawn_allowed #f)
+          (send *clock_respawning* start 3000 #t))
+
+        (set! shoot_allowed #f)
       (set! turn_allowed #f)
-      (super $Kill))
+      (super $Kill)
+
+      ;Update the flag height
+      ($Set_Flag_Height (cond
+                     [(>= lives 4) 170]
+                     [(= lives 3) 165]
+                     [(= lives 2) 160]
+                     [(= lives 1) 155]
+                     [else 150])))
     
     ;The timer that counts the respawning cooldown.
     (define *clock_respawning*
@@ -158,6 +187,7 @@
     (define/public ($Respawn)
 
       ;All buffs are reset.
+      (set! in_play #t)
       (set! active_speed_buffs 0)
       (set! active_shooting_buffs 0)
 

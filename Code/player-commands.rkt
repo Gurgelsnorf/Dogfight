@@ -321,16 +321,11 @@
 
      side_seed))))
      
-         
-
-
-
-
-
-
-         
+        
 ;_________________________________________________
-         (define ($Spawn_Player player)
+;Spawns a player at their respawn position if allowed
+(define ($Spawn_Player player)
   (when (send player $Respawn_Allowed?)
     (send player $Respawn)
-    (send *world* $Add_Flying_Unit player)))
+    (send *world* $Add_Flying_Unit player)
+    (send *world* $Add_Active_Player player)))

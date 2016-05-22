@@ -32,13 +32,39 @@
          (send *world* $Get_Flying_Units)]
         [world_height (send *flying_units* get-height)]
         [world_width (send *world* $Get_Width)]
-        [brush_color "red"])
-    
+        [active_players (send *world* $Get_Active_Players)])
+
+    ;Drawing the background.
     (send dc draw-bitmap (make-object bitmap%
                            "grafik/background.png"
                            'png/alpha)
           0
           0)
+
+
+    ;_________________________________________________
+    ;Drawing flags for all active players.
+    
+    (map (lambda (player)
+           (let (
+                 [flag_bl_corner_x($Vector_Get_X (send player $Get_Flag_Bl_Corner))]
+                 [flag_bl_corner_y ($Vector_Get_Y (send player $Get_Flag_Bl_Corner))]
+                 [flag_bitmap (send player $Get_Flag_Bitmap)])
+
+             (send dc translate
+                   flag_bl_corner_x
+                   flag_bl_corner_y)
+
+             (send dc draw-bitmap
+                   flag_bitmap
+                   0
+                   0)
+
+             (send dc translate
+                   (- flag_bl_corner_x)
+                   (- flag_bl_corner_y))))
+
+         active_players)
     
     ;Paints all flying units 1 by 1.
     (map (lambda (flying_unit)
@@ -85,7 +111,7 @@
     
 ;_________________________________________________
     
-    ;drawing the corpses, if any.
+    ;Drawing the corpses, if any.
     (map (lambda (flying_unit)
 
            ;If the cooldown has run out, the corpse is removed

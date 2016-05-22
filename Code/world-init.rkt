@@ -300,6 +300,26 @@ etc... To implement!
     "grafik/blue-pink-60-30.png"
     'png/alpha))
 
+(define *player_1_flag_bitmap*
+  (make-object bitmap%
+    "grafik/yellow-red-flag.png"
+    'png/alpha))
+
+(define *player_2_flag_bitmap*
+  (make-object bitmap%
+    "grafik/green-cyan-flag.png"
+    'png/alpha))
+
+(define *player_3_flag_bitmap*
+  (make-object bitmap%
+    "grafik/green-brown-flag.png"
+    'png/alpha))
+
+(define *player_4_flag_bitmap*
+  (make-object bitmap%
+    "grafik/blue-pink-flag.png"
+    'png/alpha))
+
 (define *projectile_bitmap*
   (make-object bitmap%
     "grafik/bullet-11.png"
@@ -355,6 +375,7 @@ etc... To implement!
   (make-object bitmap%
     "grafik/glow-31-25.png"
     'png/alpha))
+
   
 
 ;_________________________________________________
@@ -428,7 +449,9 @@ etc... To implement!
        [direction 0]
        [angle 0]
        [bitmap *player_1_bitmap*]
-       [death_bitmap *airplane_death_bitmap*]))
+       [death_bitmap *airplane_death_bitmap*]
+       [flag_bitmap *player_1_flag_bitmap*]
+       [flag_bl_corner ($Vector 148 170)]))
 
 (define *player_2*
   (new airplane%
@@ -454,7 +477,9 @@ etc... To implement!
        [direction 16]
        [angle pi]
        [bitmap *player_2_bitmap*]
-       [death_bitmap *airplane_death_bitmap*]))
+       [death_bitmap *airplane_death_bitmap*]
+       [flag_bitmap *player_2_flag_bitmap*]
+       [flag_bl_corner ($Vector 997 170)]))
 
 (define *player_3*
   (new airplane%
@@ -480,7 +505,9 @@ etc... To implement!
        [direction 16]
        [angle pi]
        [bitmap *player_3_bitmap*]
-       [death_bitmap *airplane_death_bitmap*]))
+       [death_bitmap *airplane_death_bitmap*]
+       [flag_bitmap *player_3_flag_bitmap*]
+       [flag_bl_corner ($Vector 396 170)]))
 
 (define *player_4*
   (new airplane%
@@ -506,7 +533,9 @@ etc... To implement!
        [direction 0]
        [angle 0]
        [bitmap *player_4_bitmap*]
-       [death_bitmap *airplane_death_bitmap*]))
+       [death_bitmap *airplane_death_bitmap*]
+       [flag_bitmap *player_4_flag_bitmap*]
+       [flag_bl_corner ($Vector 747 170)]))
 
 
 ;_________________________________________________

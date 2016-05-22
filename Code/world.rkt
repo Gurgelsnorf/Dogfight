@@ -11,6 +11,7 @@
      [list_of_buildings '()] ;List of all the buildings in the world.
      [list_of_flying_units '()] ;List of the flying units in the world.
      [list_of_corpses '()] ;List of all the dead units that should be
+     [list_of_active_players '()]
      ;printed.
 
      [spawn_entity_allowed #t]
@@ -53,6 +54,9 @@
     (define/public ($Get_Corpses)
       list_of_corpses)
 
+    (define/public ($Get_Active_Players)
+      list_of_active_players)
+
     (define/public ($Spawn_Entity_Allowed?)
       spawn_entity_allowed)
     
@@ -69,6 +73,7 @@
             (filter (lambda (list_unit)
                       (not (equal? list_unit flying_unit)))
                     list_of_flying_units)))
+    
 
 ;_________________________________________________
     
@@ -82,6 +87,15 @@
             (filter (lambda (list_corpse)
                       (not (equal? corpse list_corpse)))
                     list_of_corpses)))
+
+;_________________________________________________
+    ;Adds a player to the list of active players, if
+    ;they aren't there already.
+    (define/public ($Add_Active_Player player)
+      (when (null? (filter (lambda (active_player)
+                             (equal? player active_player))
+                           list_of_active_players))
+        (set! list_of_active_players (cons player list_of_active_players))))
     
 ;_________________________________________________
     ;Starts the cooldown for spawning another entity
