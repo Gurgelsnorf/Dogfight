@@ -13,10 +13,14 @@
 (define x 0)
 ;Creates the main window
 (define *main_window*
-  (new frame%
-       [width 0]
-       [height 0]
-       [label "Dogfight!"]))
+  (let-values ([(screen_width screen_height) (get-display-size)])
+    (new frame%
+         [width 0]
+         [height 0]
+         [x (- (/ screen_width 2) 600)]
+         [y (- (/ screen_height 2) 350)]
+       [label "Dogfight!"]
+       [style (list 'no-resize-border)])))
 
 ;Makes the main window appear
 (send *main_window* show #t)

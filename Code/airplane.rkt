@@ -250,7 +250,7 @@
       ;You are immune to damage for a short while
       ;when respawning.
       (set! immune_to_damage #t)
-      (send *clock_immunity* start 4000 #t)
+      (send *clock_immunity* start 2000 #t)
 
       ;You are now longer forced to respawn.
       (set! force_respawn #f)
