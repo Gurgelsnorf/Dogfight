@@ -127,11 +127,8 @@
 (define ($Move_Airplane object)
   (let ([£temp_angle (hash-ref £Directions (send object $Get_Direction))]
         [£temp_speed (send object $Get_Speed)])
-    (cond
-      [(<= £temp_speed (send £temp_angle $Get_Min_Cap))
-       (printf "Too low speed, stalling ~n")]
-      [else
-       ($Increase_Pos object (* £temp_speed ($Vector_Get_X (send £temp_angle $Get_Vector))) (* £temp_speed (cdr (send £temp_angle $Get_Vector))))])))
+        ($Increase_Pos object (* £temp_speed ($Vector_Get_X (send £temp_angle $Get_Vector)))
+                       (* £temp_speed (cdr (send £temp_angle $Get_Vector))))))
 
 
 ;_________________________________________________
@@ -392,5 +389,3 @@
           ;If 0 players left, that means they died at the same time,
           ;and it's is thereby a tie.
           [(= number_of_remaining_players 0) 'tie])))))
-
-

@@ -10,9 +10,8 @@
 
      [list_of_buildings '()] ;List of all the buildings in the world.
      [list_of_flying_units '()] ;List of the flying units in the world.
-     [list_of_corpses '()] ;List of all the dead units that should be
+     [list_of_corpses '()] ;List of all the dead units that should be printed.
      [list_of_active_players '()]
-     ;printed.
 
      [spawn_entity_allowed #t]
 

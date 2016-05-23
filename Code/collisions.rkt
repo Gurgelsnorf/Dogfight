@@ -944,12 +944,10 @@ __________________________________________________|#
               
               ;Else, take the corresponding action.
               [(or (equal? collision_tag 'ground_collision)
-                   (equal? collision_tag 'building_collision))
+                   (equal? collision_tag 'building_collision)
+                   (equal? collision_tag 'sky_collision))
                (set! kill_list
                      (cons flying_unit kill_list))]
-              
-              [(equal? collision_tag 'sky_collision)
-               (send flying_unit $Stalling)]                                ;IMPLEMENT STALLING!
               
               [(equal? collision_tag 'left_collision)
                (set! teleport_too_right_list

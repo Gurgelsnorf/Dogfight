@@ -82,7 +82,7 @@
 
     (define/public ($Force_Respawn?)
       force_respawn)
-    
+
     (define/public ($Get_Lives)
       lives)
 
@@ -177,7 +177,7 @@
       (if (= lives 0)
           (begin (set! respawn_allowed #f)
                  (set! lost #t))
-          (send *clock_respawning* start 3000 #t))
+          (send *clock_respawning* start 2000 #t))
 
       (send *clock_shooting* stop)
       (send *clock_turning* stop)
@@ -294,10 +294,10 @@
          ;The new shooting speed is improved by 30% for each buff like:
          ;30%, 60%, 90% ...
          (set! shooting_speed (* base_shooting_speed
-                                 (+ (* active_shooting_buffs 0.3) 1)))]
+                                 (+ (* active_shooting_buffs 0.4) 1)))]
         
         
         [(equal? buff_type 'health-buff)
          (set! lives (+ lives 1))]))
-    
+  
     (super-new)))
