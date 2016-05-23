@@ -15,6 +15,8 @@
      ;printed.
 
      [spawn_entity_allowed #t]
+
+     [someone_just_died #f]
      
      
      ;The worlds bottom-left corner coordinates are at (0 0),
@@ -59,8 +61,15 @@
 
     (define/public ($Spawn_Entity_Allowed?)
       spawn_entity_allowed)
+
+    (define/public ($Someone_Just_Died?)
+      someone_just_died)
     
 ;_________________________________________________
+
+    (define/public ($Set_Someone_Just_Died boolean)
+      (set! someone_just_died boolean))
+
     
     ;Adds a flying unit to the world.
     (define/public ($Add_Flying_Unit flying_unit)
