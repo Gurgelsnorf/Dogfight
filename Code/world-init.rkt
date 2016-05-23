@@ -376,6 +376,30 @@ etc... To implement!
     "grafik/glow-31-25.png"
     'png/alpha))
 
+(define *player_1_win_bitmap*
+  (make-object bitmap%
+    "grafik/player-1-victory.png"
+    'png/alpha))
+
+(define *player_2_win_bitmap*
+  (make-object bitmap%
+    "grafik/player-2-victory.png"
+    'png/alpha))
+
+(define *player_3_win_bitmap*
+  (make-object bitmap%
+    "grafik/player-3-victory.png"
+    'png/alpha))
+
+(define *player_4_win_bitmap*
+  (make-object bitmap%
+    "grafik/player-4-victory.png"
+    'png/alpha))
+
+(define *tie_bitmap*
+  (make-object bitmap%
+    "grafik/tie.png"
+    'png/alpha))
   
 
 ;_________________________________________________
@@ -451,6 +475,7 @@ etc... To implement!
        [angle 0]
        [bitmap *player_1_bitmap*]
        [death_bitmap *airplane_death_bitmap*]
+       [win_bitmap *player_1_win_bitmap*]
        [flag_bitmap *player_1_flag_bitmap*]
        [flag_bl_corner ($Vector 148 170)]))
 
@@ -480,6 +505,7 @@ etc... To implement!
        [angle pi]
        [bitmap *player_2_bitmap*]
        [death_bitmap *airplane_death_bitmap*]
+       [win_bitmap *player_2_win_bitmap*]
        [flag_bitmap *player_2_flag_bitmap*]
        [flag_bl_corner ($Vector 997 170)]))
 
@@ -509,6 +535,7 @@ etc... To implement!
        [angle pi]
        [bitmap *player_3_bitmap*]
        [death_bitmap *airplane_death_bitmap*]
+       [win_bitmap *player_3_win_bitmap*]
        [flag_bitmap *player_3_flag_bitmap*]
        [flag_bl_corner ($Vector 396 170)]))
 
@@ -538,6 +565,7 @@ etc... To implement!
        [angle 0]
        [bitmap *player_4_bitmap*]
        [death_bitmap *airplane_death_bitmap*]
+       [win_bitmap *player_4_win_bitmap*]
        [flag_bitmap *player_4_flag_bitmap*]
        [flag_bl_corner ($Vector 747 170)]))
 
