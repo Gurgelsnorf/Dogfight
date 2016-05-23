@@ -400,7 +400,14 @@ etc... To implement!
   (make-object bitmap%
     "grafik/tie.png"
     'png/alpha))
-  
+
+(define *background_bitmap*
+  (make-object bitmap%
+    "grafik/background.png"))
+
+(define *menu_bitmap*
+  (make-object bitmap%
+    "grafik/menu-background.png"))
 
 ;_________________________________________________
 ;_________________________________________________
@@ -452,8 +459,8 @@ etc... To implement!
 (define *player_1*
   (new airplane%
        [name "Player 1"]
-       [speed 10]
-       [base_speed 10]
+       [speed 4]
+       [base_speed 4]
        [base_shooting_speed 1]
        [respawn_bl_corner ($Vector 160 65)]
        [respawn_br_corner ($Vector 220 65)]
@@ -482,9 +489,9 @@ etc... To implement!
 (define *player_2*
   (new airplane%
        [name "Player 2"]
-       [speed 5]
-       [base_speed 5]
-       [base_shooting_speed 5]
+       [speed 4]
+       [base_speed 4]
+       [base_shooting_speed 1]
        [respawn_bl_corner ($Vector 980 65)]
        [respawn_br_corner ($Vector 1040 65)]
        [respawn_tl_corner ($Vector 980 95)]
@@ -512,9 +519,9 @@ etc... To implement!
 (define *player_3*
   (new airplane%
        [name "Player 3"]
-       [speed 5]
-       [base_speed 5]
-       [base_shooting_speed 0.5]
+       [speed 4]
+       [base_speed 4]
+       [base_shooting_speed 1]
        [respawn_bl_corner ($Vector 380 65)]
        [respawn_br_corner ($Vector 440 65)]
        [respawn_tl_corner ($Vector 380 95)]
@@ -542,9 +549,9 @@ etc... To implement!
 (define *player_4*
   (new airplane%
        [name "Player 4"]
-       [speed 5]
-       [base_speed 5]
-       [base_shooting_speed 0.5]
+       [speed 4]
+       [base_speed 4]
+       [base_shooting_speed 1]
        [respawn_bl_corner ($Vector 760 65)]
        [respawn_br_corner ($Vector 820 65)]
        [respawn_tl_corner ($Vector 760 95)]
@@ -621,14 +628,4 @@ etc... To implement!
                            *player_2_building*
                            *player_3_building*
                            *player_4_building*)]))
-
-;_________________________________________________
-;Adding units to the world
-;(send *world* $Add_Flying_Unit *player_1*)
-;(send *world* $Add_Flying_Unit *player_2*)
-(send *world* $Add_Flying_Unit ($Make_Projectile ($Vector 400 400) 3 10))
-
-(define *start_clock*
-  (new clocking%
-    [Should_Run #f]))
 

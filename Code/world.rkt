@@ -10,13 +10,16 @@
 
      [list_of_buildings '()] ;List of all the buildings in the world.
      [list_of_flying_units '()] ;List of the flying units in the world.
-     [list_of_corpses '()] ;List of all the dead units that should be
+     [list_of_corpses '()] ;List of all the dead units that should be printed.
      [list_of_active_players '()]
-     ;printed.
 
      [spawn_entity_allowed #t]
 
      [someone_just_died #f]
+
+     [game_started #f]
+     [game_over #f]
+     [game_paused #t]
      
      
      ;The worlds bottom-left corner coordinates are at (0 0),
@@ -64,11 +67,29 @@
 
     (define/public ($Someone_Just_Died?)
       someone_just_died)
+
+    (define/public ($Game_Started?)
+      game_started)
+    
+    (define/public ($Game_Over?)
+      game_over)
+
+    (define/public ($Game_Paused?)
+      game_paused)
     
 ;_________________________________________________
 
     (define/public ($Set_Someone_Just_Died boolean)
       (set! someone_just_died boolean))
+
+    (define/public ($Set_Game_Started boolean)
+      (set! game_started boolean))
+
+    (define/public ($Set_Game_Over boolean)
+      (set! game_over boolean))
+
+    (define/public ($Set_Game_Paused boolean)
+      (set! game_paused boolean))
 
     
     ;Adds a flying unit to the world.
@@ -110,7 +131,7 @@
     ;Starts the cooldown for spawning another entity
     (define/public ($Cooldown_Entity_Spawner)
       (set! spawn_entity_allowed #f)
-      (send *clock_spawn_entity* start (+ 9000 (random 6001)) #t))
+      (send *clock_spawn_entity* start (+ 5000 (random 5001)) #t))
 
     ;The timer that counts down the spawn entity cooldown.
     (define *clock_spawn_entity*

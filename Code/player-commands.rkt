@@ -27,7 +27,23 @@
 ;_________________________________________________________________________
 ;Keyboard affected movement requires a timed loop
 (define ($Key_Board_Full_Movement)
-  (begin
+
+  (for-each (lambda (player)
+              (when (send player $Turn_Allowed?)
+                ($Increase_Angle_Rotate player
+                                        (+ (if (send player $Get_Activate_Turn_Left)
+                                               1
+                                               0)
+                                           (if (send player $Get_Activate_Turn_Right)
+                                               -1
+                                               0)))
+                (send player $Cooldown_Turn)))
+            
+            (send *world* $Get_Active_Players))
+
+  ($Move_All))
+
+#|  (begin
     (let
        ([£Player_1_Angle
          (+ (if (send *player_1* $Get_Activate_Turn_Left) 1 0) (if (send *player_1* $Get_Activate_Turn_Right) -1 0))]
@@ -43,7 +59,7 @@
       ($Increase_Angle_Rotate *player_3* £Player_3_Angle)
       ($Increase_Angle_Rotate *player_4* £Player_4_Angle))
     ($Move_All)))
-    
+  |#  
 
 
 
@@ -111,11 +127,8 @@
 (define ($Move_Airplane object)
   (let ([£temp_angle (hash-ref £Directions (send object $Get_Direction))]
         [£temp_speed (send object $Get_Speed)])
-    (cond
-      [(<= £temp_speed (send £temp_angle $Get_Min_Cap))
-       (printf "Too low speed, stalling ~n")]
-      [else
-       ($Increase_Pos object (* £temp_speed ($Vector_Get_X (send £temp_angle $Get_Vector))) (* £temp_speed (cdr (send £temp_angle $Get_Vector))))])))
+        ($Increase_Pos object (* £temp_speed ($Vector_Get_X (send £temp_angle $Get_Vector)))
+                       (* £temp_speed (cdr (send £temp_angle $Get_Vector))))))
 
 
 ;_________________________________________________
@@ -275,7 +288,7 @@
           (new buff%
           [center_of_gravity location]
           [radius 12.5]
-          [speed 5]
+          [speed 2]
           [direction 24]
           [buff_type randomed_buff_type]
           [bitmap bitmap_]
@@ -307,7 +320,7 @@
           
           [direction_seed (+ (- 3) (random 7))]
           
-          [speed_seed (+ 5 (* 2 (random 4)))])
+          [speed_seed (+ 3 (random 4))])
 
     ($Spawn_Bird
      
@@ -376,5 +389,3 @@
           ;If 0 players left, that means they died at the same time,
           ;and it's is thereby a tie.
           [(= number_of_remaining_players 0) 'tie])))))
-
-
