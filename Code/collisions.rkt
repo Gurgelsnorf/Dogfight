@@ -783,11 +783,13 @@ __________________________________________________|#
 ;Takes a list of units and removes them from world,
 ;and runs their kill procedure.
 (define ($Kill_All kill_list)
+  (when (not (null? kill_list))
   (map (lambda (flying_unit)
          (send *world* $Delete_Flying_Unit flying_unit)
          (send *world* $Add_Corpse flying_unit)
          (send flying_unit $Kill))
-       kill_list))
+       kill_list)
+    (send *world* $Set_Someone_Just_Died #t)))
 
 ;_________________________________________________
 

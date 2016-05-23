@@ -54,4 +54,30 @@
 ;_____________________________________________________________
 
 
+;Procedure that takes action depending on the win condition. 
+(define ($Victory)
+  (let (
+        [victory-condition ($Victory_Condition)])
     
+    (cond
+      ;If you should keep playing, nothing happens.
+      [(equal? victory-condition 'keep-playing) (void)]
+
+      ;If it's a tie, the game is stopped and the tie
+      ;bitmap is drawn.
+      [(equal? victory-condition 'tie)
+       (send *start_clock* $Set_Clock_Run #f)
+       (send (send *flying_units* get-dc) draw-bitmap
+             *tie_bitmap*
+             0
+             0)]
+
+      ;Otherwise, a player has won, so the game is stopped
+      ;and their victory bitmap is drawn.
+      [else (send (send *flying_units* get-dc) draw-bitmap
+                  (send victory-condition $Get_Victory_Bitmap)
+                  0
+                  0)])))
+  
+  
+  

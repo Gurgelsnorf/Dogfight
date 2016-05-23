@@ -21,6 +21,7 @@
      respawn_angle
      flag_bl_corner
      flag_bitmap
+     win_bitmap
 
      name
 
