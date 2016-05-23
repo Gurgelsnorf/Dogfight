@@ -52,7 +52,7 @@
        ($Increase_Angle object (- angle_increase 32))
        ($Rotate_All_Corners object)
        (send object $Set_Angle angle_value)]
-      [(> 0 (+ angle_increase (send object $Get_Direction)))
+      [(>= -1 (+ angle_increase (send object $Get_Direction)))
        ($Increase_Angle object (+ angle_increase 32))
        ($Rotate_All_Corners object)
        (send object $Set_Angle angle_value)]

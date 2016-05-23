@@ -175,7 +175,7 @@
       ((eq? £Key_Code #\l) (send *player_3* $Set_Activate_Turn_Left #t))
       ((eq? £Key_Code #\ä) (send *player_3* $Set_Activate_Turn_Right #t))
       ((eq? £Key_Code #\p) (send *player_3* $Set_Activate_Shoot #t))
-      ((eq? £Key_Code #\l) ($Spawn_Player *player_3*))
+      ((eq? £Key_Code #\ö) ($Spawn_Player *player_3*))
 
       ((eq? £Key_Code #\g) (send *player_4* $Set_Activate_Turn_Left #t))
       ((eq? £Key_Code #\j) (send *player_4* $Set_Activate_Turn_Right #t))
