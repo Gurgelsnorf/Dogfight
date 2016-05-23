@@ -5,7 +5,7 @@
 (require "physics-engine.rkt")
 (require "flying-unit-rectangular.rkt")
 (require "input-canvas.rkt")
-(require "graphics-engine-key-test.rkt")
+(require "graphics-engine-Copy.rkt")
 (require "collisions.rkt")
 
 ;_____________________________________________________________
@@ -37,7 +37,7 @@
        [notify-callback $Gameplay_Looping_Check]))
 ;_____________________________________________________________
 ;Jäveln som startar tidsuppateringar
-(send *clock_timer* start 1000 #f)
+(send *clock_timer* start 16 #f)
 
 
 

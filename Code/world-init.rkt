@@ -139,7 +139,7 @@ etc... To implement!
 
 (define *angle_15/16*
   (new direction%
-       [vector (cons -.831470 .555570)]
+       [vector (cons -.980785 .195090)]
        [min_cap 0]
        [gravity 1]))
 
@@ -428,9 +428,9 @@ etc... To implement!
 (define *player_1*
   (new airplane%
        [name "Player 1"]
-       [speed 5]
-       [base_speed 5]
-       [base_shooting_speed 0.5]
+       [speed 10]
+       [base_speed 10]
+       [base_shooting_speed 1]
        [respawn_bl_corner ($Vector 160 65)]
        [respawn_br_corner ($Vector 220 65)]
        [respawn_tl_corner ($Vector 160 95)]
