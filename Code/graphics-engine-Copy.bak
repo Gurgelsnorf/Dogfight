@@ -165,42 +165,20 @@
       ((eq? £Key_Code 'left) (send *player_1* $Set_Activate_Turn_Left #t))
       ((eq? £Key_Code 'right) (send *player_1* $Set_Activate_Turn_Right #t))
       ((eq? £Key_Code 'up) (send *player_1* $Set_Activate_Shoot #t))
-      ((eq? £Key_Code 'down) ($Spawn_Player *player_1*))
-      
       ((eq? £Key_Code #\a) (send *player_2* $Set_Activate_Turn_Left #t))
       ((eq? £Key_Code #\d) (send *player_2* $Set_Activate_Turn_Right #t))
-      ((eq? £Key_Code #\w) (send *player_2* $Set_Activate_Shoot #t))
-      ((eq? £Key_Code #\s) ($Spawn_Player *player_2*))
-
-      ((eq? £Key_Code #\l) (send *player_3* $Set_Activate_Turn_Left #t))
-      ((eq? £Key_Code #\ä) (send *player_3* $Set_Activate_Turn_Right #t))
-      ((eq? £Key_Code #\p) (send *player_3* $Set_Activate_Shoot #t))
-      ((eq? £Key_Code #\l) ($Spawn_Player *player_3*))
-
-      ((eq? £Key_Code #\g) (send *player_4* $Set_Activate_Turn_Left #t))
-      ((eq? £Key_Code #\j) (send *player_4* $Set_Activate_Turn_Right #t))
-      ((eq? £Key_Code #\y) (send *player_4* $Set_Activate_Shoot #t))
-      ((eq? £Key_Code #\h) ($Spawn_Player *player_4*))
-
+      ((eq? £Key_Code #\s) (send *player_2* $Set_Activate_Shoot #t))
+      ((eq? £Key_Code #\r) (send *start_clock* $Set_Clock_Run #t))
       ((eq? £Key_Code 'escape) (send *start_clock* $Set_Clock_Run #f))
-      ((eq? £Key_Code #\space) (send *start_clock* $Set_Clock_Run #t)))
-      
+      ((eq? £Key_Code #\e) ($Spawn_Player *player_2*))
+      ((eq? £Key_Code 'rshift) ($Spawn_Player *player_1*)))
     (cond
       ((eq? £Key_Release_Code 'left) (send *player_1* $Set_Activate_Turn_Left #f))
       ((eq? £Key_Release_Code 'right) (send *player_1* $Set_Activate_Turn_Right #f))
       ((eq? £Key_Release_Code 'up) (send *player_1* $Set_Activate_Shoot #f))
-      
       ((eq? £Key_Release_Code #\a) (send *player_2* $Set_Activate_Turn_Left #f))
-      ((eq? £Key_Release_Code #\w) (send *player_2* $Set_Activate_Shoot #f))
-      ((eq? £Key_Release_Code #\d) (send *player_2* $Set_Activate_Turn_Right #f))
-
-      ((eq? £Key_Release_Code #\l) (send *player_3* $Set_Activate_Turn_Left #f))
-      ((eq? £Key_Release_Code #\p) (send *player_3* $Set_Activate_Shoot #f))
-      ((eq? £Key_Release_Code #\ä) (send *player_3* $Set_Activate_Turn_Right #f))
-
-      ((eq? £Key_Release_Code #\g) (send *player_4* $Set_Activate_Turn_Left #f))
-      ((eq? £Key_Release_Code #\y) (send *player_4* $Set_Activate_Shoot #f))
-      ((eq? £Key_Release_Code #\j) (send *player_4* $Set_Activate_Turn_Right #f)))))
+      ((eq? £Key_Release_Code #\s) (send *player_2* $Set_Activate_Shoot #f))
+      ((eq? £Key_Release_Code #\d) (send *player_2* $Set_Activate_Turn_Right #f)))))
 
 
 #|   
