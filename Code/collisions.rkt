@@ -1,8 +1,5 @@
 #lang racket/gui
 (require "basic-procedures.rkt")
-
-(require "graphics-engine.rkt")
-
 (require "rectangle.rkt")
 (require "circle.rkt")
 (require "airplane.rkt")
@@ -934,6 +931,12 @@ __________________________________________________|#
 
             
             (cond
+ 
+              ;If a buff collides with the sky (an entity spawns in the clouds),
+              ;nothing should happen.
+              [(and (is-a? flying_unit buff%) (equal? collision_tag ' sky_collision)
+                    (void))]
+              
               ;If a non airplane unit collides with the world,
               ;it will be removed.
               [(not (is-a? flying_unit airplane%))
@@ -1077,7 +1080,6 @@ __________________________________________________|#
     ;all units.
     (loop_world)
     
-    (print kill_list)
     ($Kill_All kill_list)
     ($Teleport_All 'left teleport_too_left_list)
     ($Teleport_All 'right teleport_too_right_list)))

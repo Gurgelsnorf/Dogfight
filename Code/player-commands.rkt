@@ -27,7 +27,23 @@
 ;_________________________________________________________________________
 ;Keyboard affected movement requires a timed loop
 (define ($Key_Board_Full_Movement)
-  (begin
+
+  (for-each (lambda (player)
+              (when (send player $Turn_Allowed?)
+                ($Increase_Angle_Rotate player
+                                        (+ (if (send player $Get_Activate_Turn_Left)
+                                               1
+                                               0)
+                                           (if (send player $Get_Activate_Turn_Right)
+                                               -1
+                                               0)))
+                (send player $Cooldown_Turn)))
+            
+            (send *world* $Get_Active_Players))
+
+  ($Move_All))
+
+#|  (begin
     (let
        ([£Player_1_Angle
          (+ (if (send *player_1* $Get_Activate_Turn_Left) 1 0) (if (send *player_1* $Get_Activate_Turn_Right) -1 0))]
@@ -36,7 +52,7 @@
       ($Increase_Angle_Rotate *player_1* £Player_1_Angle)
       ($Increase_Angle_Rotate *player_2* £Player_1_Angle))
     ($Move_All)))
-    
+  |#  
 
 
 
@@ -268,7 +284,7 @@
           (new buff%
           [center_of_gravity location]
           [radius 12.5]
-          [speed 5]
+          [speed 2]
           [direction 24]
           [buff_type randomed_buff_type]
           [bitmap bitmap_]
@@ -300,7 +316,7 @@
           
           [direction_seed (+ (- 3) (random 7))]
           
-          [speed_seed (+ 5 (* 2 (random 4)))])
+          [speed_seed (+ 3 (random 4))])
 
     ($Spawn_Bird
      

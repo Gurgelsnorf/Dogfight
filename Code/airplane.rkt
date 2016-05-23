@@ -47,8 +47,8 @@
      [lives 4]
      [lost #f]
      
-     [base_speed 5]
-     [base_shooting_speed 0.5])
+     [base_speed 4]
+     [base_shooting_speed 1])
     
     (inherit-field
      dead
@@ -106,6 +106,9 @@
 
     (define/public ($Get_Flag_Bitmap)
       flag_bitmap)
+
+    (define/public ($Get_Victory_Bitmap)
+      win_bitmap)
 ;_________________________________________________
 ;Setting the varables for the airplane
 
@@ -142,7 +145,7 @@
      ;Starts the cooldown for shooting again.
     (define/public ($Cooldown_Shoot)
       (set! shoot_allowed #f)
-      (send *clock_shooting* start (inexact->exact (/ 1000 shooting_speed)) #t))   ;Time should be tested!
+      (send *clock_shooting* start (round (inexact->exact (/ 1000 shooting_speed))) #t))   ;Time should be tested!
     
     ;The timer that counts down the shooting cooldown.
     (define *clock_shooting*
@@ -155,7 +158,7 @@
     ;Starts the cooldown for turning again.
     (define/public ($Cooldown_Turn)
       (set! turn_allowed #f)
-      (send *clock_turning* start 100 #t))                       ;Time should be tested! 
+      (send *clock_turning* start 25 #t))                       ;Time should be tested! 
     
     
     ;The timer that counts down the turning cooldown.
@@ -176,6 +179,8 @@
                  (set! lost #t))
           (send *clock_respawning* start 3000 #t))
 
+      (send *clock_shooting* stop)
+      (send *clock_turning* stop)
       (set! shoot_allowed #f)
       (set! turn_allowed #f)
       (super $Kill)
@@ -276,20 +281,20 @@
                           ;The speed is improved by 30% for the first 2 buffs,
                           ;and then 20% for each buff after that, like:
                           ;30%, 60%, 80%, 100%, 120%...
-                          [(>= 2 active_speed_buffs) (* active_speed_buffs 1.3)]
-                          [else (+ 1.6 (* (- active_speed_buffs 2) 1.2))])))]
+                          [(>= 2 active_speed_buffs) (+ 1 (* active_speed_buffs 0.3))]
+                          [else (+ 1.6 (+ (* 0.2 (- active_speed_buffs 2)) 1))])))]
         
         
         ;Shooting buff
-        [(equal? buff_type 'shooting_buff)
+        [(equal? buff_type 'shooting-buff)
          
          ;Update buff counter
          (set! active_shooting_buffs (+ active_shooting_buffs 1))
          
-         ;The new shooting speed is improved by 50% for each buff like:
-         ;50%, 100%, 150% ...
+         ;The new shooting speed is improved by 30% for each buff like:
+         ;30%, 60%, 90% ...
          (set! shooting_speed (* base_shooting_speed
-                                 (+ (* active_shooting_buffs 0.5) 1)))]
+                                 (+ (* active_shooting_buffs 0.3) 1)))]
         
         
         [(equal? buff_type 'health-buff)
