@@ -48,9 +48,16 @@
        ([£Player_1_Angle
          (+ (if (send *player_1* $Get_Activate_Turn_Left) 1 0) (if (send *player_1* $Get_Activate_Turn_Right) -1 0))]
         [£Player_2_Angle
-         (+ (if (send *player_2* $Get_Activate_Turn_Left) 1 0) (if (send *player_1* $Get_Activate_Turn_Right) -1 0))])
+         (+ (if (send *player_2* $Get_Activate_Turn_Left) 1 0) (if (send *player_2* $Get_Activate_Turn_Right) -1 0))]
+        [£Player_3_Angle
+         (+ (if (send *player_3* $Get_Activate_Turn_Left) 1 0) (if (send *player_3* $Get_Activate_Turn_Right) -1 0))]
+        [£Player_4_Angle
+         (+ (if (send *player_4* $Get_Activate_Turn_Left) 1 0) (if (send *player_4* $Get_Activate_Turn_Right) -1 0))])
+      
       ($Increase_Angle_Rotate *player_1* £Player_1_Angle)
-      ($Increase_Angle_Rotate *player_2* £Player_1_Angle))
+      ($Increase_Angle_Rotate *player_2* £Player_2_Angle)
+      ($Increase_Angle_Rotate *player_3* £Player_3_Angle)
+      ($Increase_Angle_Rotate *player_4* £Player_4_Angle))
     ($Move_All)))
   |#  
 
