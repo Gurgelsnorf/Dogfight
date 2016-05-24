@@ -142,17 +142,8 @@ Till halvtidsmötet ska fysikmotorn och rörelsen i koordinatsystemet vara klart
 \subsection{Betygsambitioner}
 Då båda är intresserade av att göra ett så bra och givande projekt som möjligt siktar vi på att nå betyg 5. Vi båda arbetade på samma ingenjörsprojekt som byggde på att skriva ett reglertekniskt program och vi vill förbättra våra förmågor i utvecklandet av program ur ett projektperspektiv. 
 
-\section{Konceptskiss}
-\begin{figure}[H]
-	\caption{Ungefärlig skiss över spelets utseende.}
-	\centering
-	\includegraphics[width=\linewidth]{Konceptskiss.png}
-\end{figure}
-Figur 1 ovan är en ungefärlig bild över det slutgiltiga spelets utdata. Spelarna(flygplanen) kommer att kunna styra sin riktning i kordinatsystemet genom att rotera medsols eller motsols. Utöver detta kommer man även kunna avfyra projektiler(gula prickar vid det vänstra planet), samt använda en temporär hastighetsökning(röd/gul mätare längt ned till vänster indikerar kvarvarande tid). Det kommer att vara möjligt skjuta till exempel en fågel eller ett flygplan, som i sin tur kommer att släppa någon form av bonus(lila objekt med blixt) som spelaren kan använda. Det finns även en indikator på vilka buffs om är aktiverade(längst ned till vänster). Man kan även se hastighetsmätaren(längst ned till vänster), med ett rött område som indikerar när man riskerar att störta på grund av för låg hastighet. Under hastighetsmätaren finns en indikator på hur lång tid det är kvar tills det att nästa hastighetsbuff kan användas.
-På markytan finns 4 landningsbanor, och det är här spelarna kommer att återuppstå ifall de blivit nedskjutna. Höjden av flaggan ovanpå representerar antalet liv som kvarstår för spelaren. Man kan även se taket för spelplanen, och kollision med denna kommer att göra att planet börjar störta. Sist så kan man även se att det finns en menyknapp som pausar spelet med en meny. 
-\vspace{0.4cm}
+\section{Användarmanual}
 
-Notera här att detta bara är ett exempel på hur det skulle kunna se ut, och att det inte nödvändigtvis kommer att vara på detta sätt vi representerar aktiverade bonusar, hastighet, antalet liv, placering av menyknapp etcetera. Till exempel så kan det även vara möjligt att spelet blir bättre om bonusar inte syns, att landningsbanorna är placerade annorlunda, att menyknappen är på något annat ställe eller liknande, vilket kommer ge sig alltefter funktioner blir implementerade.
 
 
 \section{Kravlista}
@@ -345,25 +336,6 @@ Datatypen \textbf{world} kommer att vara en klass som beskriver alla icke-rörli
 	\hline
 \end{tabular}
 
-\subsubsection{HUD}
-Datatypen \textbf{HUD} kommer att beskriva de objekt som ger information till spelaren, det vill säga hastighetsmätare, buffräknare, flaggor och hastighetsbuffindikator. Dessa skall kunna uppdateras i realtid, och beroende på vad som händer så skall bilderna både kunna förflyttas(visaren på hastighetsmätaren) eller ändras helt(antalet bonusar).
-
-\vspace{0.2cm}
-
-\begin{tabular}{| c | c | p{8.8cm} |}
-	\hline
-	\textbf{Metod} & \textbf{Variabel} & \textbf{Beskrivning} \\
-	\hline
-	
-	update & - & Uppdaterar objektet, det vill säga uppdaterar vad som visas på skärmen. Exempelvis så kan hastighetsmätaren peka åt ett annat håll.\\
-	\hline
-	hide & - & Slutar visa objektet på skärmen. \\
-	\hline
-	render & position size & Renderar objektet på en ny position med en satt storlek. \\
-	\hline
-\end{tabular}
-
-
 \subsubsection{Background}
 Datatypen \textbf{background} kommer att beskriva den bakgrund vilket spelet spelas över, och även bakgrunden i menyerna. Denna kommer att vara statisk under spelets gång, och kommer därför bara att behöva uppdateras vid uppstart och när man går till menyn.
 
@@ -382,24 +354,6 @@ Datatypen \textbf{background} kommer att beskriva den bakgrund vilket spelet spe
 	\hline
 \end{tabular}
 
-\subsubsection{Button}
-Datatypen \textbf{button} kommer att representera alla tryckbara knappar i menyerna och eventuellt i huvudspelet. Dessa ska utföra kommandon om spelaren trycker på detta område av skärmen med musen.
-
-\vspace{0.2cm}
-
-\begin{tabular}{| c | c | p{8.9cm} |}
-	\hline
-	\textbf{Metod} & \textbf{Variabel} & \textbf{Beskrivning} \\
-	\hline
-	
-	render & position size & Skapar knappen på en viss plats med en viss storlek.\\
-	\hline
-	delete & - & Tar bort knappen. \\
-	\hline
-	execute & - & Utför de kommandon som är bundna till knappen. \\
-	\hline
-\end{tabular}
-
 \subsubsection{Vector}
 Datatypen \textbf{vector} kommer att beskriva vektorer och punkter i koordinatsystemet, om kommer bestå av ett par där car-delen är x-värdet och cdr-delen y-värdet.
 
@@ -413,6 +367,10 @@ När det gäller tester så är det främst viktigt att rörelserna i koordinats
 Tidigt i implementeringen kommer vi främst att testa så att rörelser fungerar korrekt, så att föremål får rätt position i koordinatsystemet givet en riktning och en hastighet. När detta fungerar är huvudfokus att testa kollision av objekt och i sin tur att storlekar av objekt fungerar på rätt sätt. Här finns det även viktiga speciallfall att testa, till exempel om 3 objekt kolliderar med varandra under samma programvarv, då måste någon form av händelseprioritering göras. \\
 
 Senare i projektet kommer även grafiken att behöva testas, men då fysikmotorn då redan ska vara implementerad handlar detta främst om att se så att kollisioner och liknande inträffar synkroniserat med att de grafiska objekten kolliderar. \\
+
+\subsection{Beskrivning av implementation}
+
+
 
 \section{Utvärderingar och erfarenheter}
     
