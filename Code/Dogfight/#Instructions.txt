@@ -1,0 +1,22 @@
+The game is started by running main-game.rkt: Instructions on how to play are given
+once you start the game.
+
+
+FILES:
+
+	All class-definition files have the prefix "class-" in their filename.
+
+	collisions are handled in collisions.rkt.
+
+
+	vector-procedures is for all procedures doing basic vector calculations.
+
+
+	commands is for all procedures spawning and moving objects.
+
+
+	world-init initializes all objects, bitmaps, etc.. needed to play the game.
+
+
+	graphics-engine contains the frame and canvas used, and also the rendering
+	procedure.
