@@ -8,14 +8,28 @@
 \BOOKMARK [1][-]{section.4}{Implementation}{}% 8
 \BOOKMARK [2][-]{subsection.4.1}{Processbeskrivning}{section.4}% 9
 \BOOKMARK [2][-]{subsection.4.2}{Abstrakta datatyper}{section.4}% 10
-\BOOKMARK [3][-]{subsubsection.4.2.1}{Flying-unit}{subsection.4.2}% 11
-\BOOKMARK [4][-]{subsubsubsection.4.2.1}{Player}{subsubsection.4.2.1}% 12
-\BOOKMARK [4][-]{subsubsubsection.4.2.2}{Buff}{subsubsection.4.2.1}% 13
-\BOOKMARK [4][-]{subsubsubsection.4.2.3}{Entities}{subsubsection.4.2.1}% 14
-\BOOKMARK [3][-]{subsubsection.4.2.2}{World}{subsection.4.2}% 15
-\BOOKMARK [3][-]{subsubsection.4.2.3}{Background}{subsection.4.2}% 16
-\BOOKMARK [3][-]{subsubsection.4.2.4}{Vector}{subsection.4.2}% 17
-\BOOKMARK [3][-]{subsubsection.4.2.5}{Matrix}{subsection.4.2}% 18
-\BOOKMARK [2][-]{subsection.4.3}{Testning}{section.4}% 19
-\BOOKMARK [2][-]{subsection.4.4}{Beskrivning av implementation}{section.4}% 20
-\BOOKMARK [1][-]{section.5}{Utv\344rderingar och erfarenheter}{}% 21
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Vektorer}{subsection.4.2}% 11
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Cirklar}{subsection.4.2}% 12
+\BOOKMARK [3][-]{subsubsection.4.2.3}{Rektanglar}{subsection.4.2}% 13
+\BOOKMARK [3][-]{subsubsection.4.2.4}{V\344rlden}{subsection.4.2}% 14
+\BOOKMARK [4][-]{subsubsubsection.4.2.1}{Geometri}{subsubsection.4.2.4}% 15
+\BOOKMARK [4][-]{subsubsubsection.4.2.2}{Objekthantering}{subsubsection.4.2.4}% 16
+\BOOKMARK [4][-]{subsubsubsection.4.2.3}{Variabelhantering}{subsubsection.4.2.4}% 17
+\BOOKMARK [3][-]{subsubsection.4.2.5}{Flying-unit}{subsection.4.2}% 18
+\BOOKMARK [4][-]{subsubsubsection.4.2.1}{Player}{subsubsection.4.2.5}% 19
+\BOOKMARK [4][-]{subsubsubsection.4.2.2}{Buff}{subsubsection.4.2.5}% 20
+\BOOKMARK [4][-]{subsubsubsection.4.2.3}{Entities}{subsubsection.4.2.5}% 21
+\BOOKMARK [3][-]{subsubsection.4.2.6}{World}{subsection.4.2}% 22
+\BOOKMARK [3][-]{subsubsection.4.2.7}{Background}{subsection.4.2}% 23
+\BOOKMARK [3][-]{subsubsection.4.2.8}{Vector}{subsection.4.2}% 24
+\BOOKMARK [3][-]{subsubsection.4.2.9}{Matrix}{subsection.4.2}% 25
+\BOOKMARK [2][-]{subsection.4.3}{Testning}{section.4}% 26
+\BOOKMARK [2][-]{subsection.4.4}{Beskrivning av implementation}{section.4}% 27
+\BOOKMARK [3][-]{subsubsection.4.4.1}{R\366relser}{subsection.4.4}% 28
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Kollisioner}{subsection.4.4}% 29
+\BOOKMARK [4][-]{subsubsubsection.4.4.1}{Kollisionsdetektering}{subsubsection.4.4.2}% 30
+\BOOKMARK [4][-]{subsubsubsection.4.4.2}{Kollisionshantering}{subsubsection.4.4.2}% 31
+\BOOKMARK [3][-]{subsubsection.4.4.3}{Flygande objekt}{subsection.4.4}% 32
+\BOOKMARK [3][-]{subsubsection.4.4.4}{Grafik}{subsection.4.4}% 33
+\BOOKMARK [3][-]{subsubsection.4.4.5}{Indata}{subsection.4.4}% 34
+\BOOKMARK [1][-]{section.5}{Utv\344rdering och erfarenheter}{}% 35

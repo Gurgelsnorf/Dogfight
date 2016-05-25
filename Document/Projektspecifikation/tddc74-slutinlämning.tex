@@ -108,10 +108,18 @@ Jonas Wallgren {\small jonas.wallgren@liu.se}}
 \newpage
 
 \section{Projektplanering}
-Projektet går ut på att skapa ett actionspel där två eller fler spelare tävlar mot varandra. Spelet bygger på att med hjälp av tangentbordet styra ett flygplan på vald tvådimensionell spelbana. För att vinna skall man skjuta ner motståndarens flygplan och all information uppdateras grafiskt i realtid till de båda spelarna.
+Projektet går ut på att skapa ett actionspel där två till fyra spelare tävlar mot varandra. Spelet bygger på att med hjälp av tangentbordet styra varsitt flygplan på en tvådimensionell spelbana. För att vinna skall man skjuta ned motståndarnas flygplan till det att bara en spelare är kvar. Hela spelet uppdateras grafiskt i realtid.
 
 \subsection{Kort projektbeskrivning}
-Programmet bygger på ett tvådimensionellt koordinatsystem med x och y axel. Objektens rörelse beskrivs med vektorer enligt linjäralgebraiska ekvationer där deras hastighet och riktning ska kunna vara påverkbara. Kollisionerna bygger på att få objekten att detektera om de är nära nog ett annat objekt då de aldrig kommer dela samma flytvärde. Skulle ett objekt vara för nära aktiveras eventet för kollision som att planet störtar eller plockar upp en form av buff. \\
+Spelet bygger på ett tvådimensionellt koordinatsystem med sett från sidan. I detta plan kontrollerar två till fyra spelare varsitt flygplan, som har möjligthet att ändra sin rörelseriktning och avfyra projektiler. I spelet finns även flera utökade moment som till exempel buffar för att göra spelet intressantare(Se Användarmanual  för fullständig lista). 
+
+\vspace{0.2cm}
+
+Objektens rörelse beskrivs med en riktningsvektor och en hastighet, där objektet vid varje programuppdatering förflyttas i vektorsriktnig med en sträcka som beror på hastigheten.
+
+\vspace{0.2cm}
+
+Byggnaderna Kollisionerna bygger på att få objekten att detektera om de är nära nog ett annat objekt då de aldrig kommer dela samma flytvärde. Skulle ett objekt vara för nära aktiveras eventet för kollision som att planet störtar eller plockar upp en form av buff. \\
 
 Alla objekt ska även vara påverkade av ett gravitationsfält som läggs över koordinatsystemet som får att alla objekt kommer att falla mot marken om denna kraft inte motverkas i form av lyftkraft i någon form. Detta leder till att om man åker rakt upp för länge kommer spelaren tappa kontrollen över flygplanet och störta för en mindre tid baserat på gravitationskraften, tills det att hastigheten har stigit igen. \\
 
@@ -129,7 +137,7 @@ Vi strävar efter att genomföra det huvudsakliga arbetet i skolan på de erhål
 Koden kommer att versionshanteras med tjänsten gitlab som kommer att underlätta konflikter med koden samt så erbjuder gitlab möjligheten att gå tillbaka till äldre versioner av koden vid olösliga problem.
 
 \subsection{Grov tidplan}
-I början kommer vi huvudsakligen att arbeta tillsammans för att få en bra struktur och en gemensam grundidé att arbeta utifrån. Vi strävar att få det gemensamma arbetet över så fort som möjligt då det går effektivare att arbeta individuellt. Sen utifrån grunden kan vi börja jobba mer individuellt på kommandon och olika grafiska delar som planens utseende till menyer eller finjustera fysikmotorn. Vi kommer dock ses regelbundet för att få en bättre bild av vad den andra personen gjort. På grund av att vi ses dagligen blir det även lätt att diskutera eventuella konflikter som uppstår vid individuellt arbete. \\
+I början kommer vi huvudsakligen att arbeta tillsammans för att få en bra struktur och en gemensam grundidé att arbeta utifrån. Vi strävar att få det gemensamma arbetet över så fort som möjligt då det är effektivare att arbeta individuellt. Sen utifrån grunden kan vi börja jobba mer individuellt på kommandon och olika grafiska delar som planens utseende till menyer eller finjustera fysikmotorn. Vi kommer dock ses regelbundet för att få en bättre bild av vad den andra personen gjort. På grund av att vi ses dagligen blir det även lätt att diskutera eventuella konflikter som uppstår vid individuellt arbete. \\
 
 Vi kommer behöva bekanta oss med att arbeta med rackets inbyggda grafikpaket för att skapa menyer och spelet i sig. Samt så behöver vi lära oss att arbeta med realtidsuppdateringar och inte skapa ett spel som upplevs allt för ryckigt i manövreringen. \\
 
@@ -138,26 +146,38 @@ Till halvtidsmötet ska fysikmotorn och rörelsen i koordinatsystemet vara klart
 \subsection{Betygsambitioner}
 Då båda är intresserade av att göra ett så bra och givande projekt som möjligt siktar vi på att nå betyg 5. Vi båda arbetade på samma ingenjörsprojekt som byggde på att skriva ett reglertekniskt program och vi vill förbättra våra förmågor i utvecklandet av program ur ett projektperspektiv. 
 
-\section{Användarmanual}
-Programmet är sparat som Dogfight.exe och startas genom att köra filen. Vid start öppnas en start meny för att hjälpa spelarna förstå. \\
+\section{Användarmanual}\label{Användarmanual}
+Programmet är sparat som Dogfight.exe och startas genom att köra filen. Vid start öppnas en startmeny som berättar grunderna till spelet för spelarna. \\
 
 \begin{figure}[H]
-	\caption{Bild som föreställer menyn i spelet}
+	\caption{Spelets startmeny}
 	\centering
 	\includegraphics[width=\linewidth]{Dogfight_Menu_Example.png}
 \end{figure}
 
-Från Figur 1 kan all information som krävs för att kunna spela spelet erhållas. Alla spelares kontroller finns uppradade i controls rutan samt till höger om den en kort förklaring om hur de olika buffarna ser ut. Dessa erhålls som texten säger genom att skjuta ner fåglar. Reglerna för antal liv samt viktiga regler om hur respawning funkar erhålls ur texten över controls fältet. Vid tryck på space genereras spelbakgrunden och spelarna kan då börja tävla mot varandra. \\
+Från Figur 1 kan all information som krävs för att kunna spela spelet erhållas. Alla spelarnas kontroller finns beskrivna i controls-rutan samt till höger om den en kort förklaring om hur de olika buffarna ser ut. Dessa erhålls som texten säger genom att skjuta ner fåglar. Reglerna för antal liv samt viktiga regler om hur respawning funkar erhålls ur texten över controls-rutan. Vid tryck på blanksteg genereras världen och spelarna kan då börja tävla mot varandra. \\
 
 \begin{figure}[H]
 	\caption{Hur en spelomgång kan se ut}
 	\centering
-	\includegraphics[width=\linewidth]{Dogfight_Ingame_Run_Exmple.png}
+	\includegraphics[width=\linewidth]{Dogfight_Run_Example.png}
 \end{figure}
 
-Under en spelomgång kommer varje spelare som nämnts tidigare tilldelas 4 liv, dock kan fler erhållas genom att skjuta ner fåglar. Fåglar kommer att spawna från spelets kanter och åka tills de träffars av en projektil eller krockar i en vägg. Spelare kan åka in i kortsidan av spelplanen och komma tillbaka på andra sidan. Detta gäller dock ej för projektiler eller fåglar. Vid kollision kommer spelare att förlora liv samt kommer spelarens flagga sjunka korrensponderande med antalet liv kvar. Alla spelare kommer att respawna från sin hangar med dess nummer på. \\
+Under en spelomgång kommer varje spelare som nämnts tidigare tilldelas 4 liv, dock kan fler erhållas genom att skjuta ned fåglar. Fåglar kommer att genereras slumpmässigt vid spelplanens kanter och flyga tills de träffas av en projektil eller krockar i en vägg. Spelare kan flyga in i kortsidan av spelplanen och komma tillbaka på andra sidan. Detta gäller dock ej för projektiler eller fåglar, som istället försvinner från spelet. Vid kollision kommer spelare att förlora ett liv samt så kommer spelarens flagghöjd att sänkas för att representera antalet kvarstående liv. Alla spelare kommer att kunna, förutsatt att de har liv kvar, kunna återuppstå vid hangaren med deras nummer på. \\
 
-Inga poäng erhålls från att skjuta ner någon utan det är en fråga om att inte krocka eller bli nerskjuten för att vinna. När alla andra spela har slut på liv vinner den sist levande spelaren. Vid det eventuella fallet att de två sista spelarna kolliderar är spelet oavgjort. När någon spelare har vunnit kommer man till en skärm som klargör vinnaren eller oavgjort och för att spela igen behöver programmet startas om igen. Viktigt att notera är att det krävs två splare för att ha en vinnare samt inget mer än att trycka på sin respawn knapp krävs för att vara med. Detta kan göras hela tiden tills en vinnare har valts. Spelet är därför rekkomenderat att spelas på minst två spelare för att få någon form av tävling med blir roligare med fler spelare då det blir mer hinder samt mer utmaning.
+
+Funktionen finns även att om en spelare väntar för länge utan att återuppstå så tvingas de återuppstå för att förhindra att någon spelare gömmer sig i hangaren.\\
+
+Inga poäng erhålls för att skjuta ned någon utan det är en fråga om att inte krocka eller bli nedskjuten för att vinna. När alla andra spelare har slut på liv vinner den sist levande spelaren. Vid det eventuella fallet att de sista spelarna dör samtidigt räknas spelet som oavgjort.
+
+\begin{figure}[H]
+	\caption{Exempel på vinstskärm}
+	\label{Win}
+	\centering
+	\includegraphics[width=\linewidth]{Win_Example.png}
+\end{figure}
+
+När någon spelare har vunnit kommer man till en skärm som klargör vinnaren(se figur 3), eller oavgjort om så är fallet, och för att spela en gång till behöver programmet startas om igen. Viktigt att notera är att det krävs två spelare för att ha en vinnare samt att det enda man behöver göra för att delta är att trycka på sin tangent för återuppståndelse. Detta kan göras hela tiden tills en vinnare har valts. Spelet är därför rekomenderat att spelas med minst två spelare för att få någon form av tävling, men det blir roligare med fler spelare då det blir mer hinder samt mer utmaning.
 
 \section{Kravlista}
 Här specificeras kraven för projektet. De lägre kravprioriteringarna 4-5 är inte nödvändiga, om implementeras snarare efter tillgänglig tid efter 1-3 är färdiga. 
@@ -194,7 +214,7 @@ Här specificeras kraven för projektet. De lägre kravprioriteringarna 4-5 är 
 	Vid för låg hastighet riktad uppåt skall spelarobjektet kunna förlora kontrollen & 2 & Spelelement & Planet faller rakt ned utan kontroll till en viss hastighet uppnås, varvid spelaren kan börja styra igen\\ \hline
 	Om två spelare kolliderar med varandra skall båda krascha & 3 & Spelelement & \\ \hline
 	Det skall finnas en plats där spelaren kan återuppstå & 3 & Spelelement & Kommer att vara i form av en landningsbana vid marken\\ \hline
-	Vinst/förlustfunktionen ska utökas så att varje spelare har flera liv & 3 & Spelelement & \\ \hline
+	Vinst- och förlustfunktionen ska utökas så att varje spelare har flera liv & 3 & Spelelement & \\ \hline
 	Spelaren skall vara immun mot skada en kort tid efter återuppståndelse & 3 & Spelelement & För att undvika att motspelaren missbrukar den överlägsna positionen\\ \hline
 	Spelaren skall ha tillgång till en aktiverbar hastighetsboost & 3 & Spelelement & Kommer att ha en tidsbegränsad aktiveringsfrekvens, som eventuellt kan förändras av bonusar\\ \hline
 	Det skall finnas bonusar som spelaren kan aktivera & 3 & Spelelement & Kommer att göra saker som att öka maxhastighet, skjuthastighet m.m.\\ \hline
@@ -224,19 +244,71 @@ Här specificeras kraven för projektet. De lägre kravprioriteringarna 4-5 är 
 \end{longtable}
 
 \section{Implementation}
-Här beskrivs ungefärligt processen under ett programvarv, samt de datatyper som kommer att användas av programmet. 
+Här beskrivs processen under ett programvarv, de datatyper som används av programmet, samt hur alla objekt i världen är behandlade och representerade.
 
 \subsection{Processbeskrivning}
-Spelet kommer att uppdateras i realtid med någon lämplig uppdateringsfrekvens, där vilken framkommer med framtida tester. Vid en uppdatering kommer först alla objekt i rörelse att förflyttas beroende på deras riktning och hastighet. Steget efter detta är att detektera om några kollisioner har skett. Eftersom koordinatsystemet inte är i form av ett rutnät, så kommer positionerna istället komma att beskrivas av flyttal. Då sannolikheten att två objekt befinner sig på exakt samma flyttal vid samma tidpunkt är väldigt liten, så kommer objekten istället att ha en storlek, vilket innebär att kravet för kollision snarare blir att man jämför avståndet mellan två objekt och om den sammanlagda storleken är större än detta avstånd räknas det som en kollision.Om en kollision väl detekteras, kommer dess effekt att igångsättas efteråt, vilket till exempel skulle kunna vara aktivering av en buff eller en krasch. \\
+Spelet uppdateras i realtid med uppdateringsfrekvensen 16ms. När spelet startas från början kommer spelaren till huvudmenyn, och det enda kommando som finns tillgängligt här är att trycka på blanksteg, vilket för spelaren till själva spelet och huvudproceduren startar. Huvudproceduren utför ett antal kommandon stegvis för att sedan börja om igen, förutsatt att ingen har vunnit eller pausat spelet. En uppdateringssekvens ser ut som följande:
 
-Efter det att kollisioner har blivit behandlade, är nästa steg vara att avläsa spelarnas kommandon. Efter avläsning kommer sedan dessa värden sparas. De kommandon som finns är rotation medsols/motsols, avfyrning av projektil samt aktivering av hastighetsbuff. Värdena kontrolleras sedan för att se om de är tillåtna, vilket till exempel skulle kunna vara att spelaren nyss avfyrat en projekttil eller att spelaren störtar, och beroende på detta så kommer en åtgärd att utföras eller inte. \\
+\begin{description}
+	\item [  I. Indata] Det första som händer i huvudloopen är att indata kontrolleras, vilken kommer i form av tangenttryck från spelarna. Om pausknappen då är intryckt, så fryses uppdateringsloopen och programmet väntar på att startknappen ska tryckas ned. Om detta inte är fallet så sätts variabler för alla nedtryckta knappar att spelaren försöker utföra ett kommando. Om en knapp har blivit släppt sedan senaste uppdateringen, så sätts istället denna variabel till falsk.
+	
+	\item [  II. Rörelser] När all indata blivit hämtad, hanteras rörelser. Först kollas om spelarna har försökt svänga, och om de har det kollas sedan om de är tillåtna att göra detta. Efter detta så roteras alla spelare om de var tillåtna. Efter detta förflyttas alla flygande objekt framåt längs deras riktningsvektor med avståndet som beror på deras hastighet.
+	
+	\item [  III. Kollisioner] Efter detta testas alla flygande objekt om de kolliderar med något annat objekt eller världen. Om så är fallet så utförs då rätt åtgärd för kollisionen.
 
-Nästa steg är att se om några nya objekt ska skapas, vilket antingen är en spelare som återuppstår eller ett icke-spelarobjekt som till exempel en fågel eller en buff. Objekt som spelare och bonusar kommer att skapas vid vissa händelser, medan fåglar och liknande kommer att skapas med någon form av slumpalgoritm. \\
 
-Efter detta är ett programvarv färdigt för fysikmotorn, och det som är kvar är att uppdatera grafiken. Detta görs dock inte varje programvarv, utan kommer att göras med en frekvens på 60 Hz, och om tiden för detta inte är uppfylld så väntar programmet på att fysikmotorn ska uppdateras igen.
+	\item [  IV. Skapandet av projektiler] Nästa steg är att testa om vilka spelare som försöker skjuta, och om de är tillåtna skapa en projektil framför nosen på spelaren.
+	
+	\item [  V. Skapandet av spelare] Här kollas om en spelare försöker återuppstå, och skapar dem förutsatt att de är tillåtna. Här kollas även om spelaren varit död för lång tid, och om så är fallet tvingas spelaren återuppstå oavsett.
+	
+	\item [  VI. Skapandet av fåglar] Här kollas först om en fågel bör skapas vid sidan av skärmen, och om så är fallet skapas den på en slumpmässigt framtagen position.
+	
+	\item [  VII. Grafik] Nu har hela världen uppdaterats, och då ritas grafiken ut för spelaren att se.
+	
+	\item [  VIII. Vinst] Sista steget är att kolla om en vinst har inträffat. Om så är fallet går spelet ut ur loopen, och annars så börjar programmet om igen på steg I.
+		
+\end{description}
 
 \subsection{Abstrakta datatyper}
-I följande underrubrik beskrivs de olika datatyper och klasser som används i programmet.
+ OBS!: allt under VÄRLDEN är gammalt och ska göras om.
+
+\subsubsection{Vektorer}
+
+Lorem ipsum
+
+\subsubsection{Cirklar}
+
+Lorem ipsum
+
+\subsubsection{Rektanglar}
+
+Lorem ipsum
+
+\subsubsection{Världen}
+
+Här beskrivs hur världen och dess objekt är definierade och behandlade.
+
+\subsubsubsection{Geometri}
+Världen är representerad som ett tvådimensionellt koordinatsystem med origo i nedre vänstra hörnet på skärmen, och har positiv x-led åt höger, samt positiv y-led uppåt. Världen begränsas uppåt, nedåt och åt sidorna av linjer, som fungerar som gränser för att objekt inte ska färdas utanför skärmen. Om någon av dessa linjer korsas av ett objekt försvinner objektet, förutom fallet då en spelare passerar sidolinjen, då spelaren istället förflyttas till motsatt sida. I världen finns även 4 byggnader i form av hangarer, vilka är representerade som stationära rektanglar.
+
+\subsubsubsection{Objekthantering}
+
+Världen håller även koll på objekten som befinner sig i världen. Objekten är sparade i fyra olika listor, som alla behandlas på olika sätt:
+
+\begin{description}
+	\item [  I. Byggnader] Här sparas de fyra hangarerna, och denna används för att testa om något av de flygande objekten har kolliderat med någon av byggnaderna.
+	
+	\item [  II. Flygande enheter] Här sparas alla flygande objekt, det vill säga spelare, fåglar, buffar och projektiler. Objekten i denna lista är de enda objekt som kan förflytta sig, och därför även de som aktivt kan kollidera med andra objekt. Därför används denna lista för rörelser, kollisioner samt utritning av dessa objekt.
+	
+	\item [  III. Kroppar] Denna lista innehåller alla objekt som nyligen dött, och syftet med listan är att spara alla dessa objekts position så att deras kropp kan ritas ut.
+	
+	
+	\item [  IV. Aktiva spelare] Denna lista spar alla spelare som aktivt har anslutit sig till spelet, det vill säga upstått första gången. Denna används för att hantera vinst och utritning av flaggor.
+\end{description}
+
+\subsubsubsection{Variabelhantering}
+
+Världen håller även reda på några variabler som beskriver spelets nuvarande status. De variabler som finns håller koll på om spelet har startat, om spelet är över, om spelet är pausat, om en fågel bör skapas, samt om någon precis dött. Att en fågel ska skapas är begränsad av en slumpmässig tid från att den förra fågeln skapades, och om den ska skapas så görs detta på en slumpmässigt framtagen position vid spelplanens kant. Variabeln för att någon precis dött används för att se om detta resulterade i att någon vann spelet.
 
 \subsubsection{Flying-unit}
 Datatypen \textbf{flying-unit} kommer att vara en överklass till alla flygande objekt, det vill säga spelare, hinder(exempelvis fåglar) och bonusar. Denna datatyp kommer även att representera projektiler som spelaren avfyrar, men då dessa projektiler inte har några extra egenskaper utöver de som beskrivs av \textbf{flying-unit}, så kommer denna klass att användas för att beskriva dem direkt.
@@ -384,14 +456,104 @@ Senare i projektet kommer även grafiken att behöva testas, men då fysikmotorn
 \subsection{Beskrivning av implementation}
 
 
+\subsubsection{Rörelser}
+Lorem Ipsum
 
-\section{Utvärderingar och erfarenheter}
+
+\subsubsection{Kollisioner}
+Här beskrivs hur kollisioner detekteras och hanteras.
+
+\subsubsubsection{Kollisionsdetektering}
+
+Det finns 2 olika kategorier av kollisioner, samt 3 olika typer av geometrier som kan kollidera.
+
+Den första kategorin är kollisioner med världen, och för att testa detta jömförs det rörliga objektets ytterpunkter med linjerna som begränsar världen åt sidorna. För rektanglar jämför man hörnet med det lägsta värdet i y-led för kollision med marken. För kollision med himlen används också det lägsta y-värdet. Anledningen till detta är att objekten ska hinna fullt upp i molntäcket innan de kolliderar, istället för att en lätt beröring med molnen resulterar med kollision. För kollision med sidorna används det värde i x-led som är närmast mitten för respektive sida, detta för att objektet ska befinna sig hela vägen utanför skärmen innan det räknas som en kollision.
+
+Precis samma princip används för cirklar, men här beräknas extremvärdena i x- och y-led istället genom att ta centrum av cirkeln och förskjuta med cirkelns radie i rätt riktning.
+
+Tillhörande världskollisioner räknas även byggnader, och dessa detekteras precis som kollision för en rektangel.
+
+\vspace{0.2cm}
+
+Den andra kategorin är kollisioner mellan objekt. Det finns 2 typer av geometrier för objekt, nämligen cirklar och rektanglar. Det enklaste fallet är cirklar som kolliderar med cirklar, och detta undersöks genom att se om avståndet mellan deras centrum är längre än deras adderade radier.
+
+\vspace{0.2cm}
+
+För cirklar som kolliderar med rektanglar kollas först om cirkelns centrum är inuti rektangeln, vilket görs genom att först projicera cirkelns centrum på 2 linjer. Dessa 2 linjer är paralella med rektangelns 2 kantriktningar, vilket för en oroterad rektangel hade varit parallell med x- respektive y-axeln. Om cirkelns projektion är mellan hörnens projektion för rektangeln på båda linjerna, så har kollision inträffat.
+
+\vspace{0.2cm}
+
+Om centrum ej var innanför rektangeln, testas sedan om cirkelns kortaste avstånd till rektangeln är kortare än cirkelns radie. Först projiceras centrum av cirkeln på linjerna som spänns upp av rektangelns kanter, och då undersöks om projektionen hamnar på kanten eller utanför. Till exempel om en kant går från (0, 0) till (5, 0), så testas om projektionen ligger mellan 0 och 5. Om projektionen hamnar på kanten, innebär detta att cirkeln är rakt ovanför rektangeln, vilket i sin tur betyder att cirkelns närmaste avstånd till kanten är cirkelns radie. Om cirkelns projektion däremot hamnar utanför kanten, så vet man att det närmaste avståndet till rektangeln ligger i rektangelns hörn, och då testas om avståndet mellan centrum och hörnet understiger cirkelns radie.
+
+\vspace{0.2cm}
+
+För rektanglar som kolliderar med rektanglar används SAT(separating axis theorem), som säger att det för alla konvexa figurer som inte kolliderar går det att dra en linje parallell med en av kanterna mellan de två figurerna.
+
+Här utnyttjas samma metod som när man projicerar en cirkels centrum på en rektangels kanter, men istället projiceras den ena rektangelns 4 hörn på de 2 linjerna parallella med den andra rektangelns sidor. Man gör sedan samma typ av intervallstudie, men istället som för em cirkel att centrum ska hamna inom intervallet för kantens projektion, undersöker man istället om projektionen av den ena rektangeln(som också blir ett intervall) överlappar kantens projektion. Om detta är fallet på båda linjerna har kollision inträffat, och annars inte.
+
+\subsubsubsection{Kollisionshantering}
+Kollision testas under varje programvarv när spelet väl startat. Alla objekt testas med kollision för alla andra, vilket är möjligt då antalet objekt och dereas geometriska komplexitet tillåter detta att vara möjligt utan att det ska skapa någon form av prestandaproblem. Skillnaden hade varit marginell om man istället hade delat upp världen i sektioner, då att testa vilken sektion ett objekt befinner sig i är samma princip som att testa kollision med en oroterad rektangel. 
+
+\vspace{0.2cm}
+
+Det första som görs vid en kollisionskontroll är att ta alla objekt och testa om de kolliderar med världen. Detta gäller dels för världens ram, samt för byggnaderna. Alla objekt som kolliderade med världen sorteras sedan bort, och efter det testas kollision mellan de kvarvarande objekten. Detta görs genom att först sortera objekten efter kollisionsprioritet i en lista, och sedan ta det första objektet i listan och undersöka kollision med de kvarvarande objekten, där ordningen kollision testas är samma som prioritetsordningen. Om en kollision hittas paras dessa objekt ihop och plockas ut ur listan, och sedan fortsätter det så till listan är tom. Om ingen kollision hittas för ett objekt, så tas det bort helt från kollisionshanteringen under detta programvarv.
+
+\vspace{0.2cm}
+ 
+Anledningen till att det är strukturerat på detta sätt är att situationen att fler objekt än 2 kolliderar med varandra är väldigt ovanlig, och om det inträffar är prioriteringen till för att välja vilken kollision som väljas före den andra, vilket är viktigt för att det ska bli en konsekvent hantering av kollisioner. Prioriteringen ser ut som följande:
+
+\begin{enumerate}
+	\item Världen
+	
+	\item Spelare
+	
+	\item Fåglar
+	
+	\item Projektiler
+	
+	\item Buffar	
+\end{enumerate}
+
+Världen hanteras alltid först, ty annars hade objekt till exempel kunnat vara inuti marken så länge de kolliderade med ett annat objekt. Ordningen på resten är inte lika viktig, men är vald efter hur viktig prioriteringen är för spelupplevelsen. Till exempel om 2 spelare kolliderade med samma projektil samtidigt, så är det mer rättvist om spelarna förstör varandra än att projektilen förstör en av spelarna.
+
+\vspace{0.2cm}
+
+Efter att alla kollisioner har sorterats, behandlas varje kollision var för sig. De objekt som kolliderade med världen tas bort, utom fallet då en spelare kolliderade med sidan, då spelaren istället förflyttas till motsatt sida.
+
+För objektkollisioner så innebär nästan alla att båda objekten förstörs, och de undantag som finns gäller alla för buffar. Om en fågel eller spelare kolliderar med en buff, så kommer buffen att förstöras och objektet buffas. Om en buff kolliderar med en buff så händer ingenting, de kan dela samma yta utan problem. Det sista specialfallet är då projektiler kolliderar med fåglar, då det förutom att båda förstörs skapas en buff vid den positionen.
+
+\vspace{0.2cm}
+
+Det sista specialfallet angående kollision är att spelare är immuna mot kollisioner av projektiler, fåglar och andra spelare i 2 sekunder efter att de återuppstått, detta för att hindra att spelarna dödar varandra direkt i början innan de hunnit komma upp i luften, samt så att ingen ska utnyttja det positionella övertaget när en spelare försöker återuppstå igen.
+
+\subsubsection{Flygande objekt}
+
+
+
+\subsubsection{Grafik}
+Grafiken består av ett huvudfönster i vilken det finns en canvas. I denna canvas ritas hela spelet upp. Grafiken har samma uppdateringsfrekvens som spelet, det vill säga 16ms, vilket motsvarar 62,5 bilder per sekund. En grafikuppdatering går till så att först ritas hela bakgrunden ut, och nämnvärt är att byggnaderna är en del av bakgrunden då de är statiska. Efter detta ritas spelarnas flaggor, där höjden av flaggorna beror på hur många liv spelaren har kvar. Efter det ritas alla flygande objekt ut, följt av alla kroppar. Motivationen till ordningen av utritning är för att rätt objekt ska visas i rätt lager. Naturligt är att bakgrunden är längst bak, följt av flaggorna för att de inte ska täcka spelarna. Efter detta ritas alla flygande objekt ut, och sist ritas kropparna ut därför att det ger en mer effektfull spelupplevelse om explosioner och rök hamnar överst på skärmen.
+
+\vspace{0.2cm}
+
+All grafik är representerad som bitmaps vilka är fördefinierade, så ingen prestanda går till att faktiskt skapa den grafik som ska ritas, utan endast placera den redan definierade grafiken på rätt plats.
+
+
+\subsubsection{Indata} 
+tangentbord...
+
+
+
+
+\section{Utvärdering och erfarenheter}
     
-Under projektet har ett antal motgångar dykt vilket gjort att det tagit mer tid att genomföra uppgiften än planerat vilket har lätt till att ett antal lågprioritetskrav har slopats. Dock har programmet från start haft en bra struktur och globala värden har undvikits vilket leder till att utökandet av spelare samt att göra nya funktioner har varit enkelt att implementera. Samt så har förbestämda sätt att bemärka funktioner, klasser, variabler och så vidare använts vilket gör programmet mer läsligt och sammanhanget blir bättre. Samt så har vi båda varit noga med att kommentera koden samt meddela när nya viktiga funktioner implementerats.  Att samarbetet funkat så bra har varit till stor hjälp vid problem med koden. \\
+Under projektet har ett antal motgångar dykt up vilket gjort att det tagit mer tid att genomföra uppgiften än planerat, vilket har lett till att många lågprioritetskrav har strukits. Dock har programmet från start haft en bra struktur och globala värden har undvikits vilket leder till att utökandet av spelare samt att göra nya funktioner har varit enkelt att implementera, samt att om så önskas är det enkelt att utöka spelet med fler funktioner eller ändra saker så som världens storlek.
 
-De huvudsakliga motgångarna i projektet har byggt på ambitionsnivå. Båda insåg när slutet närma sig att nivån som valts var för hög för att klara av på 160 timmars arbete var och var inte en rimlig nivå. Därför har några av de lågprioritetskraven slopats för att få ett bättre program med rimlig uppdateringshastighet samt mer rimlig arbetsbörda. Utöver det har en del av arbetsuppgifterna varierat i krav av insats vilket gjort att Marcus tagit på sig mer arbete till och från under projektets gång. \\
+Vi hade även ett förbestämt sätt att bemärka funktioner, klasser, variabler och så vidare, vilket gjort programmet mer läsligt och sammanhanget bättre.
+Vi har även båda varit noga med att kommentera koden samt meddela när nya saker har implementerats.  Att samarbetet funkat så bra har varit till stor hjälp vid problem med koden. \\
 
-Dock så har projektet varit mycket givande för att ha en bättre inblick i hur man konstruerar större program där abstraktion på data behandlingen är ett krav. Båda projektmedlemmarna har jobbat på samma ingenjörsprojekt där koden var skriven på ett helt annat sätt vilket ledde till många bekymmer i optimeringsfasen av arbetet. Projektet har även gett ytterligare insyn i hur ett större program bör delas upp men även vad som är de mer krävande processerna. Detta gäller prestanda som antal timmar nerlagda för att skapa dem. Skulle ytterligare ett projekt göras av denna typ kommer vi ha bättre erfarenhet i hur arbetsbördan ska delas upp för att vara mer rättvis samt att inte köra fast då man väntar på att medarbetaren ska bli klar med sin kod. Detta leder annars till att mycket mer jobb måste göras de sista veckorna istället för att det flyter på med konstant hastighet hela projektet. \\
+De huvudsakliga motgångarna i projektet har byggt på val av ambitionsnivå på projektet. Vi insåg när slutet närmade sig att nivån som valts var för hög för att klara av på 160 timmars arbete, så även om motivationen och kunskapen fanns, var tiden inte tillräcklig för att hinna med implementationen av allt. Därför har många av lågprioritetskraven strukits för att få ett bättre program som är stabilt och har färre men mer välgjorda funktioner, samt en mer rimlig arbetsbörda. Vi upptäckte även att några av de krav vi satte en högre prioritering på i specifikationen inte var lika nödvändiga för spelets funktion som vi trodde, och därför har vi även prioriterat bort några av dessa. Utöver det har en del av arbetsuppgifterna varierat i krav av insats vilket gjort att Marcus tagit på sig mer arbete till och från under projektets gång. \\
+
+Projektet har varit mycket givande för att få en bättre förståelse för hur man konstruerar större program där mer avancerad dataabstraktion och databehandling är ett krav. Båda projektmedlemmarna arbetade med samma ingenjörsprojekt där koden var skriven på ett helt annat sätt vilket ledde till många bekymmer i optimeringsfasen av arbetet, och detta projekt har gett oss en större respekt för vikten av bra kodstruktur. Projektet har även gett insyn i hur ett större program bör delas upp, och även vad som är de mer krävande momenten i ett programeringsprojekt. Skulle ytterligare ett projekt göras av denna typ kommer vi att ha bättre erfarenhet av hur arbetsbördan ska delas upp för att vara mer rättvis samt att inte köra fast då man väntar på att medarbetaren ska bli klar med sin kod. Detta leder annars till att mycket mer arbete måste utföras i slutet av projektet istället för en mer jämn arbetsbelastning över hela projektet. \\
 
 
 \end{document}
