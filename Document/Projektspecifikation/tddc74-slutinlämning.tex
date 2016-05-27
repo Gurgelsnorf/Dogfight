@@ -457,7 +457,30 @@ Senare i projektet kommer även grafiken att behöva testas, men då fysikmotorn
 
 
 \subsubsection{Rörelser}
-Lorem Ipsum
+I spelet har alla objekt representerats som fyrkanter eller cirklar. Detta för att deras rörelse kan uttryckas men linjär algebra. Rörelserna i koordinatsystemet är antingen förflyttning längs en vektor eller en rotation om objektet är en rektangel. \\
+
+\subsubsubsection{Förflyttning längs vektorer}
+Alla objekt som rör dig är definierade utifrån sin mittpunkt och om det är en rektangel utifrån dess hörn med. Dessa punkter är sparade i kordinatpar med x och y värden. Objekten ges även en riktning de färdas i samt en hastighet. Dessa kan liknas med den algebrans vektorbeskrivning
+\begin{math}
+$$\lambda$$
+	\begin{pmatrix}
+		x \\
+		y
+	\end{pmatrix}
+\end{math}
+där x och y är rörelsen i respektive led och $\lambda$ är vektorns längd. Vid förflyttning utnyttjas punktens x och y värde samt längden av vektorn för att sedan med enkel addition avgöra dess nya koordinater vid förflyttning. Hastigheten kan manipuleras av buffar som plockas upp och riktningen av spelarens knapptryck. \\
+
+\subsubsubsection{Rotationer}
+Rotationer rör endast rektanglarna och är en procedur som sker efter förflyttningen av objektet. Alla rektanglar är definierade utifrån en mitt punkt samt dess hörn. För att lättare kunna räkna på rotation har även alla hörn sitt korresponderande projekterat hörn. Detta är hörnen som rektangeln har efter rotation och är de hörn som kollisionshanteringen använder. Grundhörnen är inte påverkade då alla rotationer utgår från dessa hörn och roteringen sker baserat på dess hörns position. Grundhörnen är baserade på en noll radianers vinkel och är även de hörn som förflyttas längs vektorer. De projicerade hörnen bestäms efter att föremålet förflyttats. \\
+
+All rotation utgår från en rotationsmatris 
+\begin{math}
+	\begin{pmatrix}
+	\cos (\theta) & -\sin (\theta) \\
+	\sin (\theta) & \cos (\theta)  
+	\end{pmatrix}
+\end{math}
+där rotationen sker längs en tredje z axel ortogonal mot planet som går igenom objektets mittpunkt. Det gör att vid rotation skapas en vektor mellan ett hörn och sedan roteras vektorn $\theta$ radianer runt mittpunkten och med hjälp av den nya vektorn och mittpunkten kan koordinaterna för det nya hörnet erhållas. Detta görs för alla hörn och en projicerad avbildning av rektangeln har skapats som kollisionshanteringen kan använda för att avgöra om något kolliderar. \\
 
 
 \subsubsection{Kollisioner}

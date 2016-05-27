@@ -26,10 +26,12 @@
 \BOOKMARK [2][-]{subsection.4.3}{Testning}{section.4}% 26
 \BOOKMARK [2][-]{subsection.4.4}{Beskrivning av implementation}{section.4}% 27
 \BOOKMARK [3][-]{subsubsection.4.4.1}{R\366relser}{subsection.4.4}% 28
-\BOOKMARK [3][-]{subsubsection.4.4.2}{Kollisioner}{subsection.4.4}% 29
-\BOOKMARK [4][-]{subsubsubsection.4.4.1}{Kollisionsdetektering}{subsubsection.4.4.2}% 30
-\BOOKMARK [4][-]{subsubsubsection.4.4.2}{Kollisionshantering}{subsubsection.4.4.2}% 31
-\BOOKMARK [3][-]{subsubsection.4.4.3}{Flygande objekt}{subsection.4.4}% 32
-\BOOKMARK [3][-]{subsubsection.4.4.4}{Grafik}{subsection.4.4}% 33
-\BOOKMARK [3][-]{subsubsection.4.4.5}{Indata}{subsection.4.4}% 34
-\BOOKMARK [1][-]{section.5}{Utv\344rdering och erfarenheter}{}% 35
+\BOOKMARK [4][-]{subsubsubsection.4.4.1}{F\366rflyttning l\344ngs vektorer}{subsubsection.4.4.1}% 29
+\BOOKMARK [4][-]{subsubsubsection.4.4.2}{Rotationer}{subsubsection.4.4.1}% 30
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Kollisioner}{subsection.4.4}% 31
+\BOOKMARK [4][-]{subsubsubsection.4.4.1}{Kollisionsdetektering}{subsubsection.4.4.2}% 32
+\BOOKMARK [4][-]{subsubsubsection.4.4.2}{Kollisionshantering}{subsubsection.4.4.2}% 33
+\BOOKMARK [3][-]{subsubsection.4.4.3}{Flygande objekt}{subsection.4.4}% 34
+\BOOKMARK [3][-]{subsubsection.4.4.4}{Grafik}{subsection.4.4}% 35
+\BOOKMARK [3][-]{subsubsection.4.4.5}{Indata}{subsection.4.4}% 36
+\BOOKMARK [1][-]{section.5}{Utv\344rdering och erfarenheter}{}% 37
