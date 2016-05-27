@@ -273,16 +273,16 @@ Spelet uppdateras i realtid med uppdateringsfrekvensen 16ms. När spelet startas
  OBS!: allt under VÄRLDEN är gammalt och ska göras om.
 
 \subsubsection{Vektorer}
-
-Lorem ipsum
+Vektorerna är definierade som par med ett x värde cons y värdet. Allt detta sparas med en funktion \$Vector x y. Denna funktion tar två värden och sparar dem. Samt har vi skapat funktioner som hämtar car och cdr av dessa vektorer för att enklare kunna jobba abstrakt och få en renare kod. Vektorerna kan sedan även ha en konstant $\lambda$ som avgör längden på vektorn vilket gör att för att ändra hur lång en vektor är behöver inte riktning på vektorn påverkas utan det räcker med att påverka $\lambda$ för att få samma resultat. Detta gör att mindre kan gå fel samt att alla vektorers riktningar går att hämta ur enhetscirkelns sinus och cosinus värden.
 
 \subsubsection{Cirklar}
-
-Lorem ipsum
+Alla cirklars positioner är definierade med två variabler mittpunkt och radie. Mittpunkten är definierad som ett kordinatpar med x och y värden och radien är bara ett absolutbelopp. Dessa två värden räcker för att kunna rita ut en cirkel samt framförallt kunna avgöra om en kollision inträffar. Fördelen med cirklar är att de är lätta att räkna på i kollisonshanteringen samt så byter de inte position vid rotation.
 
 \subsubsection{Rektanglar}
+Många objekt utnyttjar rektanglar för att beskriva sin position i planet. Alla rektanglar i programmet är definierade med sju variabler för att utförligt kunna beskriva dess position i planet samt göra det enklare att räkna på. Variablerna baseras på en mittpunkt, fyra grundhörn och fyra projicerade hörn. Det som skiljer grundhörnen från de projicerade hörnen är rotation. Grundhörnen utgör en rektangel som har noll radianers rotation. Utifrån dessa hörn han sedan de projicerade hörnen räknas ut med en rotations matris som tas upp senare under underrubriken rotation. \\
 
-Lorem ipsum
+De projicerade hörnen utgör grunden för den grafiska uppritningen samt kollisionshanteringen då dessa hörn är rektangelns riktiga position i planet. De grundläggande hörnen finns för att göra rörelserna enklare då de hörnen aldrig roteras. Det gör att planet kan flyttas runt på rätt sätt oberoende om det är roterat eller inte men även roteras till rätt vinkel efter förflyttning oberoende på vilken vinkel som rektangeln hade tidigare. Detta eliminerar eventuella fel samt gör alla uträkningar enklare samt kan utgå från samma procedur som inte behöver anpassa sig efter förra uppdateringens parametrar.
+
 
 \subsubsection{Världen}
 
@@ -494,17 +494,11 @@ Den första kategorin är kollisioner med världen, och för att testa detta jö
 
 Precis samma princip används för cirklar, men här beräknas extremvärdena i x- och y-led istället genom att ta centrum av cirkeln och förskjuta med cirkelns radie i rätt riktning.
 
-Tillhörande världskollisioner räknas även byggnader, och dessa detekteras precis som kollision för en rektangel.
+Tillhörande världskollisioner räknas även byggnader, och dessa detekteras precis som kollision för en rektangel. \\
 
-\vspace{0.2cm}
+Den andra kategorin är kollisioner mellan objekt. Det finns 2 typer av geometrier för objekt, nämligen cirklar och rektanglar. Det enklaste fallet är cirklar som kolliderar med cirklar, och detta undersöks genom att se om avståndet mellan deras centrum är längre än deras adderade radier. \\
 
-Den andra kategorin är kollisioner mellan objekt. Det finns 2 typer av geometrier för objekt, nämligen cirklar och rektanglar. Det enklaste fallet är cirklar som kolliderar med cirklar, och detta undersöks genom att se om avståndet mellan deras centrum är längre än deras adderade radier.
-
-\vspace{0.2cm}
-
-För cirklar som kolliderar med rektanglar kollas först om cirkelns centrum är inuti rektangeln, vilket görs genom att först projicera cirkelns centrum på 2 linjer. Dessa 2 linjer är paralella med rektangelns 2 kantriktningar, vilket för en oroterad rektangel hade varit parallell med x- respektive y-axeln. Om cirkelns projektion är mellan hörnens projektion för rektangeln på båda linjerna, så har kollision inträffat.
-
-\vspace{0.2cm}
+För cirklar som kolliderar med rektanglar kollas först om cirkelns centrum är inuti rektangeln, vilket görs genom att först projicera cirkelns centrum på 2 linjer. Dessa 2 linjer är paralella med rektangelns 2 kantriktningar, vilket för en oroterad rektangel hade varit parallell med x- respektive y-axeln. Om cirkelns projektion är mellan hörnens projektion för rektangeln på båda linjerna, så har kollision inträffat. \\
 
 Om centrum ej var innanför rektangeln, testas sedan om cirkelns kortaste avstånd till rektangeln är kortare än cirkelns radie. Först projiceras centrum av cirkeln på linjerna som spänns upp av rektangelns kanter, och då undersöks om projektionen hamnar på kanten eller utanför. Till exempel om en kant går från (0, 0) till (5, 0), så testas om projektionen ligger mellan 0 och 5. Om projektionen hamnar på kanten, innebär detta att cirkeln är rakt ovanför rektangeln, vilket i sin tur betyder att cirkelns närmaste avstånd till kanten är cirkelns radie. Om cirkelns projektion däremot hamnar utanför kanten, så vet man att det närmaste avståndet till rektangeln ligger i rektangelns hörn, och då testas om avståndet mellan centrum och hörnet understiger cirkelns radie.
 

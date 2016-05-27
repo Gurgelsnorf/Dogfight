@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.4.8)  27 MAY 2016 21:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.4.8)  27 MAY 2016 22:24
 entering extended mode
 **./tddc74-slutinlämning.tex
 (tddc74-slutinlämning.tex
@@ -1432,31 +1432,45 @@ Package babel Info: Redefining swedish shorthand "|
 Package babel Info: Redefining swedish shorthand "~
 (babel)             in language  on input line 275.
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 279.
+(babel)             in language  on input line 278.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 279.
+(babel)             in language  on input line 278.
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 283.
+(babel)             in language  on input line 280.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 283.
+(babel)             in language  on input line 280.
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 287.
+(babel)             in language  on input line 280.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 287.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 291.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 291.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 293.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 293.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 293.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 293.
+(babel)             in language  on input line 280.
  [15]
 Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 281.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 281.
+
+Underfull \hbox (badness 10000) in paragraph at lines 282--283
+
+ []
+
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 287.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 287.
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 291.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 291.
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 294.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 294.
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 294.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 294.
+[16]
+Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 294.
 Package babel Info: Redefining swedish shorthand "~
 (babel)             in language  on input line 294.
@@ -1468,15 +1482,7 @@ Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 313.
 Package babel Info: Redefining swedish shorthand "~
 (babel)             in language  on input line 313.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 316.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 316.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 316.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 316.
- [16]
+
 Overfull \hbox (13.11151pt too wide) in paragraph at lines 317--337
 [][] 
  []
@@ -1487,6 +1493,15 @@ ion.4.2.1}) has been already used, duplicate ignored
                    \relax 
 l.339 \subsubsubsection{Player}
                                
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 339.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 339.
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 339.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 339.
+ [17]
 Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 339.
 Package babel Info: Redefining swedish shorthand "~
@@ -1506,21 +1521,20 @@ Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 382.
 Package babel Info: Redefining swedish shorthand "~
 (babel)             in language  on input line 382.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 382.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 382.
- [17]
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 382.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 382.
 
 Underfull \hbox (badness 10000) in paragraph at lines 383--384
 
  []
 
-
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 384.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 384.
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 384.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 384.
+[18]
 Overfull \hbox (6.28482pt too wide) in paragraph at lines 385--394
 [][] 
  []
@@ -1549,15 +1563,6 @@ Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 408.
 Package babel Info: Redefining swedish shorthand "~
 (babel)             in language  on input line 408.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 408.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 408.
-[18]
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 408.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 408.
 
 Underfull \hbox (badness 10000) in paragraph at lines 409--410
 
@@ -1582,18 +1587,18 @@ Package babel Info: Redefining swedish shorthand "|
 Package babel Info: Redefining swedish shorthand "~
 (babel)             in language  on input line 442.
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 445.
+(babel)             in language  on input line 442.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 445.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 447.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 447.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 447.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 447.
+(babel)             in language  on input line 442.
 [19]
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 442.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 442.
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 445.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 445.
 Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 449.
 Package babel Info: Redefining swedish shorthand "~
@@ -1613,6 +1618,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 454--455
 
  []
 
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 455.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 455.
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 455.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 455.
+[20]
 Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 456.
 Package babel Info: Redefining swedish shorthand "~
@@ -1636,15 +1650,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 463--472
  []
 
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 472.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 472.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 472.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 472.
-[20]
-Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 473.
 Package babel Info: Redefining swedish shorthand "~
 (babel)             in language  on input line 473.
@@ -1659,6 +1664,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 476--484
  []
 
 Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 484.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 484.
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 484.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 484.
+[21]
+Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 486.
 Package babel Info: Redefining swedish shorthand "~
 (babel)             in language  on input line 486.
@@ -1672,116 +1686,131 @@ Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 489.
 Package babel Info: Redefining swedish shorthand "~
 (babel)             in language  on input line 489.
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--498
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 499--500
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 501--502
+
+ []
+
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 493.
+(babel)             in language  on input line 502.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 493.
+(babel)             in language  on input line 502.
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 493.
+(babel)             in language  on input line 502.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 493.
- [21]
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 514.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 514.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 514.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 514.
- [22]pdfTeX warning (ext4): destination with the same identifier (name{subsubsu
-bsection.4.4.2}) has been already used, duplicate ignored
+(babel)             in language  on input line 502.
+[22]pdfTeX warning (ext4): destination with the same identifier (name{subsubsub
+section.4.4.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.517 \subsubsubsection{Kollisionshantering}
+l.511 \subsubsubsection{Kollisionshantering}
                                             
 Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 511.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 511.
+Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 517.
 Package babel Info: Redefining swedish shorthand "~
 (babel)             in language  on input line 517.
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 537.
+(babel)             in language  on input line 517.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 537.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 537.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 537.
+(babel)             in language  on input line 517.
  [23]
 Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 546.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 546.
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 550.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 550.
+Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 552.
 Package babel Info: Redefining swedish shorthand "~
 (babel)             in language  on input line 552.
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 556.
+(babel)             in language  on input line 552.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 556.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 560.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 560.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 560.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 560.
+(babel)             in language  on input line 552.
  [24]
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 564.
+(babel)             in language  on input line 558.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 564.
+(babel)             in language  on input line 558.
 
-Underfull \hbox (badness 10000) in paragraph at lines 565--566
+Underfull \hbox (badness 10000) in paragraph at lines 559--560
 
  []
 
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 573.
+(babel)             in language  on input line 567.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 573.
-
-Underfull \hbox (badness 10000) in paragraph at lines 577--579
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 580--581
-
- []
-
+(babel)             in language  on input line 567.
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 581.
+(babel)             in language  on input line 570.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 581.
+(babel)             in language  on input line 570.
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 581.
+(babel)             in language  on input line 570.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 581.
+(babel)             in language  on input line 570.
 [25]
-Underfull \hbox (badness 10000) in paragraph at lines 582--583
+Underfull \hbox (badness 10000) in paragraph at lines 571--573
 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 585.
+
+Underfull \hbox (badness 10000) in paragraph at lines 574--575
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 576--577
+
+ []
+
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 585.
+(babel)             in language  on input line 577.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 585.
+(babel)             in language  on input line 577.
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 585.
+(babel)             in language  on input line 577.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 585.
+(babel)             in language  on input line 577.
 [26]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 585.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 579.
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 579.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 579.
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 579.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 579.
+ [27]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 579.
  (tddc74-slutinlämning.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 585.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 585.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 579.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 579.
 Package rerunfilecheck Info: File `tddc74-slutinlämning.out' has not changed.
 (rerunfilecheck)             Checksum: 57707FD762FD245EDB77EB9B85109F88;2621.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 585.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 579.
  ) 
 Here is how much of TeX's memory you used:
- 7866 strings out of 493634
- 115487 string characters out of 3135240
+ 7867 strings out of 493634
+ 115494 string characters out of 3135240
  236479 words of memory out of 3000000
  11039 multiletter control sequences out of 15000+200000
  53548 words of font info for 44 fonts, out of 3000000 for 9000
@@ -1791,8 +1820,8 @@ Here is how much of TeX's memory you used:
 y.enc}{C:/Users/thegr/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-r
 m.enc}{C:/Users/thegr/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-m
 athex.enc}{C:/Users/thegr/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
-lm-mathit.enc}{C:/Users/thegr/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips
-/lm/lm-ec.enc}<C:/Users/thegr/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
+lm-ec.enc}{C:/Users/thegr/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
+lm-mathit.enc}<C:/Users/thegr/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
 lic/lm/lmbx10.pfb><C:/Users/thegr/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
 /public/lm/lmbx12.pfb><C:/Users/thegr/AppData/Local/Programs/MiKTeX 2.9/fonts/t
 ype1/public/lm/lmex10.pfb><C:/Users/thegr/AppData/Local/Programs/MiKTeX 2.9/fon
@@ -1801,9 +1830,9 @@ ts/type1/public/lm/lmmi12.pfb><C:/Users/thegr/AppData/Local/Programs/MiKTeX 2.9
 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/thegr/AppData/Local/Programs/MiKT
 eX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/thegr/AppData/Local/Programs/M
 iKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb>
-Output written on tddc74-slutinlämning.pdf (26 pages, 497158 bytes).
+Output written on tddc74-slutinlämning.pdf (27 pages, 499755 bytes).
 PDF statistics:
- 362 PDF objects out of 1000 (max. 8388607)
- 68 named destinations out of 1000 (max. 500000)
+ 366 PDF objects out of 1000 (max. 8388607)
+ 69 named destinations out of 1000 (max. 500000)
  312 words of extra memory for PDF output out of 10000 (max. 10000000)
 
