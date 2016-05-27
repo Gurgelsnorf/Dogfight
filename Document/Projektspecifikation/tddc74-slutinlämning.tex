@@ -111,25 +111,15 @@ Jonas Wallgren {\small jonas.wallgren@liu.se}}
 Projektet går ut på att skapa ett actionspel där två till fyra spelare tävlar mot varandra. Spelet bygger på att med hjälp av tangentbordet styra varsitt flygplan på en tvådimensionell spelbana. För att vinna skall man skjuta ned motståndarnas flygplan till det att bara en spelare är kvar. Hela spelet uppdateras grafiskt i realtid.
 
 \subsection{Kort projektbeskrivning}
-Spelet bygger på ett tvådimensionellt koordinatsystem med sett från sidan. I detta plan kontrollerar två till fyra spelare varsitt flygplan, som har möjligthet att ändra sin rörelseriktning och avfyra projektiler. I spelet finns även flera utökade moment som till exempel buffar för att göra spelet intressantare(Se Användarmanual  för fullständig lista). 
+Projektet går ut på att utveckla ett program för ett spel. Spelet bygger på ett tvådimensionellt koordinatsystem sett från sidan. I detta koordinatsystem kontrollerar två till fyra spelare varsitt flygplan, som har möjligthet att svänga i koordinatsystemet och avfyra projektiler. Målet för en spelomgång är att vara den sista personen i luften, vilket uppnås genom att skjuta ned de andra spelarna tills de inte har några liv kvar.\\
 
-\vspace{0.2cm}
+Spelet har flera moment utöver rörelse och kollision, där bland annat avfyrandet av projektiler och aktiverbara bonusar ingår.
+Spelet stödjer 2 till 4 spelare, vilka har möjligheten att med tangentbordet styra sitt flygplan, som har möjligheten att svänga och avfyra projektiler.
+Hela spelet uppdateras i realtid, med möjligheten att vid vilket tillfälle som helst pausa och återuppta spelomgången med ett knapptryck.
 
-Objektens rörelse beskrivs med en riktningsvektor och en hastighet, där objektet vid varje programuppdatering förflyttas i vektorsriktnig med en sträcka som beror på hastigheten.
+Spelet är även fullt grafiskt implementerat, med dels en startmeny, samt en full spelvärld där alla objekt är visualiserade med rörliga bilder.\\
 
-\vspace{0.2cm}
-
-Byggnaderna Kollisionerna bygger på att få objekten att detektera om de är nära nog ett annat objekt då de aldrig kommer dela samma flytvärde. Skulle ett objekt vara för nära aktiveras eventet för kollision som att planet störtar eller plockar upp en form av buff. \\
-
-Alla objekt ska även vara påverkade av ett gravitationsfält som läggs över koordinatsystemet som får att alla objekt kommer att falla mot marken om denna kraft inte motverkas i form av lyftkraft i någon form. Detta leder till att om man åker rakt upp för länge kommer spelaren tappa kontrollen över flygplanet och störta för en mindre tid baserat på gravitationskraften, tills det att hastigheten har stigit igen. \\
-
-Programmet ska kunna hantera projektiler som ska kunna skjuta ner motståndare men även andra objekt som hindrar spelarens framfart. Dessa projektiler ska inte vara påverkade av gravitation. Detta är för att underlätta siktandet men även har en projektil i ett realistiskt scenario inte är märkbart påverkad av gravitation på så korta distanser. \\
-
-Spelet ska även innehålla olika former av bonusar som kan plockas upp. Detta ger allt från en fartökning till nytt vapen eller liknande. Dessa ska kunna påverka planets beteende och dess rörelse i koordinatsystemet.  Även ska objekt kallat entities, som kan komma i form av till exempel fåglar eller luftballonger, kunna bli nedskjutna som kommer innehålla bonusar eller bara behöver bli förstörda så att man inte kolliderar med dem. 
-Planet i sig ska kunna flyga i 16 olika riktningar för att ge en mjukare svängning samt ge fler riktningar att skjuta i så att spelaren har mer möjligheter att skjuta ner motståndaren. Vi svängning ska planet följa riktningen men även vridas runt x axeln för att ge en visuellt mer realistisk bild av att plant svänger. \\
-
-Slutligen ska spelets inställningar kunna påverkas via en huvudmeny. Inställningarna består av val av spelbana, flygplan, antal poäng till vinst mm. Samt så ska spelet kunna pausas när en knapp trycks ned, och en pausmeny öppnas. Från denna meny ska man kunna återgå till spelet, avsluta pågående omgång eller avsluta programmet helt. \\
-
+För en utförligare beskrivning av alla spelmoment se Användarmanual.
 
 \subsection{Utvecklingsmetodik}
 Vi strävar efter att genomföra det huvudsakliga arbetet i skolan på de erhållna tiderna. Vid behov försöker vi främst utnyttja lediga tider under arbetsveckan med vid behov även göra eget arbete hemma. Då båda medlemmarna har tillgång till laptop kan arbetet ske på valfri plats. Utöver det så ses vi dagligen samt har god kontakt vilket gör att kommunikation mellan medlemmarna kan ske utan stora förhinder. \\
@@ -273,15 +263,15 @@ Spelet uppdateras i realtid med uppdateringsfrekvensen 16ms. När spelet startas
  OBS!: allt under VÄRLDEN är gammalt och ska göras om.
 
 \subsubsection{Vektorer}
-Vektorerna är definierade som par med ett x värde cons y värdet. Allt detta sparas med en funktion \$Vector x y. Denna funktion tar två värden och sparar dem. Samt har vi skapat funktioner som hämtar car och cdr av dessa vektorer för att enklare kunna jobba abstrakt och få en renare kod. Vektorerna kan sedan även ha en konstant $\lambda$ som avgör längden på vektorn vilket gör att för att ändra hur lång en vektor är behöver inte riktning på vektorn påverkas utan det räcker med att påverka $\lambda$ för att få samma resultat. Detta gör att mindre kan gå fel samt att alla vektorers riktningar går att hämta ur enhetscirkelns sinus och cosinus värden.
+Vektorerna är definierade som par på formen (cons x-värde y-värde). Dessa är sedan abstraherade på formen (\$Vector x y). Denna funktion tar två värden och sparar dem. Samt har vi skapat funktionerna (\$Get\_Vector\_[X/Y]) som hämtar x och y av av dessa vektorer för att enklare kunna jobba abstrakt och få en renare kod. När vi sedan arbetar med vektorer för rörelser använder vi normerade vektorer som multipliceras med konstanter för enklare beräkning och för att enkelt kunna använda samma rörelsevektorer för objekt med olika hastigheter.
 
 \subsubsection{Cirklar}
-Alla cirklars positioner är definierade med två variabler mittpunkt och radie. Mittpunkten är definierad som ett kordinatpar med x och y värden och radien är bara ett absolutbelopp. Dessa två värden räcker för att kunna rita ut en cirkel samt framförallt kunna avgöra om en kollision inträffar. Fördelen med cirklar är att de är lätta att räkna på i kollisonshanteringen samt så byter de inte position vid rotation.
+Alla cirklars positioner är definierade med två variabler: mittpunkt och radie. Mittpunkten är definierad som en vektor från origo, och radien som ett konstant värde. Dessa två värden räcker för att kunna rita ut en cirkel samt avgöra om en kollision inträffar. Fördelen med cirklar är att de är enkla att göra beräkningar för vid kollisioner samt att de är oberoende av rotation.
 
 \subsubsection{Rektanglar}
-Många objekt utnyttjar rektanglar för att beskriva sin position i planet. Alla rektanglar i programmet är definierade med sju variabler för att utförligt kunna beskriva dess position i planet samt göra det enklare att räkna på. Variablerna baseras på en mittpunkt, fyra grundhörn och fyra projicerade hörn. Det som skiljer grundhörnen från de projicerade hörnen är rotation. Grundhörnen utgör en rektangel som har noll radianers rotation. Utifrån dessa hörn han sedan de projicerade hörnen räknas ut med en rotations matris som tas upp senare under underrubriken rotation. \\
+Alla rektanglar i programmet är definierade med sju variabler för att utförligt kunna beskriva dess position i planet samt göra det enklare att räkna på. Variablerna baseras på en mittpunkt, fyra grundhörn och fyra projicerade hörn. Det som skiljer grundhörnen från de projicerade hörnen är rotation. Grundhörnen utgör en rektangel vars sidor är parallella med koordinataxlarna. Utifrån dessa hörn beräknas sedan de projicerade hörnen med en rotationsmatris , vilken beskrivs utförligare under rubriken Rotation.\\
 
-De projicerade hörnen utgör grunden för den grafiska uppritningen samt kollisionshanteringen då dessa hörn är rektangelns riktiga position i planet. De grundläggande hörnen finns för att göra rörelserna enklare då de hörnen aldrig roteras. Det gör att planet kan flyttas runt på rätt sätt oberoende om det är roterat eller inte men även roteras till rätt vinkel efter förflyttning oberoende på vilken vinkel som rektangeln hade tidigare. Detta eliminerar eventuella fel samt gör alla uträkningar enklare samt kan utgå från samma procedur som inte behöver anpassa sig efter förra uppdateringens parametrar.
+De projicerade hörnen utgör grunden för den grafiska uppritningen samt kollisionshanteringen då dessa hörn är rektangelns faktiska position i planet. De grundläggande hörnen finns för att göra rörelserna enklare då de hörnen aldrig roteras. Det gör att planet kan flyttas runt på rätt sätt oberoende om det är roterat eller inte men även roteras till rätt vinkel efter förflyttning oberoende på vilken vinkel som rektangeln hade tidigare. Detta eliminerar eventuella fel, gör alla uträkningar enklare samt att man kan utgå från samma procedur som inte behöver anpassa sig efter förra uppdateringens parametrar.
 
 
 \subsubsection{Världen}
@@ -310,141 +300,8 @@ Världen håller även koll på objekten som befinner sig i världen. Objekten �
 
 Världen håller även reda på några variabler som beskriver spelets nuvarande status. De variabler som finns håller koll på om spelet har startat, om spelet är över, om spelet är pausat, om en fågel bör skapas, samt om någon precis dött. Att en fågel ska skapas är begränsad av en slumpmässig tid från att den förra fågeln skapades, och om den ska skapas så görs detta på en slumpmässigt framtagen position vid spelplanens kant. Variabeln för att någon precis dött används för att se om detta resulterade i att någon vann spelet.
 
-\subsubsection{Flying-unit}
-Datatypen \textbf{flying-unit} kommer att vara en överklass till alla flygande objekt, det vill säga spelare, hinder(exempelvis fåglar) och bonusar. Denna datatyp kommer även att representera projektiler som spelaren avfyrar, men då dessa projektiler inte har några extra egenskaper utöver de som beskrivs av \textbf{flying-unit}, så kommer denna klass att användas för att beskriva dem direkt.
-\vspace{0.2cm}
-
-\begin{tabular}{| c | c | p{8.3cm} |}
-	\hline
-	\textbf{Metod} & \textbf{Variabel} & \textbf{Beskrivning} \\
-	\hline
-	 
-	 get-size & - & Returnerar bonusens storlek. \\
-	 \hline
-	 get-coordinates & - & Returnerar var spelaren befinner sig just nu. \\
-	 \hline
-	 get-direction & - & Returnerar åt vilken riktning spelaren är riktad åt i radianer.\\
-	 \hline
-	 get-speed & - & Returnerar vilken hastighet spelaren rör sig i.\\
-	 \hline
-	 set-coordinates! & \small\textbf{X Y} & Ändrar spelarens koordinater. \\
-	 \hline
-	 set-direction! & \small\textbf{angle} & Ändrar spelarens riktning. \\
-	 \hline
-	 set-speed! & \small\textbf{speed} & Ändrar spelarens hastighet. \\
-	 \hline
-\end{tabular}
-
-
-\subsubsubsection{Player}
-Datatypen \textbf{player} kommer att vara en klass som beskriver spelarobjekt, och kommer utöver de allmänna variablerna hos flygande objekt även att innehålla spelarobjektets unika egenskaper.
-
-\vspace{0.2cm}
-
-\begin{tabular}{| c | c | p{7.8cm} |}
-	\hline
-	\textbf{Metod} & \textbf{Variabel} & \textbf{Beskrivning} \\
-	\hline
-	
-	get-size & - & Returnerar spelarens storlek \\
-	\hline	
-	get-max-speed & - & Returnerar spelarens tillåtna maxhastighet. \\
-	\hline
-	get-lives & - & Returnerar spelarens antal kvarstående liv \\
-	\hline
-	is-defeated? & - & Returnerar \#t om spelaren blivit besegrad, det vill säga inga liv kvar, och annars \#f. \\
-	\hline
-	can-fire? & - & Returnerar \#t om spelaren är tillåten att skjuta, annars \#f.\\
-	\hline
-	can-speedboost? & - & Returnerar \#t om spelaren är tillåten att använda speedboost, annars \#f. \\
-	\hline
-	is-plunging? & - & Returnerar \#t om spelaren har förlorat kontrollen på grund av för låg fart, eller kolliderat med toppen av spelplanen, annars \#f. \\
-	\hline
-	is-dead? & - & Returnerar \#t om spelaren är ur spel på grund av krasch, annars \#f. \\
-	\hline
-	set-max-speed! & \small\textbf{speed} & Ändras spelarens tillåtna maxhastighet. \\
-	\hline
-	set-lives! & \small\textbf{lives} & Sätter spelarens antal liv. \\
-	\hline
-	toggle-defeated! & - & Växlar om spelaren har blivit besegrad. \\
-	\hline
-	toggle-fire! & - & Växlar om planet är tillåtet att skjuta.\\
-	\hline
-	toggle-speedboost! & - & Växlar om planet är tillåtet att använda speedboost. \\
-	\hline
-	toggle-plunging! & - & Växlar om planet har förlorat kontrollen. \\
-	\hline
-	toggle-dead! & - & Växlar om spelaren är ur spel. \\
-	\hline
-	
-\end{tabular}
-
-\subsubsubsection{Buff}
-Datatypen \textbf{buff} kommer att vara en klass som beskriver bonusobjekt, och kommer utöver de allmänna variablerna för flygande objekt även beskriva vilken typ av bonus det är. \\
-
-\begin{tabular}{| c | c | p{8.2cm} |}
-	\hline
-	\textbf{Metod} & \textbf{Variabel} & \textbf{Beskrivning} \\
-	\hline
-
-	get-bonus-type & - & Returnerar vilken typ av bonus objektet är. \\
-	\hline
-	
-\end{tabular}
-
-\subsubsubsection{Entities}
-datatypen \textbf{entities} kommer att vara en klass som beskriver flygande objekt som inte styrs av spelaren(exempelvis fåglar), och kommer förutom de allmäna egenskaperna för flygande objekt att beskriva de unika egenskaperna för dessa objekt. \\
-
-\begin{tabular}{| c | c | p{9.5cm} |}
-	\hline
-	\textbf{Metod} & \textbf{Variabel} & \textbf{Beskrivning} \\
-	\hline
-	
-	get-buff & - & Returnerar vilken typ av bonusobjekt som detta objekt lämnar efter sig vid kollision med en projektil, eller \#f om ingen lämnas.\\
-	\hline
-	
-\end{tabular}
-
-\subsubsection{World}
-Datatypen \textbf{world} kommer att vara en klass som beskriver alla icke-rörliga kollisionsobjekt på spelplanen, det vill säga marken, himlen och landningsbanorna. \\
-
-\begin{tabular}{| c | c | p{8cm} |}
-	\hline
-	\textbf{Metod} & \textbf{Variabel} & \textbf{Beskrivning} \\
-	\hline
-	
-	get-coordinates & - & Returnerar vilka koordinater objektet har. \\
-	\hline
-	get-size & - & Returnerar objektets storlek. \\
-	\hline
-	get-type & - & Returnerar typen av kollisionsobjekt. Detta för att avgöra vilken åtgärd som ska utföras vid kollison, det vill säga förlust av kontroll för himmlen och krasch för mark och landningsbana. \\
-	\hline
-\end{tabular}
-
-\subsubsection{Background}
-Datatypen \textbf{background} kommer att beskriva den bakgrund vilket spelet spelas över, och även bakgrunden i menyerna. Denna kommer att vara statisk under spelets gång, och kommer därför bara att behöva uppdateras vid uppstart och när man går till menyn.
-
-\vspace{0.2cm}
-
-\begin{tabular}{| c | c | p{7cm} |}
-	\hline
-	\textbf{Metod} & \textbf{Variabel} & \textbf{Beskrivning} \\
-	\hline
-	
-	choose-background & background & Ändrar vilken bakgrund som visas, exempelvis meny- eller huvudspelsbakgrund.\\
-	\hline
-	render & - & Börjar visa bakgrunden på skärmen. \\
-	\hline
-	hide & - & Slutar visa bakgrunden på skärmen. \\
-	\hline
-\end{tabular}
-
-\subsubsection{Vector}
-Datatypen \textbf{vector} kommer att beskriva vektorer och punkter i koordinatsystemet, om kommer bestå av ett par där car-delen är x-värdet och cdr-delen y-värdet.
-
-\subsubsection{Matrix}
-Datatypen \textbf{matrix} kommer att beskriva matriser som används för beräkningar, och kommer att bestå av en lista, där första elementet är en lista av första raden i matrisen, andra elementet är en lista av andra raden, etcetera.
-
+\subsubsection{Flygande objekt}
+Det finns fyra typer av flygande objekt i spelet, och dessa är: Spelare, fåglar, projektiler och buffar. Dessa objekt håller koll på sin egen position, men utöver detta så är de även beskrivna med en riktning och en hastighet. Fåglar och projektiler har ingen infromation utöver detta, medan spelare och buffar har. Buffarna håller koll på vilken typ av buff de är, medan spelarobjektet håller koll på variabler för svängning och skjutning, kvarstående liv, tid för återuppståndelse, tid för immunitet, skjuthastighet, spelstatus och position för återuppståndelse.
 
 \subsection{Testning}
 När det gäller tester så är det främst viktigt att rörelserna i koordinatsystemet och kollisiondetekteringen fungerar på rätt sätt. Vi kommer därför att behöva testfunktioner som avläser och skriver ut de variabler som framkommer vid ett programvarv, för att se att saker får rätt position, att kollision detekteras korrekt samt att händelser kontrolleras och utförs korrekt. Lämpligt här är att skapa en testfunktion där programmet kan uppdateras med hjälp av ett knapptryck eller kommando istället för en klocka, för att på så sätt kunna analysera varje uppdatering på detaljnivå. Man bör även i kunna sätta alla variabler manuellt i testfunktionen, för att kunna testa specifika fall enklare. \\
@@ -457,21 +314,20 @@ Senare i projektet kommer även grafiken att behöva testas, men då fysikmotorn
 
 
 \subsubsection{Rörelser}
-I spelet har alla objekt representerats som fyrkanter eller cirklar. Detta för att deras rörelse kan uttryckas men linjär algebra. Rörelserna i koordinatsystemet är antingen förflyttning längs en vektor eller en rotation om objektet är en rektangel. \\
+I spelet har alla objekt representerats som rektanglar eller cirklar. Den enkla geometrin gör det enkelt att beskriva deras rörelse med vektorer. De rörelsetyper som finns är antingen förflyttning längs en vektor, eller rotation om objektet är en rektangel. \\
 
 \subsubsubsection{Förflyttning längs vektorer}
-Alla objekt som rör dig är definierade utifrån sin mittpunkt och om det är en rektangel utifrån dess hörn med. Dessa punkter är sparade i kordinatpar med x och y värden. Objekten ges även en riktning de färdas i samt en hastighet. Dessa kan liknas med den algebrans vektorbeskrivning
+Alla objekt som rör dig är definierade med en mittpunkt och om det är en rektangel utifrån även med hörn, och dessa punkter är sparade som vektorer. Objekten är även givna en färdriktning i form av en normerad vektor, samt en hastighet i form av en skalär. Denna kombination gör rörelsevektorn vilken kan utryckas som: 
 \begin{math}
 $$\lambda$$
 	\begin{pmatrix}
 		x \\
 		y
 	\end{pmatrix}
-\end{math}
-där x och y är rörelsen i respektive led och $\lambda$ är vektorns längd. Vid förflyttning utnyttjas punktens x och y värde samt längden av vektorn för att sedan med enkel addition avgöra dess nya koordinater vid förflyttning. Hastigheten kan manipuleras av buffar som plockas upp och riktningen av spelarens knapptryck. \\
+\end{math}, där x och y är rörelsen i respektive led och $\lambda$ vektorns längd. Vid förflyttning utnyttjas punktens x och y värde samt längden av vektorn för att sedan med enkel addition avgöra dess nya koordinater vid förflyttning. Hastigheten kan manipuleras av buffar som plockas upp och riktningen av spelarens knapptryck. \\
 
 \subsubsubsection{Rotationer}
-Rotationer rör endast rektanglarna och är en procedur som sker efter förflyttningen av objektet. Alla rektanglar är definierade utifrån en mitt punkt samt dess hörn. För att lättare kunna räkna på rotation har även alla hörn sitt korresponderande projekterat hörn. Detta är hörnen som rektangeln har efter rotation och är de hörn som kollisionshanteringen använder. Grundhörnen är inte påverkade då alla rotationer utgår från dessa hörn och roteringen sker baserat på dess hörns position. Grundhörnen är baserade på en noll radianers vinkel och är även de hörn som förflyttas längs vektorer. De projicerade hörnen bestäms efter att föremålet förflyttats. \\
+Rotationer rör endast rektanglarna och är en procedur som sker efter förflyttningen av objektet. Alla rektanglar är definierade utifrån en mittpunkt samt dess hörn. Efter objektet förflyttas så används rotationsvinkeln av rektangeln för att rotera grundhörnen, och dessa sätts sedan till de projicerade hörnen, vilka är de hörnen som beskriver den faktiska positionen och används vid beräkningar. \\
 
 All rotation utgår från en rotationsmatris 
 \begin{math}
@@ -537,30 +393,20 @@ Världen hanteras alltid först, ty annars hade objekt till exempel kunnat vara 
 
 Efter att alla kollisioner har sorterats, behandlas varje kollision var för sig. De objekt som kolliderade med världen tas bort, utom fallet då en spelare kolliderade med sidan, då spelaren istället förflyttas till motsatt sida.
 
-För objektkollisioner så innebär nästan alla att båda objekten förstörs, och de undantag som finns gäller alla för buffar. Om en fågel eller spelare kolliderar med en buff, så kommer buffen att förstöras och objektet buffas. Om en buff kolliderar med en buff så händer ingenting, de kan dela samma yta utan problem. Det sista specialfallet är då projektiler kolliderar med fåglar, då det förutom att båda förstörs skapas en buff vid den positionen.
-
-\vspace{0.2cm}
+För objektkollisioner så innebär nästan alla att båda objekten förstörs, och de undantag som finns gäller alla för buffar. Om en fågel eller spelare kolliderar med en buff, så kommer buffen att förstöras och objektet buffas. Om en buff kolliderar med en buff så händer ingenting, de kan dela samma yta utan problem. Det sista specialfallet är då projektiler kolliderar med fåglar, då det förutom att båda förstörs skapas en buff vid den positionen. \\
 
 Det sista specialfallet angående kollision är att spelare är immuna mot kollisioner av projektiler, fåglar och andra spelare i 2 sekunder efter att de återuppstått, detta för att hindra att spelarna dödar varandra direkt i början innan de hunnit komma upp i luften, samt så att ingen ska utnyttja det positionella övertaget när en spelare försöker återuppstå igen.
 
-\subsubsection{Flygande objekt}
-
-
-
 \subsubsection{Grafik}
-Grafiken består av ett huvudfönster i vilken det finns en canvas. I denna canvas ritas hela spelet upp. Grafiken har samma uppdateringsfrekvens som spelet, det vill säga 16ms, vilket motsvarar 62,5 bilder per sekund. En grafikuppdatering går till så att först ritas hela bakgrunden ut, och nämnvärt är att byggnaderna är en del av bakgrunden då de är statiska. Efter detta ritas spelarnas flaggor, där höjden av flaggorna beror på hur många liv spelaren har kvar. Efter det ritas alla flygande objekt ut, följt av alla kroppar. Motivationen till ordningen av utritning är för att rätt objekt ska visas i rätt lager. Naturligt är att bakgrunden är längst bak, följt av flaggorna för att de inte ska täcka spelarna. Efter detta ritas alla flygande objekt ut, och sist ritas kropparna ut därför att det ger en mer effektfull spelupplevelse om explosioner och rök hamnar överst på skärmen.
-
-\vspace{0.2cm}
+Grafiken består av ett huvudfönster i vilken det finns en canvas. I denna canvas ritas hela spelet upp. Grafiken har samma uppdateringsfrekvens som spelet, det vill säga 16ms, vilket motsvarar 62,5 bilder per sekund. En grafikuppdatering går till så att först ritas hela bakgrunden ut, och nämnvärt är att byggnaderna är en del av bakgrunden då de är statiska. Efter detta ritas spelarnas flaggor, där höjden av flaggorna beror på hur många liv spelaren har kvar. Efter det ritas alla flygande objekt ut, följt av alla kroppar. Motivationen till ordningen av utritning är för att rätt objekt ska visas i rätt lager. Naturligt är att bakgrunden är längst bak, följt av flaggorna för att de inte ska täcka spelarna. Efter detta ritas alla flygande objekt ut, och sist ritas kropparna ut därför att det ger en mer effektfull spelupplevelse om explosioner och rök hamnar överst på skärmen. \\
 
 All grafik är representerad som bitmaps vilka är fördefinierade, så ingen prestanda går till att faktiskt skapa den grafik som ska ritas, utan endast placera den redan definierade grafiken på rätt plats.
 
 
 \subsubsection{Indata} 
-Spelets input utgår ifrån key-event\% erhållet från racket och bygger på ett antal sanningsvärden. Dessa sanningsvärden används sedan för att kolla om planet ska skjuta eller svänga vid nästa uppdatering. Anledningen till dessa är att man skall kunna hålla ner en tangent och kontinuerligt svänga samtidigt som en annan spelare trycker på andra tangenter. Då en knapp trycks ner eller släpps registreras ett key-event som sedan kör två kommandon get-key-code samt get-key-release-code. Dessa två sparas som två variabler som kollas om de stämmer överens med något förbestämt kommando. Skulle till exempel högerpilen tryckas ned blir resultatet att sanningsvärdet för svängning till höger sätts till sant ända tills att knappen släpps. \\
+Spelets input utgår ifrån key-event\% erhållet av racket och bygger på ett antal sanningsvärden. Dessa sanningsvärden används sedan för att kolla om planet ska skjuta eller svänga vid nästa uppdatering. Anledningen till dessa är att man skall kunna hålla ner en tangent och kontinuerligt svänga samtidigt som en annan spelare trycker på andra tangenter. Då en knapp trycks ner eller släpps registreras ett key-event som sedan kör två kommandon get-key-code samt get-key-release-code. Dessa två sparas som två variabler som kollas om de stämmer överens med något förbestämt kommando. Skulle till exempel högerpilen tryckas ned blir resultatet att sanningsvärdet för svängning till höger sätts till sant ända tills att knappen släpps. Sedan, så länge detta värde är sant, så kollas vid varje uppdatering om spelaren faktiskt får svänga eller skjuta, vilket har en tidsbegränsning för hur ofta det får inträffa.\\
 
-Utöver rörelse och skjutkommando finns även ytterligare några knappar som endast behöver registrera ett knapptryck och dessa är paus knappen för spelet och spelets start knapp. Detta är den ända input som spelt erhåller under körning av programmet
-
-
+Utöver rörelse och skjutkommando finns även ytterligare två knappar som endast behöver registrera ett enstaka knapptryck, och dessa är paus- och startknappen, Som pausar respektive startar speluppdateringen.
 
 
 
