@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.4.8)  27 MAY 2016 21:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.4.8)  27 MAY 2016 21:21
 entering extended mode
 **./tddc74-slutinlämning.tex
 (tddc74-slutinlämning.tex
@@ -1729,51 +1729,55 @@ Package babel Info: Redefining swedish shorthand "|
 (babel)             in language  on input line 564.
 Package babel Info: Redefining swedish shorthand "~
 (babel)             in language  on input line 564.
-Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 570.
-Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 570.
 
-Underfull \hbox (badness 10000) in paragraph at lines 574--576
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 577--578
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--580
+Underfull \hbox (badness 10000) in paragraph at lines 565--566
 
  []
 
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 580.
+(babel)             in language  on input line 573.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 580.
+(babel)             in language  on input line 573.
+
+Underfull \hbox (badness 10000) in paragraph at lines 577--579
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 580--581
+
+ []
+
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 580.
+(babel)             in language  on input line 581.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 580.
+(babel)             in language  on input line 581.
+Package babel Info: Redefining swedish shorthand "|
+(babel)             in language  on input line 581.
+Package babel Info: Redefining swedish shorthand "~
+(babel)             in language  on input line 581.
 [25]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 582.
+Underfull \hbox (badness 10000) in paragraph at lines 582--583
+
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 585.
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 582.
+(babel)             in language  on input line 585.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 582.
+(babel)             in language  on input line 585.
 Package babel Info: Redefining swedish shorthand "|
-(babel)             in language  on input line 582.
+(babel)             in language  on input line 585.
 Package babel Info: Redefining swedish shorthand "~
-(babel)             in language  on input line 582.
- [26]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 582.
+(babel)             in language  on input line 585.
+[26]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 585.
  (tddc74-slutinlämning.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 582.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 582.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 585.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 585.
 Package rerunfilecheck Info: File `tddc74-slutinlämning.out' has not changed.
 (rerunfilecheck)             Checksum: 57707FD762FD245EDB77EB9B85109F88;2621.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 582.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 585.
  ) 
 Here is how much of TeX's memory you used:
  7866 strings out of 493634
@@ -1797,7 +1801,7 @@ ts/type1/public/lm/lmmi12.pfb><C:/Users/thegr/AppData/Local/Programs/MiKTeX 2.9
 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/thegr/AppData/Local/Programs/MiKT
 eX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/thegr/AppData/Local/Programs/M
 iKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb>
-Output written on tddc74-slutinlämning.pdf (26 pages, 496099 bytes).
+Output written on tddc74-slutinlämning.pdf (26 pages, 497158 bytes).
 PDF statistics:
  362 PDF objects out of 1000 (max. 8388607)
  68 named destinations out of 1000 (max. 500000)

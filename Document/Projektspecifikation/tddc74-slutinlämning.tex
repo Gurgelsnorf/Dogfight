@@ -562,7 +562,10 @@ All grafik är representerad som bitmaps vilka är fördefinierade, så ingen pr
 
 
 \subsubsection{Indata} 
-tangentbord...
+Spelets input utgår ifrån key-event\% erhållet från racket och bygger på ett antal sanningsvärden. Dessa sanningsvärden används sedan för att kolla om planet ska skjuta eller svänga vid nästa uppdatering. Anledningen till dessa är att man skall kunna hålla ner en tangent och kontinuerligt svänga samtidigt som en annan spelare trycker på andra tangenter. Då en knapp trycks ner eller släpps registreras ett key-event som sedan kör två kommandon get-key-code samt get-key-release-code. Dessa två sparas som två variabler som kollas om de stämmer överens med något förbestämt kommando. Skulle till exempel högerpilen tryckas ned blir resultatet att sanningsvärdet för svängning till höger sätts till sant ända tills att knappen släpps. \\
+
+Utöver rörelse och skjutkommando finns även ytterligare några knappar som endast behöver registrera ett knapptryck och dessa är paus knappen för spelet och spelets start knapp. Detta är den ända input som spelt erhåller under körning av programmet
+
 
 
 
